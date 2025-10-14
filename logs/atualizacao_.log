@@ -1,0 +1,5 @@
+[INICIO] 14/10/2025 12:02:00,25  
+CSV: admin_scaffold\admin\ingredients_master.csv              
+JSON: site\ingredients_master.json         
+------------------------------------------------ 
+[ERRO] CSV nao encontrado: admin_scaffold\admin\ingredients_master.csv 
