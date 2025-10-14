@@ -8,4 +8,4 @@ gemas,Gemas,emulsifier,30.0,0.0,50.0,1.03,false,eggs,true,Aproximações; variam
 xantana,Goma xantana,stabilizer,0.0,0.0,100.0,0.60,true,,true,"Estabilizante; 0,2–0,4%.",1.0.0,,
 lecitina_soja,Lecitina de soja,emulsifier,0.0,0.0,100.0,0.85,true,soy,true,"Emulsificante 0,3–0,5%.",1.0.0,,
 agua,Água,water,0.0,0.0,0.0,1.00,true,,true,Base aquosa.,1.0.0,,
-leite_coco_17,Leite de coco (17% gordura),plant_milk,17.0,2.0,22.0,1.02,true,tree_nuts,true,Valores médios: 17/2/22.,1.0.0,,
+leite_coco_17,Leite de coco (17% gordura),plant_milk,17.0,2.0,22.0,1.02,true,tree_nuts,true,Valores médios: 17/2/22.,1.0.1,,
