@@ -1,0 +1,15 @@
+{
+  "title": "Ingredients Catalog Schema",
+  "schema_version": "1.0",
+  "required": [
+    "id",
+    "name",
+    "category",
+    "fat_pct",
+    "sugar_pct",
+    "solids_pct",
+    "vegan",
+    "is_active",
+    "version"
+  ]
+}
