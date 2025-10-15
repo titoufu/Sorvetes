@@ -5,316 +5,191 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Base de Sorvetes</title>
 
-  <meta name="theme-color" content="#1976D2">
+  <!-- Colors & PWA -->
+  <meta name="theme-color" content="#0b63f3">
   <link rel="manifest" href="manifest.webmanifest">
+  <script>
+    if ('serviceWorker' in navigator) {
+      fetch('sw.js', {method:'HEAD'}).then(r=>{
+        if (r.ok) window.addEventListener('load', ()=>navigator.serviceWorker.register('sw.js').catch(console.warn));
+      }).catch(()=>{});
+    }
+  </script>
+
+  <!-- iOS App-like -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <style>
-    :root {
-      --bg: #f4f6fb;
-      --card: #fff;
-      --ink: #22304d;
-      --muted: #7b8ca9;
-      --pri: #1976D2;
-      --sec: #f1f5fa;
-      --ok: #43a047;
-      --warn: #fbc02d;
-      --bad: #e53935;
-      --shadow: 0 2px 10px rgba(20,40,80,0.07);
-      --radius: 18px;
-      --line: #e1e6ef;
-      --sticky: #ffffffee;
-      --pill-radius: 999px;
+    :root{
+      --bg:#f7f8fb; --card:#ffffff; --ink:#0f172a; --muted:#475569;
+      --pri:#0b63f3; --ok:#16a34a; --warn:#c2410c; --bad:#b91c1c;
+      --fat-b:#991b1b; --sugar-b:#9a3412; --solid-b:#166534;
+      --row-fat-bg: rgba(185,28,28,.12);
+      --row-sugar-bg: rgba(154,52,18,.12);
+      --row-solid-bg: rgba(22,101,52,.12);
+      --shadow:0 10px 28px rgba(2,6,23,.14);
+      --radius:16px;
+      --line:#e2e8f0;
+      --sticky:#ffffffcc;
     }
-    [data-theme="dark"] {
-      --bg: #1a2232;
-      --card: #242e47;
-      --ink: #f4f6fb;
-      --muted: #a8b0c9;
-      --pri: #2196F3;
-      --sec: #202a3b;
-      --ok: #52e57c;
-      --warn: #ffe082;
-      --bad: #ff8a80;
-      --line: #28324a;
-      --sticky: #242e47ee;
+    [data-theme="escuro-disabled"]{
+      --bg:#0b1220; --card:#0f172a; --ink:#e5e7eb; --muted:#94a3b8;
+      --pri:#60a5fa; --ok:#34d399; --warn:#fbbf24; --bad:#f87171;
+      --fat-b:#fecaca; --sugar-b:#fde68a; --solid-b:#86efac;
+      --row-fat-bg: rgba(248,113,113,.18);
+      --row-sugar-bg: rgba(253,186,116,.18);
+      --row-solid-bg: rgba(134,239,172,.18);
+      --line:#1f2a44; --sticky:#0f172acc;
     }
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.5;
+    [data-theme="suave"]{
+      --pri:#0284c7;
+      --row-fat-bg: rgba(225,29,72,.12);
+      --row-sugar-bg: rgba(180,83,9,.12);
+      --row-solid-bg: rgba(4,120,87,.12);
     }
-    .main-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 24px 16px 100px;
+
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell;}
+    .wrap{max-width:1100px;margin:0 auto;padding:6px 10px 80px}
+    .stickybar{position:fixed; left:0; right:0; top:0; z-index:1000; padding:8px; background:var(--sticky); border-bottom:1px solid var(--line); border-radius:0 0 12px 12px; box-shadow: 0 6px 18px rgba(0,0,0,.08)}
+    .stickygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+    .stickycell{display:flex;flex-direction:column;align-items:flex-start;padding:6px 8px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+    .stickycell .label{font-size:11px;color:var(--muted)}
+    .stickycell .value{font-weight:800}
+    #stickySpacer{height:56px}
+
+    header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0 12px;flex-wrap:wrap}
+    header h1{font-size:18px;margin:0}
+    .theme{display:flex;gap:8px;align-items:center}
+    .theme select{padding:8px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px;margin-bottom:12px;}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media (max-width:900px){.row{grid-template-columns:1fr}}
+    label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px}
+    input,select,button{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:16px}
+    input[type="number"]{appearance:textfield}
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button{appearance:none;margin:0}
+    button{background:var(--pri);color:#fff;border:none;font-weight:700;cursor:pointer}
+    button.secondary{background:#e7efff;color:#0b63f3;border:1px solid #bfd6ff}
+    .btn-group{display:flex;gap:6px;flex-wrap:wrap}
+    .btn-outline{background:transparent;color:var(--pri);border:2px solid var(--pri)}
+    .btn-active{background:var(--pri);color:#fff;border:2px solid var(--pri)}
+
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+    .stat{background:linear-gradient(180deg, rgba(0,0,0,0.04), transparent);border:1px solid var(--line);border-radius:12px;padding:8px}
+    .stat h3{margin:0 0 4px;font-size:12px;color:var(--muted)}
+    .stat .val{font-size:18px;font-weight:800}
+    .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.02em}
+    .ok{background:rgba(22,163,74,.18);color:var(--ok);border:1px solid rgba(22,163,74,.45)}
+    .aj{background:rgba(194,65,12,.16);color:var(--warn);border:1px solid rgba(194,65,12,.45)}
+
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:8px;border-bottom:1px dashed var(--line);text-align:left;vertical-align:middle}
+    th{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+    tfoot td{font-weight:800}
+    .muted{color:var(--muted)}
+    .sum-ok{color:var(--ok);font-weight:800}
+    .sum-bad{color:var(--bad);font-weight:800}
+    .toolbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
+
+    tr.fat-dominant{background:var(--row-fat-bg); border-left:7px solid var(--fat-b)}
+    tr.sugar-dominant{background:var(--row-sugar-bg); border-left:7px solid var(--sugar-b)}
+    tr.solid-dominant{background:var(--row-solid-bg); border-left:7px solid var(--solid-b)}
+
+    .mini{font-size:12px;color:var(--muted)}
+    .contrib{display:flex;gap:6px;flex-wrap:wrap}
+    .c-pill{padding:4px 9px;border-radius:999px;font-size:12px;font-weight:800}
+    .c-fat{background:rgba(185,28,28,.18);color:var(--fat-b);border:1px solid rgba(185,28,28,.45)}
+    .c-sugar{background:rgba(154,52,18,.18);color:var(--sugar-b);border:1px solid rgba(154,52,18,.45)}
+    .c-solid{background:rgba(22,101,52,.18);color:var(--solid-b);border:1px solid rgba(22,101,52,.45)}
+
+    .helpers{display:none;gap:6px;margin-top:6px}
+    .helpers button{padding:6px 8px;font-size:12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:#0b63f3}
+    @media (max-width:560px){
+      .helpers{display:flex}
+      header h1{font-size:16px}
+      .stat .val{font-size:16px}
+      input{padding:10px}
     }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 32px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid var(--line);
+
+    .bottombar{
+      position:fixed; left:0; right:0; bottom:0; z-index:60;
+      display:flex; gap:8px; align-items:center; justify-content:center;
+      padding:8px env(safe-area-inset-right) calc(8px + env(safe-area-inset-bottom)) env(safe-area-inset-left);
+      background:var(--sticky); border-top:1px solid var(--line);
+      backdrop-filter:saturate(1.2) blur(4px);
     }
-    header h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .theme-switch {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .theme-switch select {
-      padding: 8px 16px;
-      border-radius: var(--radius);
-      background: var(--sec);
-      color: var(--ink);
-      border: 1px solid var(--line);
-      font-size: 1rem;
-    }
-    .stickybar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--sticky);
-      border-bottom: 1px solid var(--line);
-      box-shadow: 0 4px 12px rgba(20,40,80,0.05);
-      border-radius: 0 0 12px 12px;
-      margin-bottom: 16px;
-      padding: 16px 0;
-      display: flex;
-      justify-content: center;
-    }
-    .stickygrid {
-      display: flex;
-      gap: 24px;
-      justify-content: center;
-    }
-    .stickycell {
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 16px 22px;
-      min-width: 180px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      border: 1px solid var(--line);
-    }
-    .stickycell .label {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--muted);
-      margin-bottom: 2px;
-    }
-    .stickycell .value {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .stickycell .mini {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-    .pill {
-      display: inline-block;
-      padding: 2px 14px;
-      border-radius: var(--pill-radius);
-      font-size: 0.95em;
-      font-weight: 700;
-      margin-left: 6px;
-      color: #fff;
-      background: var(--pri);
-    }
-    .pill.ok { background: var(--ok);}
-    .pill.aj { background: var(--warn); color: #222;}
-    .pill.bad { background: var(--bad);}
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 24px 18px;
-      margin-bottom: 28px;
-      border: 1px solid var(--line);
-    }
-    .card-header {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-bottom: 18px;
-      color: var(--pri);
-      letter-spacing: 0.03em;
-    }
-    .table-wrap {
-      overflow-x: auto;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 8px;
-      font-size: 1rem;
-    }
-    th, td {
-      padding: 12px 8px;
-      border-bottom: 1px solid var(--line);
-      text-align: left;
-      vertical-align: middle;
-      background: none;
-    }
-    th {
-      color: var(--muted);
-      font-weight: 600;
-      font-size: 0.97em;
-      letter-spacing: 0.03em;
-    }
-    tr:nth-child(even) td {
-      background: var(--sec);
-    }
-    tfoot td {
-      font-weight: 800;
-      background: var(--pri);
-      color: #fff;
-      border-radius: 0 0 var(--radius) var(--radius);
-    }
-    button, select, input {
-      font-size: 1rem;
-    }
-    button {
-      padding: 12px 20px;
-      border-radius: var(--radius);
-      border: none;
-      margin: 2px 0;
-      font-weight: 600;
-      background: var(--pri);
-      color: #fff;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(20,40,80,0.04);
-      transition: background 0.2s;
-    }
-    button.secondary {
-      background: var(--sec);
-      color: var(--pri);
-      border: 1px solid var(--pri);
-    }
-    button:active {
-      background: var(--ok);
-    }
-    .btn-group {
-      display: flex;
-      gap: 8px;
-      margin-top: 6px;
-      flex-wrap: wrap;
-    }
-    .bottombar {
-      position: fixed;
-      left: 0; right: 0; bottom: 0;
-      z-index: 60;
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      justify-content: center;
-      padding: 18px 0;
-      background: var(--sticky);
-      border-top: 2px solid var(--line);
-      box-shadow: 0 -4px 16px rgba(20,40,80,0.05);
-    }
-    .bottombar button {
-      min-width: 220px;
-      font-size: 1.1rem;
-    }
-    @media (max-width: 900px) {
-      .main-container { padding: 10px 2px 80px; }
-      .stickygrid { flex-direction: column; gap: 12px;}
-      .stickycell { min-width: 120px; padding: 12px; }
-      .card { padding: 16px 8px; }
-      th, td { padding: 8px 4px;}
-      .bottombar { padding: 12px 0;}
-    }
-    @media (max-width: 600px) {
-      header { flex-direction: column; gap: 12px; }
-      .card-header { font-size: 1rem;}
-      .stickygrid { gap: 8px;}
-      .stickycell { padding: 8px;}
-      .bottombar button { min-width: 120px; font-size: 1rem;}
-    }
-    .mini{font-size:12px;color:var(--muted);}
-    .contrib{display:flex;gap:6px;flex-wrap:wrap;}
-    .c-pill{padding:4px 9px;border-radius:999px;font-size:12px;font-weight:800;}
-    .c-fat{background:rgba(185,28,28,.18);color:#991b1b;border:1px solid rgba(185,28,28,.45);}
-    .c-sugar{background:rgba(154,52,18,.18);color:#9a3412;border:1px solid rgba(154,52,18,.45);}
-    .c-solid{background:rgba(22,101,52,.18);color:#166534;border:1px solid rgba(22,101,52,.45);}
-    .helpers{display:none;gap:6px;margin-top:6px;}
-    .helpers button{padding:6px 8px;font-size:12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--pri);}
-    @media (max-width:560px){.helpers{display:flex}}
-    .muted{color:var(--muted);}
-    .sum-ok{color:var(--ok);font-weight:800;}
-    .sum-bad{color:var(--bad);font-weight:800;}
-    .toolbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center;}
-  </style>
+    .bottombar button{max-width:220px}
+  
+/* === THEME SAFETY: force light everywhere === */
+:root,[data-theme="claro"]{ color-scheme: light; }
+@media (prefers-color-scheme: dark){ :root{ color-scheme: light; } }
+html,body{ background: var(--bg) !important; color: var(--ink) !important; }
+
+</style>
 </head>
-<body data-theme="">
-  <div class="main-container" id="app">
+<body data-theme="claro">
+  <div class="stickybar">
+    <div class="stickygrid">
+      <div class="stickycell">
+        <div class="label">Gordura (%)</div>
+        <div class="value" id="stickyGNow">—</div>
+        <div class="mini">Alvo: <b id="stickyGTarget">—</b> • Δ <span id="stickyGDelta" class="pill aj">—</span></div>
+      </div>
+      <div class="stickycell">
+        <div class="label">Açúcar (%)</div>
+        <div class="value" id="stickyANow">—</div>
+        <div class="mini">Alvo: <b id="stickyATarget">—</b> • Δ <span id="stickyADelta" class="pill aj">—</span></div>
+      </div>
+      <div class="stickycell">
+        <div class="label">Sólidos (%)</div>
+        <div class="value" id="stickySNow">—</div>
+        <div class="mini">Alvo: <b id="stickySTarget">—</b> • Δ <span id="stickySDelta" class="pill aj">—</span></div>
+      </div>
+    </div>
+  </div>
+  <div id="stickySpacer"></div>
+
+  <div class="wrap" id="app">
     <header>
-      <h1>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M7 21h10a4 4 0 0 0 0-8 5 5 0 0 0-4-4 4 4 0 0 0-7 3.5v.5A4 4 0 0 0 7 21Z" stroke="currentColor" stroke-width="1.5"/></svg>
-        Base de Sorvetes
-      </h1>
-      <div class="theme-switch">
-        <label for="themeSel" style="color:var(--muted); font-size:0.95em;">Tema</label>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M7 21h10a4 4 0 0 0 0-8 5 5 0 0 0-4-4 4 4 0 0 0-7 3.5v.5A4 4 0 0 0 7 21Z" stroke="currentColor" stroke-width="1.5"/></svg>
+        <h1>Base de Sorvetes</h1>
+      </div>
+      <div class="theme">
+        <label for="themeSel" class="mini">Tema</label>
         <select id="themeSel">
-          <option value="">Claro</option>
-          <option value="dark">Escuro</option>
+          <option value="">Clássico</option>
+          <option value="suave">Suave</option>
+          <option value="escuro">Escuro</option>
         </select>
       </div>
     </header>
-    <div class="stickybar">
-      <div class="stickygrid">
-        <div class="stickycell">
-          <div class="label">Gordura (%)</div>
-          <div class="value" id="stickyGNow">—</div>
-          <div class="mini">Alvo: <b id="stickyGTarget">—</b> <span id="stickyGDelta" class="pill aj">—</span></div>
-        </div>
-        <div class="stickycell">
-          <div class="label">Açúcar (%)</div>
-          <div class="value" id="stickyANow">—</div>
-          <div class="mini">Alvo: <b id="stickyATarget">—</b> <span id="stickyADelta" class="pill aj">—</span></div>
-        </div>
-        <div class="stickycell">
-          <div class="label">Sólidos (%)</div>
-          <div class="value" id="stickySNow">—</div>
-          <div class="mini">Alvo: <b id="stickySTarget">—</b> <span id="stickySDelta" class="pill aj">—</span></div>
-        </div>
-      </div>
-    </div>
+
     <div class="card">
-      <div class="card-header">Preset & Lote</div>
-      <div class="row" style="display:flex;gap:18px;flex-wrap:wrap;">
-        <div style="min-width:170px;flex:1;">
+      <div class="row">
+        <div>
           <label>Preset</label>
           <select id="preset"></select>
         </div>
-        <div style="min-width:170px;flex:1;">
+        <div>
           <label>Lote atual</label>
           <input id="loteInfo" value="—" disabled>
         </div>
       </div>
     </div>
+
     <div class="card">
-      <div class="card-header">Métricas</div>
-      <div class="stats" id="stats" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;"></div>
+      <div class="stats" id="stats"></div>
     </div>
+
     <div class="card">
-      <div class="card-header">Ingredientes da Mistura</div>
-      <div class="toolbar" style="justify-content:space-between;margin-bottom:10px;">
+      <div class="toolbar" style="justify-content:space-between;margin-bottom:6px">
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <button class="secondary" id="btnReset" title="Restaurar preset">Resetar preset</button>
           <button class="btn-outline" id="btnAddFromCatalog">Adicionar ingrediente (catálogo)</button>
@@ -351,25 +226,28 @@
         <div id="comp100" class="mini" style="margin-top:6px"></div>
       </details>
     </div>
+
     <div class="bottombar">
-      <button id="btnBlur" class="secondary">OK</button>
+      <button id="btnBlur" class="secondary" style="max-width:200px">OK</button>
     </div>
   </div>
-  <dialog id="dlgCatalog" style="border:none;border-radius:18px;padding:0;max-width:min(920px,95vw);">
-    <div style="background:var(--card);color:var(--ink);padding:18px 18px 20px;border-radius:18px;box-shadow:var(--shadow);min-width:min(920px,95vw);">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
-        <h3 style="margin:0;font-size:19px;color:var(--pri);font-weight:700;">Adicionar do catálogo</h3>
+
+  <!-- Modal antes do script -->
+  <dialog id="dlgCatalog" style="border:none;border-radius:16px;padding:0;max-width:min(920px,95vw);">
+    <div style="background:var(--card);color:var(--ink);padding:12px 12px 14px;border-radius:16px;box-shadow:var(--shadow);min-width:min(920px,95vw);">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <h3 style="margin:0;font-size:16px">Adicionar do catálogo</h3>
         <div class="mini muted" id="catMeta" style="margin-left:auto">—</div>
         <button id="btnCloseDlg" class="secondary" style="max-width:120px">Fechar</button>
       </div>
-      <div class="row" style="margin-bottom:12px;display:flex;gap:18px;flex-wrap:wrap;">
-        <div style="min-width:170px;flex:1;">
+      <div class="row" style="margin-bottom:8px">
+        <div>
           <label>Buscar por nome/categoria/id</label>
-          <input id="catSearch" placeholder="Ex.: leite, cacau, manga, syrup…" style="width:100%;padding:10px;border-radius:12px;border:1px solid var(--line);background:var(--sec);color:var(--ink)">
+          <input id="catSearch" placeholder="Ex.: leite, cacau, manga, syrup…">
         </div>
-        <div style="min-width:170px;flex:1;">
+        <div>
           <label>Categoria</label>
-          <select id="catFilter" style="width:100%;padding:10px;border-radius:12px;border:1px solid var(--line);background:var(--sec);color:var(--ink)"></select>
+          <select id="catFilter"></select>
         </div>
       </div>
       <div style="max-height:60vh;overflow:auto;border:1px dashed var(--line);border-radius:12px;padding:6px">
@@ -460,22 +338,9 @@ let current = "Creme";
 let gramsMix = {};
 let polpaSolids = 0.0;
 
+// Catálogo
 const FALLBACK_CATALOG = "https://titoufu.github.io/Sorvetes/ingredients_master.json";
 let catalogData = { ingredients: [], updated_at:"" };
-
-// Adiciona os 9 primeiros ingredientes do catálogo por padrão à mistura
-async function fixarPrimeirosIngredientesCatalogo() {
-  if (!catalogData.ingredients.length) await loadCatalog();
-  const fixos = catalogData.ingredients.slice(0, 9);
-  fixos.forEach((item) => {
-    if (!COMPOS[item.name]) {
-      COMPOS[item.name] = [item.fat_pct, item.solids_pct, item.sugar_pct];
-    }
-    if (!(item.name in gramsMix)) gramsMix[item.name] = 0;
-  });
-  renderTable();
-  recalc();
-}
 
 async function getCatalogUrl() {
   try {
@@ -568,8 +433,8 @@ function drawCatalogRows() {
 })();
 
 function setTheme(name){
-  if(!name){ document.body.removeAttribute('data-theme'); return; }
-  document.body.setAttribute('data-theme', name);
+  if(!name){ app.removeAttribute('data-theme'); return; }
+  app.setAttribute('data-theme', name);
 }
 function setTarget(val){ targetBatch = val; normalizeToTarget(); updateTargetButtons(); }
 function updateTargetButtons(){
@@ -635,10 +500,10 @@ function calc(){
     fatG+=f; solidsG+=s; sugarG+=a; fatParts[k]=f; solidsParts[k]=s; sugarParts[k]=a;
   }
   const percent = {}; for(const k of Object.keys(gramsMix)){ percent[k] = total>0 ? (gramsMix[k]/total*100) : 0; }
-  return { total, percent, gorduraPct: total>0 ? (fatG/total)*100 : 0, solidosPct: total>0 ? (solidsG/total)*100 : 0, acucarPct: total>0 ? (sugarG/total)*100 : 0, fatG, solidsG, sugarG, fatParts, soli[...]
+  return { total, percent, gorduraPct: total>0 ? (fatG/total)*100 : 0, solidosPct: total>0 ? (solidsG/total)*100 : 0, acucarPct: total>0 ? (sugarG/total)*100 : 0, fatG, solidsG, sugarG, fatParts, solidsParts, sugarParts };
 }
-function statusPill(name, val){ let ok=false, txt="Ajustar", cls="aj"; if(name==="gordura") ok=(val>=8&&val<=16); if(name==="acucar") ok=(val>=16&&val<=22); if(name==="solidos") ok=(val>=36&&val<=42);[...]
-function setDeltaChip(el, delta){ el.textContent=(delta>0?'+':'')+delta.toFixed(2)+' pp'; el.classList.remove('ok','aj'); if(Math.abs(delta)<=0.10){el.classList.add('ok');} else {el.classList.add('aj'[...]
+function statusPill(name, val){ let ok=false, txt="Ajustar", cls="aj"; if(name==="gordura") ok=(val>=8&&val<=16); if(name==="acucar") ok=(val>=16&&val<=22); if(name==="solidos") ok=(val>=36&&val<=42); if(ok){txt="OK";cls="ok";} return `<span class="pill ${cls}">${txt}</span>`; }
+function setDeltaChip(el, delta){ el.textContent=(delta>0?'+':'')+delta.toFixed(2)+' pp'; el.classList.remove('ok','aj'); if(Math.abs(delta)<=0.10){el.classList.add('ok');} else {el.classList.add('aj');} }
 function recalc(){
   const r = calc();
   stats.innerHTML = `<div class="stat"><h3>Gordura (%)</h3><div class="val">${r.gorduraPct.toFixed(2)}</div>${statusPill('gordura',r.gorduraPct)}</div>
@@ -652,38 +517,30 @@ function recalc(){
     const name = tr.dataset.ing; const pctCell = tr.querySelector('td[data-pct-cell]'); const contribCell = tr.querySelector('td[data-contrib-cell]'); const pct = r.percent[name]||0;
     pctCell.textContent = isFinite(pct) ? pct.toFixed(2) + " %" : "—";
     const fg=r.fatParts[name]||0, sg=r.sugarParts[name]||0, tg=r.solidsParts[name]||0; const fc=r.fatG>0?(fg/r.fatG*100):0, sc=r.sugarG>0?(sg/r.sugarG*100):0, tc=r.solidsG>0?(tg/r.solidsG*100):0;
-    contribCell.innerHTML = `<div class="contrib"><span class="c-pill c-fat">Gord ${fc.toFixed(1)}%</span><span class="c-pill c-sugar">Açúc ${sc.toFixed(1)}%</span><span class="c-pill c-solid">Sóli[...]
+    contribCell.innerHTML = `<div class="contrib"><span class="c-pill c-fat">Gord ${fc.toFixed(1)}%</span><span class="c-pill c-sugar">Açúc ${sc.toFixed(1)}%</span><span class="c-pill c-solid">Sólid ${tc.toFixed(1)}%</span></div>`;
   }
   const near = Math.abs(r.total - targetBatch) < 0.5; sumG.className = near ? "sum-ok" : "sum-bad";
   sumG.textContent = r.total.toFixed(0) + " g"; sumPct.textContent = r.total>0 ? "100.00 %" : "—"; targetInfo.textContent = `(alvo atual: ${targetBatch} g)`;
 }
-function normalizeToTarget(){ const r = calc(); const total = r.total; if(total<=0) return; const factor = targetBatch/total; for(const k of Object.keys(gramsMix)){ gramsMix[k]=Math.max(0, Math.round([...]
-function renderComp100(){ const entries = Object.entries(COMPOS).map(([k,[g,s,a]])=>`<div>• <b>${k}</b> — gordura ${g}% • açúcares ${a}% • sólidos ${s}% (por 100 g)</div>`).join(""); comp10[...]
+function normalizeToTarget(){ const r = calc(); const total = r.total; if(total<=0) return; const factor = targetBatch/total; for(const k of Object.keys(gramsMix)){ gramsMix[k]=Math.max(0, Math.round(Number(gramsMix[k]||0)*factor)); } renderTable(); recalc(); }
+function renderComp100(){ const entries = Object.entries(COMPOS).map(([k,[g,s,a]])=>`<div>• <b>${k}</b> — gordura ${g}% • açúcares ${a}% • sólidos ${s}% (por 100 g)</div>`).join(""); comp100Div.innerHTML = entries; }
 
-async function init(){
-  const savedTheme = localStorage.getItem('sorvete_theme') || '';
-  themeSel.value = savedTheme;
-  setTheme(savedTheme);
-
-  await loadCatalog(); // carrega o catálogo antes de presets
-  await fixarPrimeirosIngredientesCatalogo(); // fixa os 9 primeiros da lista na mistura
-
-  presetSel.innerHTML = Object.keys(PRESETS).map(p=>`<option ${p===current?'selected':''}>${p}</option>`).join('');
-  applyPreset(current);
-
+function init(){
+  const savedTheme = localStorage.getItem('sorvete_theme') || ''; themeSel.value = savedTheme; setTheme(savedTheme);
+  themeSel.addEventListener('change', ()=>{ setTheme(themeSel.value); localStorage.setItem('sorvete_theme', themeSel.value||''); });
+  presetSel.innerHTML = Object.keys(PRESETS).map(p=>`<option ${p===current?'selected':''}>${p}</option>`).join(''); applyPreset(current);
   presetSel.addEventListener('change', ()=>{ applyPreset(presetSel.value); });
   document.getElementById('btnReset').addEventListener('click', ()=>applyPreset(current));
   document.getElementById('btnT1').addEventListener('click', ()=>setTarget(1000));
   document.getElementById('btnT15').addEventListener('click', ()=>setTarget(1500));
   document.getElementById('btnT2').addEventListener('click', ()=>setTarget(2000));
   document.getElementById('btnBlur').addEventListener('click', ()=>{ if(document.activeElement && document.activeElement.blur){ document.activeElement.blur(); } });
-
-  themeSel.addEventListener('change', ()=>{ setTheme(themeSel.value); localStorage.setItem('sorvete_theme', themeSel.value||''); });
 }
 
 document.addEventListener('DOMContentLoaded', init);
 </script>
 
+<!-- PATCH: Abreviar "por 100 g → gordura ... • açúcares ... • sólidos ..." -->
 <script>
 (function(){
   function toNumStr(x){ const s = String(x).replace(',', '.'); const n = parseFloat(s); return isNaN(n)? s : String(n); }
@@ -709,6 +566,7 @@ document.addEventListener('DOMContentLoaded', init);
   });
 })();
 </script>
+<!-- END PATCH -->
 
 </body>
 </html>
