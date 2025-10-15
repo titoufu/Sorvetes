@@ -89,14 +89,6 @@
     .aj{background:rgba(194,65,12,.16);color:var(--warn);border:1px solid rgba(194,65,12,.45)}
 
     table{width:100%;border-collapse:collapse}
-.table-wrap{overflow:auto;-webkit-overflow-scrolling:touch}
-/* Evita estouro em grids e inputs no mobile */
-.row > * { min-width: 0; }
-input,select,button{max-width:100%}
-/* Lote atual: não vazar em telas estreitas */
-#loteInfo{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
-/* Células longas quebram/resumem adequadamente */
-th,td{word-break:break-word}
     th,td{padding:8px;border-bottom:1px dashed var(--line);text-align:left;vertical-align:middle}
     th{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
     tfoot td{font-weight:800}
@@ -133,12 +125,45 @@ th,td{word-break:break-word}
       backdrop-filter:saturate(1.2) blur(4px);
     }
     .bottombar button{max-width:220px}
-  </style>
+  
+/* === FIXES: contraste, layout e botões de ajuste === */
 
-  <style>
-    #dlgCatalog::backdrop{background:rgba(0,0,0,.25)}
-  </style>
+/* 1) Contraste garantido para o NOME do ingrediente (tabela e catálogo) */
+#tbl td:nth-child(1),
+#tbl td:nth-child(1) .name,
+#dlgCatalog .ing-name,
+#dlgCatalog .name {
+  color: var(--ink) !important;
+  font-weight: 600;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+}
 
+/* 2) Evitar que tudo vire uma coluna por largura 100% em botões */
+header .theme select, header button, .toolbar button, .btn-group > button, .table-wrap button, dialog button { width: auto; }
+@media (max-width:560px){ .btn-group > button, .toolbar button { width: 100%; } }
+.card input, .card select { width: 100%; } /* mantém 100% só em formulários */
+
+/* 3) Grid padrão em 2 colunas até 700px */
+.row{display:grid;grid-template-columns:repeat(2, minmax(280px,1fr));gap:10px}
+@media (max-width:700px){.row{grid-template-columns:1fr}}
+
+/* 4) Tabela principal: mais espaço ao nome + truncagem elegante */
+#tbl th:nth-child(1), #tbl td:nth-child(1){width:48%;}
+#tbl th:nth-child(2), #tbl td:nth-child(2){width:18%;}
+#tbl th:nth-child(3), #tbl td:nth-child(3){width:10%;}
+#tbl th:nth-child(4), #tbl td:nth-child(4){width:24%;}
+@media (max-width:520px){
+  #tbl th:nth-child(1), #tbl td:nth-child(1){width:56%;}
+  #tbl th:nth-child(2), #tbl td:nth-child(2){width:20%;}
+  #tbl th:nth-child(3), #tbl td:nth-child(3){width:8%;}
+  #tbl th:nth-child(4), #tbl td:nth-child(4){width:16%;}
+}
+#tbl td:nth-child(1){overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0;}
+
+/* 5) Garantir exibição dos botões +10 / -10 */
+button[data-step="10"], button[data-step="-10"]{ display:inline-flex !important; }
+
+</style>
 </head>
 <body>
   <div class="stickybar">
@@ -240,8 +265,8 @@ th,td{word-break:break-word}
   </div>
 
   <!-- Modal antes do script -->
-  <dialog id="dlgCatalog" style="border:none;border-radius:16px;padding:0;max-width:95vw;">
-    <div style="background:var(--card);color:var(--ink);padding:12px 12px 14px;border-radius:16px;box-shadow:var(--shadow);width:min(920px,95vw);max-height:80vh;overflow:auto;">
+  <dialog id="dlgCatalog" style="border:none;border-radius:16px;padding:0;max-width:min(920px,95vw);">
+    <div style="background:var(--card);color:var(--ink);padding:12px 12px 14px;border-radius:16px;box-shadow:var(--shadow);min-width:min(920px,95vw);">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
         <h3 style="margin:0;font-size:16px">Adicionar do catálogo</h3>
         <div class="mini muted" id="catMeta" style="margin-left:auto">—</div>
@@ -545,21 +570,64 @@ function init(){
 }
 
 document.addEventListener('DOMContentLoaded', init);
+</script>
+<script>
+// === Abreviar composição e preservar botões +10/-10 ===
+(function(){
+  function abbreviate(str){
+    const re = /por\s*100\s*g\s*→?\s*[^0-9]*gordur[aa]\s*([\d.,]+)%\s*[•|·\-–]\s*aç(?:u|ú)cares?\s*([\d.,]+)%\s*[•|·\-–]\s*só?lidos?\s*([\d.,]+)%/i;
+    const m = str.match(re);
+    if(!m) return null;
+    const g = parseFloat(String(m[1]).replace(',','.'))||0;
+    const a = parseFloat(String(m[2]).replace(',','.'))||0;
+    const s = parseFloat(String(m[3]).replace(',','.'))||0;
+    return `${g}% G • ${a}% A • ${s}% S`;
+  }
 
-// Fechar o diálogo ao clicar fora do painel (backdrop)
-(() => {
-  const dlg = document.getElementById('dlgCatalog');
-  if (dlg) {
-    dlg.addEventListener('click', (e) => {
-      const panel = dlg.querySelector('div');
-      if (!panel) return;
-      const rect = panel.getBoundingClientRect();
-      const x = e.clientX, y = e.clientY;
-      if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) {
-        try { dlg.close(); } catch(_) {}
+  function applyAbbrev(root=document){
+    const nodes = root.querySelectorAll('#tbl td, #tbl span, #tbl div, #dlgCatalog *');
+    nodes.forEach(n=>{
+      const t = (n.innerText||'').trim();
+      const short = abbreviate(t);
+      if(short){
+        n.innerText = t.replace(/por.*$/i, short);
       }
     });
   }
+
+  function removePlusMinusOne(root=document){
+    root.querySelectorAll('button').forEach(b=>{
+      const txt = (b.textContent||'').trim();
+      const step = (b.getAttribute('data-step')||'').trim();
+      if (txt === '+1' || txt === '-1' || step === '1' || step === '-1'){
+        b.remove();
+      }
+    });
+  }
+
+  function ensurePlusMinusTenVisible(root=document){
+    const btns = Array.from(root.querySelectorAll('button'));
+    btns.forEach(b=>{
+      const txt = (b.textContent||'').trim();
+      const step = (b.getAttribute('data-step')||'').trim();
+      if (txt === '+10' || txt === '-10' || step === '10' || step === '-10'){
+        b.style.display = 'inline-flex';
+        b.style.visibility = 'visible';
+      }
+    });
+  }
+
+  function runAll(){
+    removePlusMinusOne();
+    ensurePlusMinusTenVisible();
+    applyAbbrev();
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    runAll();
+    const obs = new MutationObserver(runAll);
+    obs.observe(document.body, {childList:true, subtree:true});
+  });
 })();
 
 </script>
