@@ -126,19 +126,23 @@
     }
     .bottombar button{max-width:220px}
   
-/* === Visibility and layout fixes === */
+/* === SAFE FIXES (no risky DOM rewrites) === */
+
+/* Keep grids in 2 cols on medium screens; drop to 1 below 700px */
 .row{display:grid;grid-template-columns:repeat(2, minmax(280px,1fr));gap:10px}
 @media (max-width:700px){.row{grid-template-columns:1fr}}
 
-header .theme select, header button, .toolbar button, .btn-group > button, .table-wrap button, dialog button { width:auto; }
+/* Buttons/selects default to auto width outside of form cards */
+header .theme select, header button, .toolbar button, .btn-group > button, dialog button { width:auto; }
+.card input, .card select { width:100%; }
 
-/* First column (ingredient name) stronger contrast across themes */
-#tbl td:nth-child(1){ color: var(--ink) !important; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
+/* Ingredient name (1st column) readable on dark theme too */
+#tbl td:nth-child(1){ color:var(--ink) !important; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
 
-/* Table column widths */
+/* Table columns width hints */
 #tbl th:nth-child(1), #tbl td:nth-child(1){width:48%;}
 #tbl th:nth-child(2), #tbl td:nth-child(2){width:18%;}
-#tbl th:nth-child(3), #tbl td:nth-child(3){width:10%;}
+#tbl th:nth-child(3), #tbl td:nth-child(3){width:10%; text-align:center;}
 #tbl th:nth-child(4), #tbl td:nth-child(4){width:24%;}
 @media (max-width:520px){
   #tbl th:nth-child(1), #tbl td:nth-child(1){width:56%;}
@@ -147,10 +151,7 @@ header .theme select, header button, .toolbar button, .btn-group > button, .tabl
   #tbl th:nth-child(4), #tbl td:nth-child(4){width:16%;}
 }
 
-/* Step10 buttons always visible */
-button.step10{ display:inline-flex !important; visibility:visible !important; }
-
-/* Contributions badges truncated neatly */
+/* Contribution badges truncation only (no text changes here) */
 #tbl td:nth-child(4) .badge{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
 
 </style>
@@ -562,45 +563,51 @@ function init(){
 document.addEventListener('DOMContentLoaded', init);
 </script>
 <script>
-// === Ensure +10/-10 visible and abbreviate contribution badges ===
+// === SAFE JS: visibility and contributions abbreviation (scoped) ===
 (function(){
-  function markStep10(root=document){
+  function ensureStep10Visible(root=document){
     root.querySelectorAll('button').forEach(b=>{
       const t = (b.textContent||'').trim();
       const step = (b.getAttribute('data-step')||'').trim();
       if (t === '+10' || t === '-10' || step === '10' || step === '-10'){
-        b.classList.add('step10');
+        b.style.display = 'inline-flex';
+        b.style.visibility = 'visible';
       }
-      // remove only +1 / -1
+      // Remove ONLY exact +1/-1 if present
       if (t === '+1' || t === '-1' || step === '1' || step === '-1'){
         b.remove();
       }
     });
   }
-  function abbreviateContrib(root=document){
-    // Only scan contributions column (4th column) if present
+
+  function abbreviateContributionBadges(root=document){
+    // Scope strictly to 4th column badges
     const rows = root.querySelectorAll('#tbl tbody tr');
     rows.forEach(tr=>{
       const td = tr.children[3];
       if(!td) return;
-      td.querySelectorAll('*').forEach(el=>{
+      td.querySelectorAll('.badge, .chip, span, div').forEach(el=>{
         const txt = (el.innerText||'').trim();
-        // Match patterns like "Gord 12.5%" or "Gordura 12.5%"
         let m;
-        if ((m = txt.match(/^(?:Gord(?:ura)?)\s*([\d.,]+)%/i))) {
+        if ((m = txt.match(/^Gord(?:ura)?\s*([\d.,]+)%$/i))) {
           el.innerText = `${m[1].replace(',', '.')}% G`;
-        } else if ((m = txt.match(/^(?:A[cç]u[cç]ar(?:es)?)\s*([\d.,]+)%/i))) {
+        } else if ((m = txt.match(/^A[cç]u[cç]ar(?:es)?\s*([\d.,]+)%$/i))) {
           el.innerText = `${m[1].replace(',', '.')}% A`;
-        } else if ((m = txt.match(/^(?:S[oó]lidos?)\s*([\d.,]+)%/i))) {
+        } else if ((m = txt.match(/^S[oó]lidos?\s*([\d.,]+)%$/i))) {
           el.innerText = `${m[1].replace(',', '.')}% S`;
         }
       });
     });
   }
-  function run(){ markStep10(); abbreviateContrib(); }
+
+  function runAll(){
+    ensureStep10Visible();
+    abbreviateContributionBadges();
+  }
+
   document.addEventListener('DOMContentLoaded', ()=>{
-    run();
-    const obs = new MutationObserver(run);
+    runAll();
+    const obs = new MutationObserver(runAll);
     obs.observe(document.body, {childList:true, subtree:true});
   });
 })();
