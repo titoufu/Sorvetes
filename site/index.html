@@ -36,7 +36,7 @@
       --line:#e2e8f0;
       --sticky:#ffffffcc;
     }
-    [data-theme="escuro"]{
+    [data-theme="escuro-disabled"]{
       --bg:#0b1220; --card:#0f172a; --ink:#e5e7eb; --muted:#94a3b8;
       --pri:#60a5fa; --ok:#34d399; --warn:#fbbf24; --bad:#f87171;
       --fat-b:#fecaca; --sugar-b:#fde68a; --solid-b:#86efac;
@@ -125,9 +125,15 @@
       backdrop-filter:saturate(1.2) blur(4px);
     }
     .bottombar button{max-width:220px}
-  </style>
+  
+/* === THEME SAFETY: force light everywhere === */
+:root,[data-theme="claro"]{ color-scheme: light; }
+@media (prefers-color-scheme: dark){ :root{ color-scheme: light; } }
+html,body{ background: var(--bg) !important; color: var(--ink) !important; }
+
+</style>
 </head>
-<body>
+<body data-theme="claro">
   <div class="stickybar">
     <div class="stickygrid">
       <div class="stickycell">
@@ -533,5 +539,34 @@ function init(){
 
 document.addEventListener('DOMContentLoaded', init);
 </script>
+
+<!-- PATCH: Abreviar "por 100 g → gordura ... • açúcares ... • sólidos ..." -->
+<script>
+(function(){
+  function toNumStr(x){ const s = String(x).replace(',', '.'); const n = parseFloat(s); return isNaN(n)? s : String(n); }
+  function shortenText(t){
+    const s = t.replace(/\s+/g,' ').trim();
+    if (/[%]\s*G\s*•\s*[%]\s*A\s*•\s*[%]\s*S/i.test(s)) return null;
+    const re = /por\s*100\s*g\s*→?\s*gordur[aa]\s*([\d.,]+)%\s*[•·\-–]\s*aç(?:u|ú)cares?\s*([\d.,]+)%\s*[•·\-–]\s*só?lidos?\s*([\d.,]+)%/i;
+    const m = s.match(re); if (!m) return null;
+    return ` ${toNumStr(m[1])}% G• ${toNumStr(m[2])}% A• ${toNumStr(m[3])}% S`;
+  }
+  function process(){
+    const nodes = document.querySelectorAll('#tbl td:nth-child(1), #tbl td:nth-child(1) * , #dlgCatalog *');
+    nodes.forEach(el=>{
+      const txt = el.innerText || el.textContent || '';
+      const short = shortenText(txt);
+      if (short){ el.innerText = txt.replace(/por\s*100\s*g\s*→?.*$/i, short); }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', ()=>{
+    process();
+    const obs = new MutationObserver(process);
+    obs.observe(document.body, {childList:true, subtree:true});
+  });
+})();
+</script>
+<!-- END PATCH -->
+
 </body>
 </html>
