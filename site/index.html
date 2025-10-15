@@ -131,6 +131,24 @@
 @media (prefers-color-scheme: dark){ :root{ color-scheme: light; } }
 html,body{ background: var(--bg) !important; color: var(--ink) !important; }
 
+
+/* === Patch: integrar e melhorar legibilidade da coluna "Contribuições na mistura" === */
+.table-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch}
+#tbl{table-layout:fixed; background:var(--card)}
+#tbl th, #tbl td{vertical-align:top}
+/* col widths that still wrap nicely on mobile */
+#tbl th:nth-child(1), #tbl td:nth-child(1){width:40%}
+#tbl th:nth-child(2), #tbl td:nth-child(2){width:20%}
+#tbl th:nth-child(3), #tbl td:nth-child(3){width:10%}
+#tbl th:nth-child(4), #tbl td:nth-child(4){width:30%}
+/* grid lines para mostrar que a última coluna faz parte da tabela */
+#tbl th, #tbl td{border-right:1px dashed var(--line)}
+#tbl th:last-child, #tbl td:last-child{border-right:none}
+/* garantir que conteúdo da coluna 4 não "estoure" visualmente */
+#tbl td:nth-child(4){background:var(--card)}
+#tbl td:nth-child(4) .contrib{max-width:100%;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-start}
+#tbl td:nth-child(4) .c-pill{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
 </style>
 </head>
 <body data-theme="claro">
