@@ -36,7 +36,7 @@
       --line:#e2e8f0;
       --sticky:#ffffffcc;
     }
-    [data-theme="escuro-disabled"]{
+    [data-theme="escuro"]{
       --bg:#0b1220; --card:#0f172a; --ink:#e5e7eb; --muted:#94a3b8;
       --pri:#60a5fa; --ok:#34d399; --warn:#fbbf24; --bad:#f87171;
       --fat-b:#fecaca; --sugar-b:#fde68a; --solid-b:#86efac;
@@ -126,32 +126,92 @@
     }
     .bottombar button{max-width:220px}
   
-/* === THEME SAFETY: force light everywhere === */
-:root,[data-theme="claro"]{ color-scheme: light; }
-@media (prefers-color-scheme: dark){ :root{ color-scheme: light; } }
-html,body{ background: var(--bg) !important; color: var(--ink) !important; }
-
-
-/* === Patch: integrar e melhorar legibilidade da coluna "Contribuições na mistura" === */
+/* === Tabela de ingredientes — layout proposto === */
 .table-wrap{overflow-x:auto; -webkit-overflow-scrolling:touch}
-#tbl{table-layout:fixed; background:var(--card)}
-#tbl th, #tbl td{vertical-align:top}
-/* col widths that still wrap nicely on mobile */
-#tbl th:nth-child(1), #tbl td:nth-child(1){width:40%}
-#tbl th:nth-child(2), #tbl td:nth-child(2){width:20%}
-#tbl th:nth-child(3), #tbl td:nth-child(3){width:10%}
-#tbl th:nth-child(4), #tbl td:nth-child(4){width:30%}
-/* grid lines para mostrar que a última coluna faz parte da tabela */
-#tbl th, #tbl td{border-right:1px dashed var(--line)}
-#tbl th:last-child, #tbl td:last-child{border-right:none}
-/* garantir que conteúdo da coluna 4 não "estoure" visualmente */
-#tbl td:nth-child(4){background:var(--card)}
-#tbl td:nth-child(4) .contrib{max-width:100%;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-start}
-#tbl td:nth-child(4) .c-pill{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Cores */
+:root{
+  --tbl-header:#f6d9b5;  /* laranja claro */
+  --tbl-cream:#f7f0d5;   /* creme (linhas ímpares) */
+  --tbl-blue:#d7e4f5;    /* azul claro (linhas pares) */
+  --pill-g:#d64545;      /* Gord */
+  --pill-a:#e8a23e;      /* Açú */
+  --pill-s:#3aa66b;      /* Sólid */
+}
+
+#tbl{ table-layout: fixed; width:100%; border-collapse:separate; border-spacing:0; background:white; }
+#tbl th, #tbl td{ border-bottom:1px solid var(--line, #ccd3db); border-right:1px solid var(--line, #ccd3db); padding:.65rem .75rem; vertical-align:middle; }
+#tbl th:last-child, #tbl td:last-child{ border-right:none; }
+
+/* Cabeçalho e totais */
+#tbl thead th{ background:var(--tbl-header); text-align:center; font-weight:700; }
+#tbl thead th:first-child{ text-align:left; }
+#tbl tfoot td{ background:var(--tbl-header); font-weight:700; }
+
+/* Linhas alternadas */
+#tbl tbody tr:nth-child(odd) td{ background:var(--tbl-cream); }
+#tbl tbody tr:nth-child(even) td{ background:var(--tbl-blue); }
+
+/* Colunas — larguras aproximadas */
+#tbl th:nth-child(1), #tbl td:nth-child(1){ width:42%; }
+#tbl th:nth-child(2), #tbl td:nth-child(2){ width:22%; }
+#tbl th:nth-child(3), #tbl td:nth-child(3){ width:13%; text-align:center; }
+#tbl th:nth-child(4), #tbl td:nth-child(4){ width:23%; }
+
+/* Coluna 1: nome + composição em duas linhas */
+#tbl td:nth-child(1) .ingrediente{ font-weight:700; margin-bottom:.15rem; }
+#tbl td:nth-child(1) .comp{ font-size:.92em; opacity:.9; }
+
+/* Coluna 2: campo editável + helpers */
+#tbl td:nth-child(2) .qtd-box{ display:grid; grid-template-columns:1fr; gap:.35rem; max-width:140px; }
+#tbl td:nth-child(2) .q-input{ display:flex; align-items:center; gap:.4rem; }
+#tbl td:nth-child(2) input[type="number"]{
+  width:100%; padding:.35rem .5rem; border:1px solid var(--line, #ccd3db); border-radius:8px;
+  font:inherit; text-align:right; background:white;
+}
+/* esconder setas do input number */
+#tbl input::-webkit-outer-spin-button,
+#tbl input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+#tbl input[type=number]{ -moz-appearance: textfield; }
+
+#tbl td:nth-child(2) .helpers{ display:flex; gap:.4rem; flex-wrap:wrap; }
+#tbl td:nth-child(2) .helpers button{
+  padding:.25rem .6rem; border-radius:999px; border:1px solid var(--line, #ccd3db);
+  background:white; cursor:pointer; font-weight:700; line-height:1;
+}
+#tbl td:nth-child(2) .helpers button:active{ transform:translateY(1px); }
+
+/* Coluna 3: % no peso */
+#tbl td:nth-child(3) .peso-pct{ font-weight:700; text-align:center; }
+
+/* Coluna 4: % na mistura (pills) */
+#tbl td:nth-child(4) .mix{ display:flex; gap:.35rem; flex-wrap:wrap; }
+#tbl td:nth-child(4) .pill{ border-radius:999px; padding:.15rem .5rem; font-weight:700; color:#fff; }
+#tbl td:nth-child(4) .pill.g{ background:var(--pill-g); }
+#tbl td:nth-child(4) .pill.a{ background:var(--pill-a); }
+#tbl td:nth-child(4) .pill.s{ background:var(--pill-s); }
+
+@media (max-width: 720px){
+  #tbl th, #tbl td{ font-size:14px; }
+  #tbl td:nth-child(2) .qtd-box{ max-width:none; }
+}
+
+
+/* === Ensure number input has no spinners and keep compact rows === */
+#tbl input::-webkit-outer-spin-button,
+#tbl input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+#tbl input[type=number]{ -moz-appearance: textfield; }
+
+
+/* === Ajustes solicitados === */
+/* Centralizar o valor dentro do campo de gramas (2ª coluna) */
+#tbl td:nth-child(2) input[type="number"]{ text-align:center; }
+/* Estilo para texto curto da coluna % NA MISTURA */
+#tbl td:nth-child(4) .mix-short{ font-weight:700; }
 
 </style>
 </head>
-<body data-theme="claro">
+<body>
   <div class="stickybar">
     <div class="stickygrid">
       <div class="stickycell">
@@ -558,33 +618,115 @@ function init(){
 document.addEventListener('DOMContentLoaded', init);
 </script>
 
-<!-- PATCH: Abreviar "por 100 g → gordura ... • açúcares ... • sólidos ..." -->
 <script>
 (function(){
-  function toNumStr(x){ const s = String(x).replace(',', '.'); const n = parseFloat(s); return isNaN(n)? s : String(n); }
-  function shortenText(t){
-    const s = t.replace(/\s+/g,' ').trim();
-    if (/[%]\s*G\s*•\s*[%]\s*A\s*•\s*[%]\s*S/i.test(s)) return null;
-    const re = /por\s*100\s*g\s*→?\s*gordur[aa]\s*([\d.,]+)%\s*[•·\-–]\s*aç(?:u|ú)cares?\s*([\d.,]+)%\s*[•·\-–]\s*só?lidos?\s*([\d.,]+)%/i;
-    const m = s.match(re); if (!m) return null;
-    return ` ${toNumStr(m[1])}% G• ${toNumStr(m[2])}% A• ${toNumStr(m[3])}% S`;
+  // Helpers para encurtar composição e contribuições
+  function shortenCompText(text){
+    if (!text) return text;
+    let t = String(text).replace(/\s+/g,' ').trim();
+    // "por 100 g → gordura X% • açúcares Y% • sólidos Z%" -> "X% G - Y% A - Z% S"
+    let m = t.match(/por\s*100\s*g\s*→?\s*gordur[aa]\s*([\d.,]+)%\s*[•·\-–]\s*aç(?:u|ú)cares?\s*([\d.,]+)%\s*[•·\-–]\s*só?lidos?\s*([\d.,]+)%/i);
+    if (m){
+      const g = m[1].replace(',', '.'), a = m[2].replace(',', '.'), s = m[3].replace(',', '.');
+      return `${g}% G - ${a}% A - ${s}% S`;
+    }
+    // Se já estiver com bullets "•", troca por hífens
+    t = t.replace(/\s*•\s*/g, ' - ');
+    return t;
   }
-  function process(){
-    const nodes = document.querySelectorAll('#tbl td:nth-child(1), #tbl td:nth-child(1) * , #dlgCatalog *');
-    nodes.forEach(el=>{
-      const txt = el.innerText || el.textContent || '';
-      const short = shortenText(txt);
-      if (short){ el.innerText = txt.replace(/por\s*100\s*g\s*→?.*$/i, short); }
+  function parseGAS(text){
+    // Aceita "Gord 12.5%" / "Gordura 12.5%" / "Açú 0%" / "Açúcar 0%" / "Sólid 37%" / "Sólidos 37%"
+    const s = String(text);
+    const g = (s.match(/Gord(?:ura)?\s*([\d.,]+)%/i)||[])[1];
+    const a = (s.match(/A[cç]u[cç](?:ar(?:es)?)?\s*([\d.,]+)%/i)||[])[1];
+    const so = (s.match(/S[oó]lid(?:os)?\s*([\d.,]+)%/i)||[])[1];
+    return [g?.replace(',', '.'), a?.replace(',', '.'), so?.replace(',', '.')];
+  }
+
+  // Enhance rows by ensuring expected structure/classes exist without breaking your logic.
+  function enhanceTable(){
+    const tbl = document.getElementById('tbl');
+    if(!tbl) return;
+    const rows = tbl.tBodies[0]?.rows || [];
+    for (const tr of rows){
+      const c1 = tr.cells[0], c2 = tr.cells[1], c3 = tr.cells[2], c4 = tr.cells[3];
+      if (!c1 || !c2 || !c3 || !c4) continue;
+
+      // Coluna 1: split em nome + comp se necessário
+      if (!c1.querySelector('.ingrediente')) {
+        const txt = c1.innerText.trim();
+        const parts = txt.split('\n').map(s=>s.trim()).filter(Boolean);
+        if (parts.length > 1){
+          c1.innerHTML = `<div class="ingrediente">${parts[0]}</div><div class="comp">${parts.slice(1).join(' ')}</div>`;
+        } else {
+          c1.innerHTML = `<div class="ingrediente">${txt}</div>`;
+        }
+      }
+      // Encurtar texto de composição se existir
+      const compEl = c1.querySelector('.comp');
+      if (compEl){ compEl.textContent = shortenCompText(compEl.textContent); }
+
+      // Coluna 2: agrupar input e helpers
+      if (!c2.querySelector('.qtd-box')){
+        const input = c2.querySelector('input[type="number"]') || c2.querySelector('input');
+        const helpers = c2.querySelector('.helpers') || (()=>{
+          const h=document.createElement('div'); h.className='helpers';
+          // Tentar encontrar botões existentes +/-10
+          const btns = c2.querySelectorAll('button');
+          btns.forEach(b=>h.appendChild(b));
+          return h;
+        })();
+        const box = document.createElement('div'); box.className='qtd-box';
+        const qi = document.createElement('div'); qi.className='q-input';
+        if (input){ qi.appendChild(input); }
+        box.appendChild(qi);
+        if (helpers && helpers.children.length) box.appendChild(helpers);
+        c2.innerHTML = ''; c2.appendChild(box);
+      }
+
+      // Coluna 3: % no peso centralizado
+      if (!c3.querySelector('.peso-pct')){
+        const t = c3.innerText.trim();
+        c3.innerHTML = `<div class="peso-pct">${t}</div>`;
+      }
+
+      // Coluna 4: % na mistura como texto curto "X% G - Y% A - Z% S"
+      if (!c4.querySelector('.mix-short')){
+        const txt = c4.innerText.trim();
+        const [g,a,s] = parseGAS(txt);
+        if (g!=null && a!=null && s!=null){
+          const div = document.createElement('div'); div.className='mix-short';
+          div.textContent = `${g}% G - ${a}% A - ${s}% S`;
+          c4.innerHTML = ''; c4.appendChild(div);
+        }
+      }
+  }
+  document.addEventListener('DOMContentLoaded', enhanceTable);
+  // Caso a tabela seja re-renderizada pelo app
+  const obs = new MutationObserver(enhanceTable);
+  obs.observe(document.body, {childList:true, subtree:true});
+})();
+</script>
+
+
+<script>
+(function(){
+  function keepOnlyStep10(root=document){
+    root.querySelectorAll('#tbl td:nth-child(2) .helpers button').forEach(btn=>{
+      const t = (btn.textContent||'').trim();
+      const step = (btn.getAttribute('data-step')||'').trim();
+      if (t === '+1' || t === '-1' || step === '1' || step === '-1'){
+        btn.remove();
+      }
     });
   }
   document.addEventListener('DOMContentLoaded', ()=>{
-    process();
-    const obs = new MutationObserver(process);
-    obs.observe(document.body, {childList:true, subtree:true});
+    keepOnlyStep10();
+    const obs = new MutationObserver(keepOnlyStep10);
+    obs.observe(document.getElementById('tbl') || document.body, {childList:true, subtree:true});
   });
 })();
 </script>
-<!-- END PATCH -->
 
 </body>
 </html>
