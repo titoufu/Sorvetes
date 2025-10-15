@@ -126,28 +126,16 @@
     }
     .bottombar button{max-width:220px}
   
-/* === FIXES: contraste, layout e botões de ajuste === */
-
-/* 1) Contraste garantido para o NOME do ingrediente (tabela e catálogo) */
-#tbl td:nth-child(1),
-#tbl td:nth-child(1) .name,
-#dlgCatalog .ing-name,
-#dlgCatalog .name {
-  color: var(--ink) !important;
-  font-weight: 600;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
-}
-
-/* 2) Evitar que tudo vire uma coluna por largura 100% em botões */
-header .theme select, header button, .toolbar button, .btn-group > button, .table-wrap button, dialog button { width: auto; }
-@media (max-width:560px){ .btn-group > button, .toolbar button { width: 100%; } }
-.card input, .card select { width: 100%; } /* mantém 100% só em formulários */
-
-/* 3) Grid padrão em 2 colunas até 700px */
+/* === Visibility and layout fixes === */
 .row{display:grid;grid-template-columns:repeat(2, minmax(280px,1fr));gap:10px}
 @media (max-width:700px){.row{grid-template-columns:1fr}}
 
-/* 4) Tabela principal: mais espaço ao nome + truncagem elegante */
+header .theme select, header button, .toolbar button, .btn-group > button, .table-wrap button, dialog button { width:auto; }
+
+/* First column (ingredient name) stronger contrast across themes */
+#tbl td:nth-child(1){ color: var(--ink) !important; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
+
+/* Table column widths */
 #tbl th:nth-child(1), #tbl td:nth-child(1){width:48%;}
 #tbl th:nth-child(2), #tbl td:nth-child(2){width:18%;}
 #tbl th:nth-child(3), #tbl td:nth-child(3){width:10%;}
@@ -158,10 +146,12 @@ header .theme select, header button, .toolbar button, .btn-group > button, .tabl
   #tbl th:nth-child(3), #tbl td:nth-child(3){width:8%;}
   #tbl th:nth-child(4), #tbl td:nth-child(4){width:16%;}
 }
-#tbl td:nth-child(1){overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0;}
 
-/* 5) Garantir exibição dos botões +10 / -10 */
-button[data-step="10"], button[data-step="-10"]{ display:inline-flex !important; }
+/* Step10 buttons always visible */
+button.step10{ display:inline-flex !important; visibility:visible !important; }
+
+/* Contributions badges truncated neatly */
+#tbl td:nth-child(4) .badge{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
 
 </style>
 </head>
@@ -572,60 +562,45 @@ function init(){
 document.addEventListener('DOMContentLoaded', init);
 </script>
 <script>
-// === Abreviar composição e preservar botões +10/-10 ===
+// === Ensure +10/-10 visible and abbreviate contribution badges ===
 (function(){
-  function abbreviate(str){
-    const re = /por\s*100\s*g\s*→?\s*[^0-9]*gordur[aa]\s*([\d.,]+)%\s*[•|·\-–]\s*aç(?:u|ú)cares?\s*([\d.,]+)%\s*[•|·\-–]\s*só?lidos?\s*([\d.,]+)%/i;
-    const m = str.match(re);
-    if(!m) return null;
-    const g = parseFloat(String(m[1]).replace(',','.'))||0;
-    const a = parseFloat(String(m[2]).replace(',','.'))||0;
-    const s = parseFloat(String(m[3]).replace(',','.'))||0;
-    return `${g}% G • ${a}% A • ${s}% S`;
-  }
-
-  function applyAbbrev(root=document){
-    const nodes = root.querySelectorAll('#tbl td, #tbl span, #tbl div, #dlgCatalog *');
-    nodes.forEach(n=>{
-      const t = (n.innerText||'').trim();
-      const short = abbreviate(t);
-      if(short){
-        n.innerText = t.replace(/por.*$/i, short);
-      }
-    });
-  }
-
-  function removePlusMinusOne(root=document){
+  function markStep10(root=document){
     root.querySelectorAll('button').forEach(b=>{
-      const txt = (b.textContent||'').trim();
+      const t = (b.textContent||'').trim();
       const step = (b.getAttribute('data-step')||'').trim();
-      if (txt === '+1' || txt === '-1' || step === '1' || step === '-1'){
+      if (t === '+10' || t === '-10' || step === '10' || step === '-10'){
+        b.classList.add('step10');
+      }
+      // remove only +1 / -1
+      if (t === '+1' || t === '-1' || step === '1' || step === '-1'){
         b.remove();
       }
     });
   }
-
-  function ensurePlusMinusTenVisible(root=document){
-    const btns = Array.from(root.querySelectorAll('button'));
-    btns.forEach(b=>{
-      const txt = (b.textContent||'').trim();
-      const step = (b.getAttribute('data-step')||'').trim();
-      if (txt === '+10' || txt === '-10' || step === '10' || step === '-10'){
-        b.style.display = 'inline-flex';
-        b.style.visibility = 'visible';
-      }
+  function abbreviateContrib(root=document){
+    // Only scan contributions column (4th column) if present
+    const rows = root.querySelectorAll('#tbl tbody tr');
+    rows.forEach(tr=>{
+      const td = tr.children[3];
+      if(!td) return;
+      td.querySelectorAll('*').forEach(el=>{
+        const txt = (el.innerText||'').trim();
+        // Match patterns like "Gord 12.5%" or "Gordura 12.5%"
+        let m;
+        if ((m = txt.match(/^(?:Gord(?:ura)?)\s*([\d.,]+)%/i))) {
+          el.innerText = `${m[1].replace(',', '.')}% G`;
+        } else if ((m = txt.match(/^(?:A[cç]u[cç]ar(?:es)?)\s*([\d.,]+)%/i))) {
+          el.innerText = `${m[1].replace(',', '.')}% A`;
+        } else if ((m = txt.match(/^(?:S[oó]lidos?)\s*([\d.,]+)%/i))) {
+          el.innerText = `${m[1].replace(',', '.')}% S`;
+        }
+      });
     });
   }
-
-  function runAll(){
-    removePlusMinusOne();
-    ensurePlusMinusTenVisible();
-    applyAbbrev();
-  }
-
+  function run(){ markStep10(); abbreviateContrib(); }
   document.addEventListener('DOMContentLoaded', ()=>{
-    runAll();
-    const obs = new MutationObserver(runAll);
+    run();
+    const obs = new MutationObserver(run);
     obs.observe(document.body, {childList:true, subtree:true});
   });
 })();
