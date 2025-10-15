@@ -10,14 +10,13 @@
   <link rel="manifest" href="manifest.webmanifest">
   <script>
     if ('serviceWorker' in navigator) {
-      fetch('sw.js', {method:'HEAD'}).then(r=>{
-        if (r.ok) window.addEventListener('load', ()=>navigator.serviceWorker.register('sw.js').catch(console.warn));
-      }).catch(()=>{});
+      window.addEventListener('load', ()=>{
+        navigator.serviceWorker.register('sw.js').catch(console.error);
+      });
     }
   </script>
 
   <!-- iOS App-like -->
-  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="format-detection" content="telephone=no">
@@ -54,7 +53,17 @@
 
     html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell;}
     .wrap{max-width:1100px;margin:0 auto;padding:6px 10px 80px}
-    .stickybar{position:fixed; left:0; right:0; top:0; z-index:1000; padding:8px; background:var(--sticky); border-bottom:1px solid var(--line); border-radius:0 0 12px 12px; box-shadow: 0 6px 18px rgba(0,0,0,.08)}
+
+    /* Sticky summary — always visible */
+    .stickybar{
+      position:fixed; left:0; right:0; top:0; z-index:1000;
+      padding: calc(6px + env(safe-area-inset-top)) 10px 8px 10px;
+      backdrop-filter:saturate(1.2) blur(4px);
+      background:var(--sticky);
+      border-bottom:1px solid var(--line);
+      border-radius:0 0 12px 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    }
     .stickygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
     .stickycell{display:flex;flex-direction:column;align-items:flex-start;padding:6px 8px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
     .stickycell .label{font-size:11px;color:var(--muted)}
@@ -108,6 +117,7 @@
     .c-sugar{background:rgba(154,52,18,.18);color:var(--sugar-b);border:1px solid rgba(154,52,18,.45)}
     .c-solid{background:rgba(22,101,52,.18);color:var(--solid-b);border:1px solid rgba(22,101,52,.45)}
 
+    /* Mobile helpers for inputs */
     .helpers{display:none;gap:6px;margin-top:6px}
     .helpers button{padding:6px 8px;font-size:12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:#0b63f3}
     @media (max-width:560px){
@@ -117,6 +127,7 @@
       input{padding:10px}
     }
 
+    /* Bottom bar: dismiss keyboard on mobile */
     .bottombar{
       position:fixed; left:0; right:0; bottom:0; z-index:60;
       display:flex; gap:8px; align-items:center; justify-content:center;
@@ -128,6 +139,7 @@
   </style>
 </head>
 <body>
+  <!-- Sticky summary always visible -->
   <div class="stickybar">
     <div class="stickygrid">
       <div class="stickycell">
@@ -183,18 +195,7 @@
     </div>
 
     <div class="card">
-      <div class="toolbar" style="justify-content:space-between;margin-bottom:6px">
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <button class="secondary" id="btnReset" title="Restaurar preset">Resetar preset</button>
-          <button class="btn-outline" id="btnAddFromCatalog">Adicionar ingrediente (catálogo)</button>
-        </div>
-        <div class="btn-group">
-          <button class="btn-outline" id="btnT1">Normalizar 1 kg</button>
-          <button class="btn-outline" id="btnT15">Normalizar 1,5 kg</button>
-          <button class="btn-outline" id="btnT2">Normalizar 2 kg</button>
-        </div>
-      </div>
-      <div class="table-wrap">
+      <div class="toolbar" style="justify-content:space-between;margin-bottom:6px">  <div style="display:flex;gap:8px;flex-wrap:wrap">    <button class="secondary" id="btnReset" title="Restaurar preset">Resetar preset</button>  </div>  <div class="btn-group">    <button class="btn-outline" id="btnT1">Normalizar 1 kg</button>    <button class="btn-outline" id="btnT15">Normalizar 1,5 kg</button>    <button class="btn-outline" id="btnT2">Normalizar 2 kg</button>  </div></div><div class="table-wrap">
         <table id="tbl">
           <thead>
             <tr>
@@ -225,41 +226,6 @@
       <button id="btnBlur" class="secondary" style="max-width:200px">OK (fechar teclado)</button>
     </div>
   </div>
-
-  <!-- Modal antes do script -->
-  <dialog id="dlgCatalog" style="border:none;border-radius:16px;padding:0;max-width:min(920px,95vw);">
-    <div style="background:var(--card);color:var(--ink);padding:12px 12px 14px;border-radius:16px;box-shadow:var(--shadow);min-width:min(920px,95vw);">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
-        <h3 style="margin:0;font-size:16px">Adicionar do catálogo</h3>
-        <div class="mini muted" id="catMeta" style="margin-left:auto">—</div>
-        <button id="btnCloseDlg" class="secondary" style="max-width:120px">Fechar</button>
-      </div>
-      <div class="row" style="margin-bottom:8px">
-        <div>
-          <label>Buscar por nome/categoria/id</label>
-          <input id="catSearch" placeholder="Ex.: leite, cacau, manga, syrup…">
-        </div>
-        <div>
-          <label>Categoria</label>
-          <select id="catFilter"></select>
-        </div>
-      </div>
-      <div style="max-height:60vh;overflow:auto;border:1px dashed var(--line);border-radius:12px;padding:6px">
-        <table style="width:100%;border-collapse:collapse">
-          <thead>
-            <tr>
-              <th>Ingrediente</th>
-              <th>Categoria</th>
-              <th class="mini">gord / sólidos / açúcs</th>
-              <th style="width:140px">Qtd (g)</th>
-              <th style="width:120px"></th>
-            </tr>
-          </thead>
-          <tbody id="catTbody"></tbody>
-        </table>
-      </div>
-    </div>
-  </dialog>
 
 <script>
 const TARGETS = [1000, 1500, 2000];
@@ -318,6 +284,7 @@ const comp100Div = document.getElementById('comp100');
 const themeSel = document.getElementById('themeSel');
 const app = document.getElementById('app');
 
+// Sticky elements (targets + current + deltas)
 const stickyGNow = document.getElementById('stickyGNow');
 const stickyANow = document.getElementById('stickyANow');
 const stickySNow = document.getElementById('stickySNow');
@@ -332,105 +299,54 @@ let current = "Creme";
 let gramsMix = {};
 let polpaSolids = 0.0;
 
-// Catálogo
-const FALLBACK_CATALOG = "https://titoufu.github.io/Sorvetes/ingredients_master.json";
-let catalogData = { ingredients: [], updated_at:"" };
-
-async function getCatalogUrl() {
-  try {
-    const r = await fetch("config.json", { cache:"no-store" });
-    if (r.ok) {
-      const cfg = await r.json();
-      if (cfg && cfg.ingredients_catalog_url) return cfg.ingredients_catalog_url;
-    }
-  } catch {}
-  return FALLBACK_CATALOG;
+function sizeStickySpacer(){
+  const bar = document.querySelector('.stickybar');
+  const sp = document.getElementById('stickySpacer');
+  if(bar && sp){ sp.style.height = bar.offsetHeight + 'px'; }
 }
 
-async function loadCatalog() {
-  const url = await getCatalogUrl();
-  const r = await fetch(url + (url.includes("?")?"&":"?") + "t=" + Date.now());
-  if (!r.ok) throw new Error("Falha ao carregar catálogo: " + r.status);
-  const data = await r.json();
-  const valid = (data.ingredients||[]).filter(i =>
-    i && String(i.id||"").trim() && String(i.name||"").trim() && i.is_active !== false
-  );
-  catalogData = { ingredients: valid, updated_at: data.updated_at || "—" };
-  renderCatalogModal();
-}
-
-function renderCatalogModal() {
-  document.getElementById("catMeta").textContent = `${catalogData.ingredients.length} itens · atualizado ${catalogData.updated_at}`;
-  const sel = document.getElementById("catFilter");
-  const cats = Array.from(new Set(catalogData.ingredients.map(i=>i.category||"—"))).sort();
-  sel.innerHTML = `<option value="">Todas</option>` + cats.map(c=>`<option value="${c}">${c}</option>`).join("");
-  drawCatalogRows();
-}
-
-function drawCatalogRows() {
-  const q = document.getElementById("catSearch").value.toLowerCase().trim();
-  const cf = document.getElementById("catFilter").value;
-  const tbody = document.getElementById("catTbody");
-  const items = catalogData.ingredients
-    .filter(i => !cf || (i.category||"—") === cf)
-    .filter(i => !q ||
-      (i.name||"").toLowerCase().includes(q) ||
-      (i.category||"").toLowerCase().includes(q) ||
-      (i.id||"").toLowerCase().includes(q))
-    .slice(0, 400);
-  tbody.innerHTML = "";
-  for (const it of items) {
-    const tr = document.createElement("tr");
-    const f = Number(it.fat_pct||0), s = Number(it.solids_pct||0), a = Number(it.sugar_pct||0);
-    tr.innerHTML = `
-      <td><b>${it.name||it.id}</b><div class="mini muted">${it.id}</div></td>
-      <td>${it.category||"—"}</td>
-      <td class="mini">gord ${f.toFixed(1)}% • sólidos ${s.toFixed(1)}% • açúcs ${a.toFixed(1)}%</td>
-      <td><input type="number" min="0" step="1" value="0" style="width:120px"></td>
-      <td><button class="btn-outline">Adicionar</button></td>`;
-    const qty = tr.querySelector("input");
-    tr.querySelector("button").addEventListener("click", ()=>{
-      const g = Math.max(0, Math.round(Number((qty.value||"0").replace(",","."))));
-      if (g<=0) return;
-      const name = it.name || it.id;
-      COMPOS[name] = [f, s, a];
-      if (!(name in gramsMix)) gramsMix[name] = 0;
-      gramsMix[name] = gramsMix[name] + g;
-      renderTable();
-      recalc();
-    });
-    tbody.appendChild(tr);
-  }
-}
-
-// Modal wiring
-(function wireCatalogUI(){
-  const dlg = document.getElementById("dlgCatalog");
-  const btnOpen = document.getElementById("btnAddFromCatalog");
-  const btnClose = document.getElementById("btnCloseDlg");
-  const s1 = document.getElementById("catSearch");
-  const s2 = document.getElementById("catFilter");
-
-  btnOpen.addEventListener("click", async ()=>{
-    try {
-      if (!catalogData.ingredients.length) await loadCatalog();
-      s1.value = ""; s2.value = "";
-      drawCatalogRows();
-      dlg.showModal();
-    } catch(e){
-      alert("Não foi possível carregar o catálogo.\n" + e.message);
-    }
+function init(){
+  // Tema com persistência
+  const savedTheme = localStorage.getItem('sorvete_theme') || '';
+  themeSel.value = savedTheme;
+  setTheme(savedTheme);
+  themeSel.addEventListener('change', ()=>{
+    setTheme(themeSel.value);
+    localStorage.setItem('sorvete_theme', themeSel.value||'');
+    setTimeout(sizeStickySpacer, 50);
   });
-  btnClose.addEventListener("click", ()=> dlg.close());
-  s1.addEventListener("input", drawCatalogRows);
-  s2.addEventListener("change", drawCatalogRows);
-})();
+
+  presetSel.innerHTML = Object.keys(PRESETS).map(p=>`<option ${p===current?'selected':''}>${p}</option>`).join('');
+  applyPreset(current);
+
+  presetSel.addEventListener('change', ()=>{ applyPreset(presetSel.value); });
+  document.getElementById('btnReset').addEventListener('click', ()=>applyPreset(current));
+
+  document.getElementById('btnT1').addEventListener('click', ()=>setTarget(1000));
+  document.getElementById('btnT15').addEventListener('click', ()=>setTarget(1500));
+  document.getElementById('btnT2').addEventListener('click', ()=>setTarget(2000));
+
+  document.getElementById('btnBlur').addEventListener('click', ()=>{
+    if(document.activeElement && document.activeElement.blur){ document.activeElement.blur(); }
+  });
+
+  updateTargetButtons();
+  sizeStickySpacer();
+  window.addEventListener('resize', sizeStickySpacer);
+  new ResizeObserver(sizeStickySpacer).observe(document.querySelector('.stickybar'));
+}
 
 function setTheme(name){
   if(!name){ app.removeAttribute('data-theme'); return; }
   app.setAttribute('data-theme', name);
 }
-function setTarget(val){ targetBatch = val; normalizeToTarget(); updateTargetButtons(); }
+
+function setTarget(val){
+  targetBatch = val;
+  normalizeToTarget();
+  updateTargetButtons();
+}
+
 function updateTargetButtons(){
   const map = {1000: 'btnT1', 1500:'btnT15', 2000:'btnT2'};
   for(const [val,id] of Object.entries(map)){
@@ -444,6 +360,7 @@ function updateTargetButtons(){
   }
   loteInfo.value = `${(targetBatch/1000).toFixed(1)} kg (alvo)`;
 }
+
 function applyPreset(name){
   current = name;
   const p = PRESETS[name];
@@ -452,86 +369,199 @@ function applyPreset(name){
   for(const k of Object.keys(p.mix_pct)){
     gramsMix[k] = Math.round(targetBatch * (p.mix_pct[k]/100));
   }
-  renderTable(); renderComp100(); recalc();
+  renderTable();
+  renderComp100();
+  recalc();
+
+  // init sticky targets
   const t = PRESETS[current].targets;
   stickyGTarget.textContent = t.gordura.toFixed(1);
   stickyATarget.textContent = t.acucar.toFixed(1);
   stickySTarget.textContent = t.solidos.toFixed(1);
 }
+
 function renderComp100(){
-  const entries = Object.entries(COMPOS).map(([k,[g,s,a]])=>`<div>• <b>${k}</b> — gordura ${g}% • açúcares ${a}% • sólidos ${s}% (por 100 g)</div>`).join("");
+  const entries = Object.entries(COMPOS).map(([k,[g,s,a]])=>{
+    return `<div>• <b>${k}</b> — gordura ${g}% • açúcares ${a}% • sólidos ${s}% (por 100 g)</div>`;
+  }).join("");
   comp100Div.innerHTML = entries;
 }
+
 function addHelpers(td, name){
-  const bar = document.createElement('div'); bar.className = 'helpers';
-  for (const [label, delta] of [["-10",-10],["-1",-1],["+1",1],["+10",10]]){
-    const b = document.createElement('button'); b.type="button"; b.textContent = label;
-    b.addEventListener('click', ()=>{ gramsMix[name] = Math.max(0, Math.round(Number(gramsMix[name]||0) + Number(delta))); renderTable(); recalc(); });
-    bar.appendChild(b);
-  }
+  const bar = document.createElement('div');
+  bar.className = 'helpers';
+  const mk = (label, delta)=>{
+    const b = document.createElement('button');
+    b.type="button"; b.textContent = label;
+    b.addEventListener('click', ()=>{
+      gramsMix[name] = Math.max(0, Math.round(Number(gramsMix[name]||0) + delta));
+      renderTable();
+      recalc();
+    });
+    return b;
+  };
+  bar.appendChild(mk("-10", -10));
+  bar.appendChild(mk("-1", -1));
+  bar.appendChild(mk("+1", +1));
+  bar.appendChild(mk("+10", +10));
   td.appendChild(bar);
 }
+
 function renderTable(){
   tbody.innerHTML = "";
   for(const k of Object.keys(gramsMix)){
-    const tr = document.createElement('tr'); tr.dataset.ing = k;
-    const td1 = document.createElement('td'), td2 = document.createElement('td'), td3 = document.createElement('td'), td4 = document.createElement('td');
+    const tr = document.createElement('tr');
+    tr.dataset.ing = k;
+    const td1 = document.createElement('td');
+    const td2 = document.createElement('td');
+    const td3 = document.createElement('td');
+    const td4 = document.createElement('td');
     td1.innerHTML = `<div><b>${k}</b></div><div class="mini muted">por 100 g → gordura ${COMPOS[k][0]}% • açúcares ${COMPOS[k][2]}% • sólidos ${COMPOS[k][1]}%</div>`;
-    const inp = document.createElement('input'); inp.type="number"; inp.step="1"; inp.min="0"; inp.inputMode="numeric"; inp.pattern="[0-9]*"; inp.value = gramsMix[k]; inp.style.width="120px";
-    const onChange = ()=>{ const raw = (inp.value||"").toString().replace(',','.'); const v = Number(raw); gramsMix[k] = isFinite(v) && v>=0 ? v : 0; recalc(); };
-    inp.addEventListener('input', onChange); inp.addEventListener('change', onChange); td2.appendChild(inp);
+    const inp = document.createElement('input');
+    inp.type = "number"; inp.step="1"; inp.min="0"; inp.inputMode="numeric"; inp.pattern="[0-9]*";
+    inp.value = gramsMix[k];
+    inp.style.width = "120px";
+    const onChange = ()=>{
+      const raw = (inp.value||"").toString().replace(',','.');
+      const v = Number(raw);
+      gramsMix[k] = isFinite(v) && v>=0 ? v : 0;
+      recalc();
+    };
+    inp.addEventListener('input', onChange);
+    inp.addEventListener('change', onChange);
+    td2.appendChild(inp);
     addHelpers(td2, k);
-    td3.setAttribute('data-pct-cell', k); td4.setAttribute('data-contrib-cell', k);
-    tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tr.appendChild(td4); tbody.appendChild(tr);
+    td3.setAttribute('data-pct-cell', k);
+    td4.setAttribute('data-contrib-cell', k);
+    tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tr.appendChild(td4);
+    tbody.appendChild(tr);
   }
 }
+
 function calc(){
   const total = Object.values(gramsMix).reduce((a,b)=>a+Number(b||0), 0);
-  const comp = {...COMPOS}; if(polpaSolids>0){ comp["Água/Polpa"] = [0.0, polpaSolids, 0.0]; }
-  let fatG=0, solidsG=0, sugarG=0; const fatParts={}, solidsParts={}, sugarParts={};
+  const comp = {...COMPOS};
+  if(polpaSolids>0){ comp["Água/Polpa"] = [0.0, polpaSolids, 0.0]; }
+
+  let fatG=0, solidsG=0, sugarG=0;
+  const fatParts={}, solidsParts={}, sugarParts={};
   for(const k of Object.keys(gramsMix)){
-    const g = Number(gramsMix[k]||0); const f = g*(comp[k][0]/100); const s = g*(comp[k][1]/100); const a = g*(comp[k][2]/100);
-    fatG+=f; solidsG+=s; sugarG+=a; fatParts[k]=f; solidsParts[k]=s; sugarParts[k]=a;
+    const g = Number(gramsMix[k]||0);
+    const f = g*(comp[k][0]/100);
+    const s = g*(comp[k][1]/100);
+    const a = g*(comp[k][2]/100);
+    fatG    += f; solidsG += s; sugarG  += a;
+    fatParts[k]=f; solidsParts[k]=s; sugarParts[k]=a;
   }
-  const percent = {}; for(const k of Object.keys(gramsMix)){ percent[k] = total>0 ? (gramsMix[k]/total*100) : 0; }
-  return { total, percent, gorduraPct: total>0 ? (fatG/total)*100 : 0, solidosPct: total>0 ? (solidsG/total)*100 : 0, acucarPct: total>0 ? (sugarG/total)*100 : 0, fatG, solidsG, sugarG, fatParts, solidsParts, sugarParts };
+
+  const percent = {};
+  for(const k of Object.keys(gramsMix)){
+    percent[k] = total>0 ? (gramsMix[k]/total*100) : 0;
+  }
+
+  return {
+    total, percent,
+    gorduraPct: total>0 ? (fatG/total)*100 : 0,
+    solidosPct: total>0 ? (solidsG/total)*100 : 0,
+    acucarPct:  total>0 ? (sugarG/total)*100 : 0,
+    fatG, solidsG, sugarG,
+    fatParts, solidsParts, sugarParts
+  };
 }
-function statusPill(name, val){ let ok=false, txt="Ajustar", cls="aj"; if(name==="gordura") ok=(val>=8&&val<=16); if(name==="acucar") ok=(val>=16&&val<=22); if(name==="solidos") ok=(val>=36&&val<=42); if(ok){txt="OK";cls="ok";} return `<span class="pill ${cls}">${txt}</span>`; }
-function setDeltaChip(el, delta){ el.textContent=(delta>0?'+':'')+delta.toFixed(2)+' pp'; el.classList.remove('ok','aj'); if(Math.abs(delta)<=0.10){el.classList.add('ok');} else {el.classList.add('aj');} }
+
+function statusPill(name, val){
+  let ok=false, txt="Ajustar", cls="aj";
+  if(name==="gordura") ok = (val>=8 && val<=16);
+  if(name==="acucar")  ok = (val>=16 && val<=22);
+  if(name==="solidos") ok = (val>=36 && val<=42);
+  if(ok){ txt="OK"; cls="ok"; }
+  return `<span class="pill ${cls}">${txt}</span>`;
+}
+
+function setDeltaChip(el, delta){
+  el.textContent = (delta>0?'+':'') + delta.toFixed(2) + ' pp';
+  el.classList.remove('ok','aj');
+  if(Math.abs(delta) <= 0.10){ el.classList.add('ok'); }
+  else { el.classList.add('aj'); }
+}
+
 function recalc(){
   const r = calc();
-  stats.innerHTML = `<div class="stat"><h3>Gordura (%)</h3><div class="val">${r.gorduraPct.toFixed(2)}</div>${statusPill('gordura',r.gorduraPct)}</div>
-                     <div class="stat"><h3>Açúcares (%)</h3><div class="val">${r.acucarPct.toFixed(2)}</div>${statusPill('acucar',r.acucarPct)}</div>
-                     <div class="stat"><h3>Sólidos (%)</h3><div class="val">${r.solidosPct.toFixed(2)}</div>${statusPill('solidos',r.solidosPct)}</div>`;
+  // Stats topo
+  stats.innerHTML = `
+    <div class="stat"><h3>Gordura (%)</h3><div class="val">${r.gorduraPct.toFixed(2)}</div>${statusPill('gordura',r.gorduraPct)}</div>
+    <div class="stat"><h3>Açúcares (%)</h3><div class="val">${r.acucarPct.toFixed(2)}</div>${statusPill('acucar',r.acucarPct)}</div>
+    <div class="stat"><h3>Sólidos (%)</h3><div class="val">${r.solidosPct.toFixed(2)}</div>${statusPill('solidos',r.solidosPct)}</div>
+  `;
+
+  // Sticky (target + current + delta)
   const t = PRESETS[current].targets;
-  stickyGTarget.textContent = t.gordura.toFixed(1); stickyATarget.textContent = t.acucar.toFixed(1); stickySTarget.textContent = t.solidos.toFixed(1);
-  stickyGNow.textContent = r.gorduraPct.toFixed(1); stickyANow.textContent = r.acucarPct.toFixed(1); stickySNow.textContent = r.solidosPct.toFixed(1);
-  setDeltaChip(stickyGDelta, r.gorduraPct - t.gordura); setDeltaChip(stickyADelta, r.acucarPct - t.acucar); setDeltaChip(stickySDelta, r.solidosPct - t.solidos);
+  stickyGTarget.textContent = t.gordura.toFixed(1);
+  stickyATarget.textContent = t.acucar.toFixed(1);
+  stickySTarget.textContent = t.solidos.toFixed(1);
+  stickyGNow.textContent = r.gorduraPct.toFixed(1);
+  stickyANow.textContent = r.acucarPct.toFixed(1);
+  stickySNow.textContent = r.solidosPct.toFixed(1);
+  setDeltaChip(stickyGDelta, r.gorduraPct - t.gordura);
+  setDeltaChip(stickyADelta, r.acucarPct  - t.acucar);
+  setDeltaChip(stickySDelta, r.solidosPct - t.solidos);
+
+  // Atualizar % por ingrediente e chips
   for(const tr of tbody.querySelectorAll('tr')){
-    const name = tr.dataset.ing; const pctCell = tr.querySelector('td[data-pct-cell]'); const contribCell = tr.querySelector('td[data-contrib-cell]'); const pct = r.percent[name]||0;
+    const name = tr.dataset.ing;
+    const pctCell = tr.querySelector('td[data-pct-cell]');
+    const contribCell = tr.querySelector('td[data-contrib-cell]');
+    const pct = r.percent[name] || 0;
     pctCell.textContent = isFinite(pct) ? pct.toFixed(2) + " %" : "—";
-    const fg=r.fatParts[name]||0, sg=r.sugarParts[name]||0, tg=r.solidsParts[name]||0; const fc=r.fatG>0?(fg/r.fatG*100):0, sc=r.sugarG>0?(sg/r.sugarG*100):0, tc=r.solidsG>0?(tg/r.solidsG*100):0;
-    contribCell.innerHTML = `<div class="contrib"><span class="c-pill c-fat">Gord ${fc.toFixed(1)}%</span><span class="c-pill c-sugar">Açúc ${sc.toFixed(1)}%</span><span class="c-pill c-solid">Sólid ${tc.toFixed(1)}%</span></div>`;
+
+    const fg = r.fatParts[name]   || 0;
+    const sg = r.sugarParts[name] || 0;
+    const tg = r.solidsParts[name]|| 0;
+    const fc = r.fatG>0   ? (fg/r.fatG*100)   : 0;
+    const sc = r.sugarG>0 ? (sg/r.sugarG*100) : 0;
+    const tc = r.solidsG>0? (tg/r.solidsG*100): 0;
+
+    contribCell.innerHTML = `
+      <div class="contrib">
+        <span class="c-pill c-fat">Gord ${fc.toFixed(1)}%</span>
+        <span class="c-pill c-sugar">Açúc ${sc.toFixed(1)}%</span>
+        <span class="c-pill c-solid">Sólid ${tc.toFixed(1)}%</span>
+      </div>
+    `;
+
+    // Dominante
+    tr.classList.remove('fat-dominant','sugar-dominant','solid-dominant');
+    const maxVal = Math.max(fc, sc, tc);
+    if(maxVal === fc && maxVal>0) tr.classList.add('fat-dominant');
+    else if(maxVal === sc && maxVal>0) tr.classList.add('sugar-dominant');
+    else if(maxVal === tc && maxVal>0) tr.classList.add('solid-dominant');
   }
-  const near = Math.abs(r.total - targetBatch) < 0.5; sumG.className = near ? "sum-ok" : "sum-bad";
-  sumG.textContent = r.total.toFixed(0) + " g"; sumPct.textContent = r.total>0 ? "100.00 %" : "—"; targetInfo.textContent = `(alvo atual: ${targetBatch} g)`;
-}
-function normalizeToTarget(){ const r = calc(); const total = r.total; if(total<=0) return; const factor = targetBatch/total; for(const k of Object.keys(gramsMix)){ gramsMix[k]=Math.max(0, Math.round(Number(gramsMix[k]||0)*factor)); } renderTable(); recalc(); }
-function renderComp100(){ const entries = Object.entries(COMPOS).map(([k,[g,s,a]])=>`<div>• <b>${k}</b> — gordura ${g}% • açúcares ${a}% • sólidos ${s}% (por 100 g)</div>`).join(""); comp100Div.innerHTML = entries; }
 
-function init(){
-  const savedTheme = localStorage.getItem('sorvete_theme') || ''; themeSel.value = savedTheme; setTheme(savedTheme);
-  themeSel.addEventListener('change', ()=>{ setTheme(themeSel.value); localStorage.setItem('sorvete_theme', themeSel.value||''); });
-  presetSel.innerHTML = Object.keys(PRESETS).map(p=>`<option ${p===current?'selected':''}>${p}</option>`).join(''); applyPreset(current);
-  presetSel.addEventListener('change', ()=>{ applyPreset(presetSel.value); });
-  document.getElementById('btnReset').addEventListener('click', ()=>applyPreset(current));
-  document.getElementById('btnT1').addEventListener('click', ()=>setTarget(1000));
-  document.getElementById('btnT15').addEventListener('click', ()=>setTarget(1500));
-  document.getElementById('btnT2').addEventListener('click', ()=>setTarget(2000));
-  document.getElementById('btnBlur').addEventListener('click', ()=>{ if(document.activeElement && document.activeElement.blur){ document.activeElement.blur(); } });
+  // Totais e alvo
+  const near = Math.abs(r.total - targetBatch) < 0.5;
+  sumG.className = near ? "sum-ok" : "sum-bad";
+  sumG.textContent = r.total.toFixed(0) + " g";
+  sumPct.textContent = r.total>0 ? "100.00 %" : "—";
+  targetInfo.textContent = `(alvo atual: ${targetBatch} g)`;
 }
 
-document.addEventListener('DOMContentLoaded', init);
+function normalizeToTarget(){
+  const r = calc();
+  const total = r.total;
+  if(total<=0) return;
+  const factor = targetBatch / total;
+  for(const k of Object.keys(gramsMix)){
+    gramsMix[k] = Math.max(0, Math.round(Number(gramsMix[k]||0) * factor));
+  }
+  renderTable();
+  recalc();
+}
+
+function topContributors(parts, topN=3){
+  return Object.entries(parts).sort((a,b)=>b[1]-a[1]).slice(0, topN).map(([k,_])=>k);
+}
+
+init();
 </script>
 </body>
 </html>
