@@ -548,5 +548,31 @@ function init(){
 
 document.addEventListener('DOMContentLoaded', init);
 </script>
+
+<!-- PATCH: manter +10/-10 e remover +1/-1 -->
+<script>
+(function(){
+  function fixButtons(root=document){
+    root.querySelectorAll('button').forEach(btn=>{
+      const txt = (btn.textContent||'').trim();
+      const step = (btn.getAttribute('data-step')||'').trim();
+      if (txt === '+1' || txt === '-1' || step === '1' || step === '-1'){
+        btn.remove(); // remove apenas +1/-1
+      }
+      if (txt === '+10' || txt === '-10' || step === '10' || step === '-10'){
+        btn.style.display = 'inline-flex';
+        btn.style.visibility = 'visible';
+      }
+    });
+  }
+  document.addEventListener('DOMContentLoaded', ()=>{
+    fixButtons();
+    const obs = new MutationObserver(fixButtons);
+    obs.observe(document.body, {childList:true, subtree:true});
+  });
+})();
+</script>
+<!-- END PATCH -->
+
 </body>
 </html>
