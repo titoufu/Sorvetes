@@ -1,3185 +1,483 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2025-10-14T15:27:47Z",
-  "count": 999,
+  "updated_at": "2025-10-15T00:19:20Z",
+  "count": 28,
   "ingredients": [
     {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "leite_integral;Leite integral;dairy;3",
-      "null": [
-        "20;0",
-        "00;12",
-        "50;1",
-        "03;false;milk;true;\"Valores típicos Brasil; ajuste conforme rótulo.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "creme35;Creme de leite 35%;dairy_fat;35",
-      "null": [
-        "00;0",
-        "00;37",
-        "00;1",
-        "00;false;milk;true;\"Gordura ~35%; sólidos ~37%.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "creme17;Creme de leite 17%;dairy_fat;17",
-      "null": [
-        "00;0",
-        "00;24",
-        "00;1",
-        "01;false;milk;true;Estimativa: MSNF ~7%",
-        " sólidos totais ~24%.;1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "leite_po_integral;Leite em pó integral;dairy_powder;26",
-      "null": [
-        "00;0",
-        "00;96",
-        "00;0",
-        "45;false;milk;true;Sólidos ~96%.;1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "leite_po_desnatado;Leite em pó desnatado;dairy_powder;1",
-      "null": [
-        "00;52",
-        "00;96",
-        "00;0",
-        "45;false;milk;true;\"Lactose ~52%; ajuste conforme rótulo.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "leite_condensado;Leite condensado;dairy;8",
-      "null": [
-        "00;55",
-        "00;73",
-        "00;1",
-        "30;false;milk;true;Médias: ~8% gordura",
-        " ~55% açúcares",
-        " ~73% sólidos.;1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "acucar_refinado;Açúcar refinado (sacarose);sugar;0",
-      "null": [
-        "00;100",
-        "00;100",
-        "00;0",
-        "85;true;;true;100% sólidos e 100% açúcares.;1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "dextrose;Dextrose (glicose monoidratada);sugar;0",
-      "null": [
-        "00;92",
-        "00;100",
-        "00;0",
-        "90;true;;true;Doçura ~70% da sacarose.;1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "maltodextrina10;Maltodextrina DE10;sugar;0",
-      "null": [
-        "00;0",
-        "00;95",
-        "00;0",
-        "80;true;;true;\"Baixa doçura; aumenta sólidos e corpo.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "glicose_42de;Xarope de glicose 42 DE (sólidos 80%);syrup;0",
-      "null": [
-        "00;80",
-        "00;80",
-        "00;1",
-        "40;true;;true;\"Usar sólidos 80%; água 20%.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "mel;Mel;syrup;0",
-      "null": [
-        "00;80",
-        "00;80",
-        "00;1",
-        "42;true;;true;\"Sólidos ~80%; mistura de açúcares.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "cacau_po_22_24;Cacau em pó 22–24%;cocoa;22",
-      "null": [
-        "00;0",
-        "00;96",
-        "00;0",
-        "60;true;;true;\"Gordura do cacau ~22%; sólidos ~96%.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "chocolate70;Chocolate 70% cacau;cocoa;42",
-      "null": [
-        "00;28",
-        "00;100",
-        "00;1",
-        "30;true;;true;\"Valores típicos: gordura 39–43%; açúcar ~28%.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "chocolate50;Chocolate 50% cacau;cocoa;32",
-      "null": [
-        "00;48",
-        "00;100",
-        "00;1",
-        "28;true;;true;\"Aproximado; ajuste pelo rótulo.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "pasta_pistache;Pasta 100% pistache;nut_paste;45",
-      "null": [
-        "00;10",
-        "00;96",
-        "00;1",
-        "00;true;tree_nuts;true;\"Sem açúcar adicionado; verificar rótulo.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "pasta_avela;Pasta 100% avelã;nut_paste;60",
-      "null": [
-        "00;6",
-        "00;96",
-        "00;1",
-        "00;true;tree_nuts;true;\"Sem açúcar adicionado; verificar rótulo.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "pasta_amendoim;Pasta 100% amendoim;nut_paste;50",
-      "null": [
-        "00;7",
-        "00;96",
-        "00;1",
-        "00;true;peanuts;true;Sem açúcar adicionado.;1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "xantana;Goma xantana;stabilizer;0",
-      "null": [
-        "00;0",
-        "00;100",
-        "00;0",
-        "60;true;;true;\"Estabilizante; 0",
-        "2–0",
-        "4%.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "guar;Goma guar;stabilizer;0",
-      "null": [
-        "00;0",
-        "00;100",
-        "00;0",
-        "60;true;;true;\"Estabilizante; 0",
-        "2–0",
-        "4%.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "lecitina_soja;Lecitina de soja;emulsifier;0",
-      "null": [
-        "00;0",
-        "00;100",
-        "00;0",
-        "85;true;soy;true;Emulsificante 0",
-        "3–0",
-        "5%.;1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "agua;Água;water;0",
-      "null": [
-        "00;0",
-        "00;0",
-        "00;1",
-        "00;true;;true;Base aquosa.;1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "leite_coco_17;Leite de coco (17% gordura);plant_milk;17",
-      "null": [
-        "00;2",
-        "00;22",
-        "00;1",
-        "02;true;tree_nuts;true;Médias: gordura 17%",
-        " açúcares 2%",
-        " sólidos 22%.;1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "manga;Manga (polpa);fruit;0",
-      "null": [
-        "60;13",
-        "50;15",
-        "00;1",
-        "02;true;;true;\"Brix ~15; açúcares ~13",
-        "5%.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "morango;Morango (polpa);fruit;0",
-      "null": [
-        "50;7",
-        "20;8",
-        "00;1",
-        "02;true;;true;\"Brix ~8; açúcares ~7–7",
-        "5%.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "maracuja;Maracujá (polpa);fruit;0",
-      "null": [
-        "70;11",
-        "70;13",
-        "00;1",
-        "02;true;;true;\"Brix ~13; atenção à acidez.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "banana;Banana (polpa);fruit;0",
-      "null": [
-        "40;20",
-        "00;22",
-        "00;1",
-        "05;true;;true;\"Brix ~22; muito corpo.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "goiaba;Goiaba (polpa);fruit;0",
-      "null": [
-        "60;10",
-        "80;12",
-        "00;1",
-        "02;true;;true;\"Brix ~12; fibras ajudam corpo.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": "abacaxi;Abacaxi (polpa);fruit;0",
-      "null": [
-        "20;11",
-        "70;13",
-        "00;1",
-        "02;true;;true;\"Brix ~13; enzimas podem afetar textura.\";1.0.0;;;OK"
-      ]
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
-    {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
-    },
+      "id": "leite_integral",
+      "name": "Leite integral",
+      "category": "dairy",
+      "fat_pct": 3.2,
+      "sugar_pct": 0.0,
+      "solids_pct": 12.5,
+      "density_g_ml": 1.03,
+      "vegan": false,
+      "allergens": "milk",
+      "is_active": true,
+      "notes": "Valores típicos Brasil; ajuste conforme rótulo.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "creme35",
+      "name": "Creme de leite 35%",
+      "category": "dairy_fat",
+      "fat_pct": 35.0,
+      "sugar_pct": 0.0,
+      "solids_pct": 37.0,
+      "density_g_ml": 1.0,
+      "vegan": false,
+      "allergens": "milk",
+      "is_active": true,
+      "notes": "Gordura ~35%; sólidos ~37%.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "creme17",
+      "name": "Creme de leite 17%",
+      "category": "dairy_fat",
+      "fat_pct": 17.0,
+      "sugar_pct": 0.0,
+      "solids_pct": 24.0,
+      "density_g_ml": 1.01,
+      "vegan": false,
+      "allergens": "milk",
+      "is_active": true,
+      "notes": "Estimativa: MSNF ~7%, sólidos totais ~24%.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "leite_po_integral",
+      "name": "Leite em pó integral",
+      "category": "dairy_powder",
+      "fat_pct": 26.0,
+      "sugar_pct": 0.0,
+      "solids_pct": 96.0,
+      "density_g_ml": 0.45,
+      "vegan": false,
+      "allergens": "milk",
+      "is_active": true,
+      "notes": "Sólidos ~96%.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "leite_po_desnatado",
+      "name": "Leite em pó desnatado",
+      "category": "dairy_powder",
+      "fat_pct": 1.0,
+      "sugar_pct": 52.0,
+      "solids_pct": 96.0,
+      "density_g_ml": 0.45,
+      "vegan": false,
+      "allergens": "milk",
+      "is_active": true,
+      "notes": "Lactose ~52%; ajuste conforme rótulo.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "leite_condensado",
+      "name": "Leite condensado",
+      "category": "dairy",
+      "fat_pct": 8.0,
+      "sugar_pct": 55.0,
+      "solids_pct": 73.0,
+      "density_g_ml": 1.3,
+      "vegan": false,
+      "allergens": "milk",
+      "is_active": true,
+      "notes": "Médias: ~8% gordura, ~55% açúcares, ~73% sólidos.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
     {
-      "﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status": ";;;;;;;;;;;;;;"
+      "id": "acucar_refinado",
+      "name": "Açúcar refinado (sacarose)",
+      "category": "sugar",
+      "fat_pct": 0.0,
+      "sugar_pct": 100.0,
+      "solids_pct": 100.0,
+      "density_g_ml": 0.85,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "100% sólidos e 100% açúcares.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "dextrose",
+      "name": "Dextrose (glicose monoidratada)",
+      "category": "sugar",
+      "fat_pct": 0.0,
+      "sugar_pct": 92.0,
+      "solids_pct": 100.0,
+      "density_g_ml": 0.9,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Doçura ~70% da sacarose.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "maltodextrina10",
+      "name": "Maltodextrina DE10",
+      "category": "sugar",
+      "fat_pct": 0.0,
+      "sugar_pct": 0.0,
+      "solids_pct": 95.0,
+      "density_g_ml": 0.8,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Baixa doçura; aumenta sólidos e corpo.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "glicose_42de",
+      "name": "Xarope de glicose 42 DE (sólidos 80%)",
+      "category": "syrup",
+      "fat_pct": 0.0,
+      "sugar_pct": 80.0,
+      "solids_pct": 80.0,
+      "density_g_ml": 1.4,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Usar sólidos 80%; água 20%.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "mel",
+      "name": "Mel",
+      "category": "syrup",
+      "fat_pct": 0.0,
+      "sugar_pct": 80.0,
+      "solids_pct": 80.0,
+      "density_g_ml": 1.42,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Sólidos ~80%; mistura de açúcares.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "cacau_po_22_24",
+      "name": "Cacau em pó 22–24%",
+      "category": "cocoa",
+      "fat_pct": 22.0,
+      "sugar_pct": 0.0,
+      "solids_pct": 96.0,
+      "density_g_ml": 0.6,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Gordura do cacau ~22%; sólidos ~96%.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "chocolate70",
+      "name": "Chocolate 70% cacau",
+      "category": "cocoa",
+      "fat_pct": 42.0,
+      "sugar_pct": 28.0,
+      "solids_pct": 100.0,
+      "density_g_ml": 1.3,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Valores típicos: gordura 39–43%; açúcar ~28%.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "chocolate50",
+      "name": "Chocolate 50% cacau",
+      "category": "cocoa",
+      "fat_pct": 32.0,
+      "sugar_pct": 48.0,
+      "solids_pct": 100.0,
+      "density_g_ml": 1.28,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Aproximado; ajuste pelo rótulo.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "pasta_pistache",
+      "name": "Pasta 100% pistache",
+      "category": "nut_paste",
+      "fat_pct": 45.0,
+      "sugar_pct": 10.0,
+      "solids_pct": 96.0,
+      "density_g_ml": 1.0,
+      "vegan": true,
+      "allergens": "tree_nuts",
+      "is_active": true,
+      "notes": "Sem açúcar adicionado; verificar rótulo.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "pasta_avela",
+      "name": "Pasta 100% avelã",
+      "category": "nut_paste",
+      "fat_pct": 60.0,
+      "sugar_pct": 6.0,
+      "solids_pct": 96.0,
+      "density_g_ml": 1.0,
+      "vegan": true,
+      "allergens": "tree_nuts",
+      "is_active": true,
+      "notes": "Sem açúcar adicionado; verificar rótulo.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "pasta_amendoim",
+      "name": "Pasta 100% amendoim",
+      "category": "nut_paste",
+      "fat_pct": 50.0,
+      "sugar_pct": 7.0,
+      "solids_pct": 96.0,
+      "density_g_ml": 1.0,
+      "vegan": true,
+      "allergens": "peanuts",
+      "is_active": true,
+      "notes": "Sem açúcar adicionado.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "xantana",
+      "name": "Goma xantana",
+      "category": "stabilizer",
+      "fat_pct": 0.0,
+      "sugar_pct": 0.0,
+      "solids_pct": 100.0,
+      "density_g_ml": 0.6,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Estabilizante; 0,2–0,4%.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "guar",
+      "name": "Goma guar",
+      "category": "stabilizer",
+      "fat_pct": 0.0,
+      "sugar_pct": 0.0,
+      "solids_pct": 100.0,
+      "density_g_ml": 0.6,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Estabilizante; 0,2–0,4%.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "lecitina_soja",
+      "name": "Lecitina de soja",
+      "category": "emulsifier",
+      "fat_pct": 0.0,
+      "sugar_pct": 0.0,
+      "solids_pct": 100.0,
+      "density_g_ml": 0.85,
+      "vegan": true,
+      "allergens": "soy",
+      "is_active": true,
+      "notes": "Emulsificante 0,3–0,5%.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "agua",
+      "name": "Água",
+      "category": "water",
+      "fat_pct": 0.0,
+      "sugar_pct": 0.0,
+      "solids_pct": 0.0,
+      "density_g_ml": 1.0,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Base aquosa.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "leite_coco_17",
+      "name": "Leite de coco (17% gordura)",
+      "category": "plant_milk",
+      "fat_pct": 17.0,
+      "sugar_pct": 2.0,
+      "solids_pct": 22.0,
+      "density_g_ml": 1.02,
+      "vegan": true,
+      "allergens": "tree_nuts",
+      "is_active": true,
+      "notes": "Médias: gordura 17%, açúcares 2%, sólidos 22%.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "manga",
+      "name": "Manga (polpa)",
+      "category": "fruit",
+      "fat_pct": 0.6,
+      "sugar_pct": 13.5,
+      "solids_pct": 15.0,
+      "density_g_ml": 1.02,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Brix ~15; açúcares ~13,5%.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "morango",
+      "name": "Morango (polpa)",
+      "category": "fruit",
+      "fat_pct": 0.5,
+      "sugar_pct": 7.2,
+      "solids_pct": 8.0,
+      "density_g_ml": 1.02,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Brix ~8; açúcares ~7–7,5%.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "maracuja",
+      "name": "Maracujá (polpa)",
+      "category": "fruit",
+      "fat_pct": 0.7,
+      "sugar_pct": 11.7,
+      "solids_pct": 13.0,
+      "density_g_ml": 1.02,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Brix ~13; atenção à acidez.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "banana",
+      "name": "Banana (polpa)",
+      "category": "fruit",
+      "fat_pct": 0.4,
+      "sugar_pct": 20.0,
+      "solids_pct": 22.0,
+      "density_g_ml": 1.05,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Brix ~22; muito corpo.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "goiaba",
+      "name": "Goiaba (polpa)",
+      "category": "fruit",
+      "fat_pct": 0.6,
+      "sugar_pct": 10.8,
+      "solids_pct": 12.0,
+      "density_g_ml": 1.02,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Brix ~12; fibras ajudam corpo.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "abacaxi",
+      "name": "Abacaxi (polpa)",
+      "category": "fruit",
+      "fat_pct": 0.2,
+      "sugar_pct": 11.7,
+      "solids_pct": 13.0,
+      "density_g_ml": 1.02,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Brix ~13; enzimas podem afetar textura.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
     }
   ]
 }
