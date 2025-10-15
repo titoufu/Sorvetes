@@ -1,10 +1,10 @@
 {
-  "name": "Base de Sorvetes",
+  "name": "Sorvetes",
   "short_name": "Sorvetes",
-  "start_url": ".",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#0b63f3",
+  "background_color": "#fdfdfd",
+  "theme_color": "#a3e0e0",
   "icons": [
     {
       "src": "icon-192.png",
@@ -20,7 +20,7 @@
       "src": "apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "maskable any"
     }
   ]
 }
