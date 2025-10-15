@@ -125,36 +125,7 @@
       backdrop-filter:saturate(1.2) blur(4px);
     }
     .bottombar button{max-width:220px}
-  
-/* === SAFE FIXES (no risky DOM rewrites) === */
-
-/* Keep grids in 2 cols on medium screens; drop to 1 below 700px */
-.row{display:grid;grid-template-columns:repeat(2, minmax(280px,1fr));gap:10px}
-@media (max-width:700px){.row{grid-template-columns:1fr}}
-
-/* Buttons/selects default to auto width outside of form cards */
-header .theme select, header button, .toolbar button, .btn-group > button, dialog button { width:auto; }
-.card input, .card select { width:100%; }
-
-/* Ingredient name (1st column) readable on dark theme too */
-#tbl td:nth-child(1){ color:var(--ink) !important; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0; }
-
-/* Table columns width hints */
-#tbl th:nth-child(1), #tbl td:nth-child(1){width:48%;}
-#tbl th:nth-child(2), #tbl td:nth-child(2){width:18%;}
-#tbl th:nth-child(3), #tbl td:nth-child(3){width:10%; text-align:center;}
-#tbl th:nth-child(4), #tbl td:nth-child(4){width:24%;}
-@media (max-width:520px){
-  #tbl th:nth-child(1), #tbl td:nth-child(1){width:56%;}
-  #tbl th:nth-child(2), #tbl td:nth-child(2){width:20%;}
-  #tbl th:nth-child(3), #tbl td:nth-child(3){width:8%;}
-  #tbl th:nth-child(4), #tbl td:nth-child(4){width:16%;}
-}
-
-/* Contribution badges truncation only (no text changes here) */
-#tbl td:nth-child(4) .badge{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0; }
-
-</style>
+  </style>
 </head>
 <body>
   <div class="stickybar">
@@ -562,56 +533,53 @@ function init(){
 
 document.addEventListener('DOMContentLoaded', init);
 </script>
+
+<!-- BEGIN: Abreviação segura da linha "por 100 g → ..." -->
 <script>
-// === SAFE JS: visibility and contributions abbreviation (scoped) ===
 (function(){
-  function ensureStep10Visible(root=document){
-    root.querySelectorAll('button').forEach(b=>{
-      const t = (b.textContent||'').trim();
-      const step = (b.getAttribute('data-step')||'').trim();
-      if (t === '+10' || t === '-10' || step === '10' || step === '-10'){
-        b.style.display = 'inline-flex';
-        b.style.visibility = 'visible';
-      }
-      // Remove ONLY exact +1/-1 if present
-      if (t === '+1' || t === '-1' || step === '1' || step === '-1'){
-        b.remove();
+  function toNumStr(x){
+    // keep original decimal separator if present, else ensure dot
+    const s = String(x).replace(',', '.');
+    const n = parseFloat(s);
+    if (isNaN(n)) return s;
+    return String(n);
+  }
+  function shortenText(t){
+    // normalize spaces
+    const s = t.replace(/\s+/g,' ').trim();
+    // already short?
+    if (/[%]\s*G\s*•\s*[%]\s*A\s*•\s*[%]\s*S/i.test(s)) return null;
+    const re = /por\s*100\s*g\s*→?\s*gordur[aa]\s*([\d.,]+)%\s*[•·\-–]\s*aç(?:u|ú)cares?\s*([\d.,]+)%\s*[•·\-–]\s*só?lidos?\s*([\d.,]+)%/i;
+    const m = s.match(re);
+    if (!m) return null;
+    const g = toNumStr(m[1]);
+    const a = toNumStr(m[2]);
+    const so = toNumStr(m[3]);
+    return ` ${g}% G• ${a}% A• ${so}% S`;
+  }
+  function processRoot(root){
+    // Look under table first column and modal catalog content
+    const nodes = root.querySelectorAll('#tbl td:nth-child(1), #tbl td:nth-child(1) * , #dlgCatalog *');
+    nodes.forEach(el=>{
+      const txt = el.innerText || el.textContent || '';
+      const short = shortenText(txt);
+      if (short){
+        // replace only the matched long tail, preserve any name before it
+        el.innerText = txt.replace(/por\s*100\s*g\s*→?.*$/i, short);
       }
     });
   }
-
-  function abbreviateContributionBadges(root=document){
-    // Scope strictly to 4th column badges
-    const rows = root.querySelectorAll('#tbl tbody tr');
-    rows.forEach(tr=>{
-      const td = tr.children[3];
-      if(!td) return;
-      td.querySelectorAll('.badge, .chip, span, div').forEach(el=>{
-        const txt = (el.innerText||'').trim();
-        let m;
-        if ((m = txt.match(/^Gord(?:ura)?\s*([\d.,]+)%$/i))) {
-          el.innerText = `${m[1].replace(',', '.')}% G`;
-        } else if ((m = txt.match(/^A[cç]u[cç]ar(?:es)?\s*([\d.,]+)%$/i))) {
-          el.innerText = `${m[1].replace(',', '.')}% A`;
-        } else if ((m = txt.match(/^S[oó]lidos?\s*([\d.,]+)%$/i))) {
-          el.innerText = `${m[1].replace(',', '.')}% S`;
-        }
-      });
-    });
+  function run(){
+    processRoot(document);
   }
-
-  function runAll(){
-    ensureStep10Visible();
-    abbreviateContributionBadges();
-  }
-
   document.addEventListener('DOMContentLoaded', ()=>{
-    runAll();
-    const obs = new MutationObserver(runAll);
+    run();
+    const obs = new MutationObserver(()=>run());
     obs.observe(document.body, {childList:true, subtree:true});
   });
 })();
-
 </script>
+<!-- END: Abreviação segura -->
+
 </body>
 </html>
