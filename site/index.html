@@ -89,6 +89,14 @@
     .aj{background:rgba(194,65,12,.16);color:var(--warn);border:1px solid rgba(194,65,12,.45)}
 
     table{width:100%;border-collapse:collapse}
+.table-wrap{overflow:auto;-webkit-overflow-scrolling:touch}
+/* Evita estouro em grids e inputs no mobile */
+.row > * { min-width: 0; }
+input,select,button{max-width:100%}
+/* Lote atual: não vazar em telas estreitas */
+#loteInfo{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+/* Células longas quebram/resumem adequadamente */
+th,td{word-break:break-word}
     th,td{padding:8px;border-bottom:1px dashed var(--line);text-align:left;vertical-align:middle}
     th{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
     tfoot td{font-weight:800}
@@ -126,6 +134,11 @@
     }
     .bottombar button{max-width:220px}
   </style>
+
+  <style>
+    #dlgCatalog::backdrop{background:rgba(0,0,0,.25)}
+  </style>
+
 </head>
 <body>
   <div class="stickybar">
@@ -227,8 +240,8 @@
   </div>
 
   <!-- Modal antes do script -->
-  <dialog id="dlgCatalog" style="border:none;border-radius:16px;padding:0;max-width:min(920px,95vw);">
-    <div style="background:var(--card);color:var(--ink);padding:12px 12px 14px;border-radius:16px;box-shadow:var(--shadow);min-width:min(920px,95vw);">
+  <dialog id="dlgCatalog" style="border:none;border-radius:16px;padding:0;max-width:95vw;">
+    <div style="background:var(--card);color:var(--ink);padding:12px 12px 14px;border-radius:16px;box-shadow:var(--shadow);width:min(920px,95vw);max-height:80vh;overflow:auto;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
         <h3 style="margin:0;font-size:16px">Adicionar do catálogo</h3>
         <div class="mini muted" id="catMeta" style="margin-left:auto">—</div>
@@ -532,6 +545,23 @@ function init(){
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+// Fechar o diálogo ao clicar fora do painel (backdrop)
+(() => {
+  const dlg = document.getElementById('dlgCatalog');
+  if (dlg) {
+    dlg.addEventListener('click', (e) => {
+      const panel = dlg.querySelector('div');
+      if (!panel) return;
+      const rect = panel.getBoundingClientRect();
+      const x = e.clientX, y = e.clientY;
+      if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) {
+        try { dlg.close(); } catch(_) {}
+      }
+    });
+  }
+})();
+
 </script>
 </body>
 </html>
