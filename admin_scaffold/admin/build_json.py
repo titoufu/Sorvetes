@@ -22,9 +22,12 @@ def fnum(s):
 
 def fbool(s):
     s2 = (str(s) or "").strip().lower()
-    if s2 in ("true","1","yes","y","sim"): return True
-    if s2 in ("false","0","no","n","nao","não",""): return False
+    if s2 in ("true","1","yes","y","sim","verdadeiro","v"): 
+        return True
+    if s2 in ("false","0","no","n","nao","não","falso","f"): 
+        return False
     return False
+
 
 def is_empty_row_values(cells):
     return all((c is None) or (str(c).strip()=="") for c in cells)
