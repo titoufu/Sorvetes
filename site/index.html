@@ -709,7 +709,7 @@ document.addEventListener('DOMContentLoaded', init);
         const [g,a,s] = parseGAS(txt);
         if (g!=null && a!=null && s!=null){
           const div = document.createElement('div'); div.className='mix-short';
-          div.textContent = `${g}% G - ${a}% A - ${s}% S`;
+          div.textContent = '${g}% G - ${a}% A - ${s}% S';
           c4.innerHTML = ''; c4.appendChild(div);
         }
       }
