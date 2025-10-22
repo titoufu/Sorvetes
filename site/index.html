@@ -767,6 +767,7 @@
     </div>
 
     <div class="bottombar">
+      <button id="btnExport" class="secondary" style="max-width:200px">Exportar Receita</button>
       <button id="btnBlur" class="secondary" style="max-width:200px">OK</button>
     </div>
   </div>
@@ -1070,12 +1071,74 @@
       themeSel.addEventListener('change', () => { setTheme(themeSel.value); localStorage.setItem('sorvete_theme', themeSel.value || ''); });
       presetSel.innerHTML = Object.keys(PRESETS).map(p => `<option ${p === current ? 'selected' : ''}>${p}</option>`).join(''); applyPreset(current);
       presetSel.addEventListener('change', () => { applyPreset(presetSel.value); });
+      document.getElementById('btnExport').addEventListener('click', exportarReceita);
       document.getElementById('btnReset').addEventListener('click', () => applyPreset(current));
       document.getElementById('btnT1').addEventListener('click', () => setTarget(1000));
       document.getElementById('btnT15').addEventListener('click', () => setTarget(1500));
       document.getElementById('btnT2').addEventListener('click', () => setTarget(2000));
       document.getElementById('btnBlur').addEventListener('click', () => { if (document.activeElement && document.activeElement.blur) { document.activeElement.blur(); } });
     }
+    function exportarReceita() {
+  const r = calc();
+  const ingredientesAtivos = Object.entries(gramsMix)
+    .filter(([ingrediente, quantidade]) => quantidade > 0)
+    .sort((a, b) => b[1] - a[1]); // Ordena por quantidade (maior primeiro)
+
+  if (ingredientesAtivos.length === 0) {
+    alert("Nenhum ingrediente com quantidade maior que zero para exportar.");
+    return;
+  }
+
+  // Cabeçalho
+  let texto = `RECEITA DE SORVETE - ${current}\n`;
+  texto += `Data: ${new Date().toLocaleDateString('pt-BR')}\n`;
+  texto += `Peso total: ${r.total.toFixed(0)}g\n`;
+  texto += `Composição: Gordura ${r.gorduraPct.toFixed(1)}% | Açúcar ${r.acucarPct.toFixed(1)}% | Sólidos ${r.solidosPct.toFixed(1)}%\n`;
+  texto += "=".repeat(50) + "\n\n";
+
+  // Ingredientes
+  texto += "INGREDIENTES:\n";
+  ingredientesAtivos.forEach(([ingrediente, quantidade]) => {
+    const percentual = r.percent[ingrediente] || 0;
+    texto += `• ${ingrediente}: ${quantidade.toFixed(0)}g (${percentual.toFixed(1)}%)\n`;
+  });
+
+  // Detalhes da composição
+  texto += "\n" + "=".repeat(50) + "\n";
+  texto += "DETALHES TÉCNICOS:\n";
+  
+  // Contribuição de cada ingrediente
+  texto += "\nContribuições na mistura:\n";
+  ingredientesAtivos.forEach(([ingrediente]) => {
+    const fg = r.fatParts[ingrediente] || 0;
+    const sg = r.sugarParts[ingrediente] || 0;
+    const tg = r.solidsParts[ingrediente] || 0;
+    
+    const fc = r.fatG > 0 ? (fg / r.fatG * 100) : 0;
+    const sc = r.sugarG > 0 ? (sg / r.sugarG * 100) : 0;
+    const tc = r.solidsG > 0 ? (tg / r.solidsG * 100) : 0;
+
+    texto += `• ${ingrediente}: Gord ${fc.toFixed(1)}% | Açúc ${sc.toFixed(1)}% | Sólid ${tc.toFixed(1)}%\n`;
+  });
+
+  // Metas vs Atual
+  const t = PRESETS[current].targets;
+  texto += "\nCOMPARAÇÃO COM METAS:\n";
+  texto += `Gordura: ${r.gorduraPct.toFixed(1)}% (Alvo: ${t.gordura}%) - Δ ${(r.gorduraPct - t.gordura).toFixed(1)}pp\n`;
+  texto += `Açúcar: ${r.acucarPct.toFixed(1)}% (Alvo: ${t.acucar}%) - Δ ${(r.acucarPct - t.acucar).toFixed(1)}pp\n`;
+  texto += `Sólidos: ${r.solidosPct.toFixed(1)}% (Alvo: ${t.solidos}%) - Δ ${(r.solidosPct - t.solidos).toFixed(1)}pp\n`;
+
+  // Criar e baixar o arquivo
+  const blob = new Blob([texto], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `receita-sorvete-${current.toLowerCase()}-${new Date().toISOString().split('T')[0]}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 
     document.addEventListener('DOMContentLoaded', init);
   </script>
