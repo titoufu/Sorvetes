@@ -643,13 +643,7 @@ document.addEventListener('DOMContentLoaded', init);
     }
     return t.replace(/\s*•\s*/g, ' - ');
   }
-% G - ${a}% A - ${s}% S';
-    }
-    // Se já estiver com bullets "•", troca por hífens
-    t = t.replace(/\s*•\s*/g, ' - ');
-    return t;
-  }
-    function parseGAS(text){
+  function parseGAS(text){
     const s = String(text||'');
     const g = (s.match(/gord[a-z]*\s*([\d.,]+)%/i)||[])[1];
     const a = (s.match(/a[cç]u[cç]ar[a-z]*\s*([\d.,]+)%/i)||[])[1];
