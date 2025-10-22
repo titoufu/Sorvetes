@@ -1,0 +1,33 @@
+RECEITA DE SORVETE - Gelato
+Data: 22/10/2025
+Peso total: 1000g
+Composição: Gordura 9.3% | Açúcar 17.5% | Sólidos 37.7%
+==================================================
+
+INGREDIENTES:
+• Morango (polpa): 372g (37.2%)
+• Leite integral: 199g (19.9%)
+• Creme de leite 35%: 155g (15.5%)
+• Açúcar (sacarose): 148g (14.8%)
+• Leite em pó integral: 118g (11.8%)
+• Água/Polpa: 4g (0.4%)
+• Estabilizante: 2g (0.2%)
+• Emulsificante: 2g (0.2%)
+
+==================================================
+DETALHES TÉCNICOS:
+
+Contribuições na mistura:
+• Morango (polpa): Gord 2.0% | Açúc 15.3% | Sólid 7.9%
+• Leite integral: Gord 6.8% | Açúc 0.0% | Sólid 6.6%
+• Creme de leite 35%: Gord 58.2% | Açúc 0.0% | Sólid 15.2%
+• Açúcar (sacarose): Gord 0.0% | Açúc 84.7% | Sólid 39.2%
+• Leite em pó integral: Gord 32.9% | Açúc 0.0% | Sólid 30.0%
+• Água/Polpa: Gord 0.0% | Açúc 0.0% | Sólid 0.0%
+• Estabilizante: Gord 0.0% | Açúc 0.0% | Sólid 0.5%
+• Emulsificante: Gord 0.0% | Açúc 0.0% | Sólid 0.5%
+
+COMPARAÇÃO COM METAS:
+Gordura: 9.3% (Alvo: 9%) - Δ 0.3pp
+Açúcar: 17.5% (Alvo: 18%) - Δ -0.5pp
+Sólidos: 37.7% (Alvo: 38%) - Δ -0.3pp
