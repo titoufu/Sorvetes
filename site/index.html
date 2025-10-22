@@ -452,10 +452,10 @@ async function loadCatalog() {
 }
 
 function renderCatalogModal() {
-  document.getElementById("catMeta").textContent = `${catalogData.ingredients.length} itens · atualizado ${catalogData.updated_at}`;
+  document.getElementById("catMeta").textContent = '${catalogData.ingredients.length} itens · atualizado ${catalogData.updated_at}';
   const sel = document.getElementById("catFilter");
   const cats = Array.from(new Set(catalogData.ingredients.map(i=>i.category||"—"))).sort();
-  sel.innerHTML = `<option value="">Todas</option>` + cats.map(c=>`<option value="${c}">${c}</option>`).join("");
+  sel.innerHTML = '<option value="">Todas</option>' + cats.map(c=>'<option value="${c}">${c}</option>').join("");
   drawCatalogRows();
 }
 
@@ -474,12 +474,12 @@ function drawCatalogRows() {
   for (const it of items) {
     const tr = document.createElement("tr");
     const f = Number(it.fat_pct||0), s = Number(it.solids_pct||0), a = Number(it.sugar_pct||0);
-    tr.innerHTML = `
+    tr.innerHTML = '
       <td><b>${it.name||it.id}</b><div class="mini muted">${it.id}</div></td>
       <td>${it.category||"—"}</td>
       <td class="mini">gord ${f.toFixed(1)}% • sólidos ${s.toFixed(1)}% • açúcs ${a.toFixed(1)}%</td>
       <td><input type="number" min="0" step="1" value="0" style="width:120px"></td>
-      <td><button class="btn-outline">Adicionar</button></td>`;
+      <td><button class="btn-outline">Adicionar</button></td>';
     const qty = tr.querySelector("input");
     tr.querySelector("button").addEventListener("click", ()=>{
       const g = Math.max(0, Math.round(Number((qty.value||"0").replace(",","."))));
@@ -534,7 +534,7 @@ function updateTargetButtons(){
       btn.classList.remove('btn-outline');
     }
   }
-  loteInfo.value = `${(targetBatch/1000).toFixed(1)} kg (alvo)`;
+  loteInfo.value = '${(targetBatch/1000).toFixed(1)} kg (alvo)';
 }
 function applyPreset(name){
   current = name;
@@ -551,7 +551,7 @@ function applyPreset(name){
   stickySTarget.textContent = t.solidos.toFixed(1);
 }
 function renderComp100(){
-  const entries = Object.entries(COMPOS).map(([k,[g,s,a]])=>`<div>• <b>${k}</b> — gordura ${g}% • açúcares ${a}% • sólidos ${s}% (por 100 g)</div>`).join("");
+  const entries = Object.entries(COMPOS).map(([k,[g,s,a]])=>'<div>• <b>${k}</b> — gordura ${g}% • açúcares ${a}% • sólidos ${s}% (por 100 g)</div>').join("");
   comp100Div.innerHTML = entries;
 }
 function addHelpers(td, name){
@@ -568,7 +568,7 @@ function renderTable(){
   for(const k of Object.keys(gramsMix)){
     const tr = document.createElement('tr'); tr.dataset.ing = k;
     const td1 = document.createElement('td'), td2 = document.createElement('td'), td3 = document.createElement('td'), td4 = document.createElement('td');
-    td1.innerHTML = `<div><b>${k}</b></div><div class="mini muted">por 100 g → gordura ${COMPOS[k][0]}% • açúcares ${COMPOS[k][2]}% • sólidos ${COMPOS[k][1]}%</div>`;
+    td1.innerHTML = '<div><b>${k}</b></div><div class="mini muted">por 100 g → gordura ${COMPOS[k][0]}% • açúcares ${COMPOS[k][2]}% • sólidos ${COMPOS[k][1]}%</div>';
     const inp = document.createElement('input'); inp.type="number"; inp.step="1"; inp.min="0"; inp.inputMode="numeric"; inp.pattern="[0-9]*"; inp.value = gramsMix[k]; inp.style.width="120px";
     const onChange = ()=>{ const raw = (inp.value||"").toString().replace(',','.'); const v = Number(raw); gramsMix[k] = isFinite(v) && v>=0 ? v : 0; recalc(); };
     inp.addEventListener('input', onChange); inp.addEventListener('change', onChange); td2.appendChild(inp);
@@ -588,14 +588,14 @@ function calc(){
   const percent = {}; for(const k of Object.keys(gramsMix)){ percent[k] = total>0 ? (gramsMix[k]/total*100) : 0; }
   return { total, percent, gorduraPct: total>0 ? (fatG/total)*100 : 0, solidosPct: total>0 ? (solidsG/total)*100 : 0, acucarPct: total>0 ? (sugarG/total)*100 : 0, fatG, solidsG, sugarG, fatParts, solidsParts, sugarParts };
 }
-function statusPill(name, val){ let ok=false, txt="Ajustar", cls="aj"; if(name==="gordura") ok=(val>=8&&val<=16); if(name==="acucar") ok=(val>=16&&val<=22); if(name==="solidos") ok=(val>=36&&val<=42); if(ok){txt="OK";cls="ok";} return `<span class="pill ${cls}">${txt}</span>`; }
+function statusPill(name, val){ let ok=false, txt="Ajustar", cls="aj"; if(name==="gordura") ok=(val>=8&&val<=16); if(name==="acucar") ok=(val>=16&&val<=22); if(name==="solidos") ok=(val>=36&&val<=42); if(ok){txt="OK";cls="ok";} return '<span class="pill ${cls}">${txt}</span>'; }
 function setDeltaChip(el, delta){ el.textContent=(delta>0?'+':'')+delta.toFixed(2)+' pp'; el.classList.remove('ok','aj'); if(Math.abs(delta)<=0.10){el.classList.add('ok');} else {el.classList.add('aj');} }
 function recalc(){
   const r = calc();
   if (stats) {
-    stats.innerHTML = `<div class="stat"><h3>Gordura (%)</h3><div class="val">${r.gorduraPct.toFixed(2)}</div>${statusPill('gordura',r.gorduraPct)}</div>
+    stats.innerHTML = '<div class="stat"><h3>Gordura (%)</h3><div class="val">${r.gorduraPct.toFixed(2)}</div>${statusPill('gordura',r.gorduraPct)}</div>
                        <div class="stat"><h3>Açúcares (%)</h3><div class="val">${r.acucarPct.toFixed(2)}</div>${statusPill('acucar',r.acucarPct)}</div>
-                       <div class="stat"><h3>Sólidos (%)</h3><div class="val">${r.solidosPct.toFixed(2)}</div>${statusPill('solidos',r.solidosPct)}</div>`;
+                       <div class="stat"><h3>Sólidos (%)</h3><div class="val">${r.solidosPct.toFixed(2)}</div>${statusPill('solidos',r.solidosPct)}</div>';
   }
   const t = PRESETS[current].targets;
   stickyGTarget.textContent = t.gordura.toFixed(1); stickyATarget.textContent = t.acucar.toFixed(1); stickySTarget.textContent = t.solidos.toFixed(1);
@@ -605,18 +605,18 @@ function recalc(){
     const name = tr.dataset.ing; const pctCell = tr.querySelector('td[data-pct-cell]'); const contribCell = tr.querySelector('td[data-contrib-cell]'); const pct = r.percent[name]||0;
     pctCell.textContent = isFinite(pct) ? pct.toFixed(2) + " %" : "—";
     const fg=r.fatParts[name]||0, sg=r.sugarParts[name]||0, tg=r.solidsParts[name]||0; const fc=r.fatG>0?(fg/r.fatG*100):0, sc=r.sugarG>0?(sg/r.sugarG*100):0, tc=r.solidsG>0?(tg/r.solidsG*100):0;
-    contribCell.innerHTML = `<div class="contrib"><span class="c-pill c-fat">Gord ${fc.toFixed(1)}%</span><span class="c-pill c-sugar">Açúc ${sc.toFixed(1)}%</span><span class="c-pill c-solid">Sólid ${tc.toFixed(1)}%</span></div>`;
+    contribCell.innerHTML = '<div class="contrib"><span class="c-pill c-fat">Gord ${fc.toFixed(1)}%</span><span class="c-pill c-sugar">Açúc ${sc.toFixed(1)}%</span><span class="c-pill c-solid">Sólid ${tc.toFixed(1)}%</span></div>';
   }
   const near = Math.abs(r.total - targetBatch) < 0.5; sumG.className = near ? "sum-ok" : "sum-bad";
-  sumG.textContent = r.total.toFixed(0) + " g"; sumPct.textContent = r.total>0 ? "100.00 %" : "—"; targetInfo.textContent = `(alvo atual: ${targetBatch} g)`;
+  sumG.textContent = r.total.toFixed(0) + " g"; sumPct.textContent = r.total>0 ? "100.00 %" : "—"; targetInfo.textContent = '(alvo atual: ${targetBatch} g)';
 }
 function normalizeToTarget(){ const r = calc(); const total = r.total; if(total<=0) return; const factor = targetBatch/total; for(const k of Object.keys(gramsMix)){ gramsMix[k]=Math.max(0, Math.round(Number(gramsMix[k]||0)*factor)); } renderTable(); recalc(); }
-function renderComp100(){ const entries = Object.entries(COMPOS).map(([k,[g,s,a]])=>`<div>• <b>${k}</b> — gordura ${g}% • açúcares ${a}% • sólidos ${s}% (por 100 g)</div>`).join(""); comp100Div.innerHTML = entries; }
+function renderComp100(){ const entries = Object.entries(COMPOS).map(([k,[g,s,a]])=>'<div>• <b>${k}</b> — gordura ${g}% • açúcares ${a}% • sólidos ${s}% (por 100 g)</div>').join(""); comp100Div.innerHTML = entries; }
 
 function init(){
   const savedTheme = localStorage.getItem('sorvete_theme') || ''; themeSel.value = savedTheme; setTheme(savedTheme);
   themeSel.addEventListener('change', ()=>{ setTheme(themeSel.value); localStorage.setItem('sorvete_theme', themeSel.value||''); });
-  presetSel.innerHTML = Object.keys(PRESETS).map(p=>`<option ${p===current?'selected':''}>${p}</option>`).join(''); applyPreset(current);
+  presetSel.innerHTML = Object.keys(PRESETS).map(p=>'<option ${p===current?'selected':''}>${p}</option>').join(''); applyPreset(current);
   presetSel.addEventListener('change', ()=>{ applyPreset(presetSel.value); });
   document.getElementById('btnReset').addEventListener('click', ()=>applyPreset(current));
   document.getElementById('btnT1').addEventListener('click', ()=>setTarget(1000));
@@ -639,11 +639,11 @@ document.addEventListener('DOMContentLoaded', init);
       const g = m[1].replace(',', '.');
       const a = m[2].replace(',', '.');
       const s = m[3].replace(',', '.');
-      return `${g}% G - ${a}% A - ${s}% S`;
+      return '${g}% G - ${a}% A - ${s}% S';
     }
     return t.replace(/\s*•\s*/g, ' - ');
   }
-% G - ${a}% A - ${s}% S`;
+% G - ${a}% A - ${s}% S';
     }
     // Se já estiver com bullets "•", troca por hífens
     t = t.replace(/\s*•\s*/g, ' - ');
@@ -670,9 +670,9 @@ document.addEventListener('DOMContentLoaded', init);
         const txt = c1.innerText.trim();
         const parts = txt.split('\n').map(s=>s.trim()).filter(Boolean);
         if (parts.length > 1){
-          c1.innerHTML = `<div class="ingrediente">${parts[0]}</div><div class="comp">${parts.slice(1).join(' ')}</div>`;
+          c1.innerHTML = '<div class="ingrediente">${parts[0]}</div><div class="comp">${parts.slice(1).join(' ')}</div>';
         } else {
-          c1.innerHTML = `<div class="ingrediente">${txt}</div>`;
+          c1.innerHTML = '<div class="ingrediente">${txt}</div>';
         }
       }
       // Encurtar texto de composição se existir
@@ -700,7 +700,7 @@ document.addEventListener('DOMContentLoaded', init);
       // Coluna 3: % no peso centralizado
       if (!c3.querySelector('.peso-pct')){
         const t = c3.innerText.trim();
-        c3.innerHTML = `<div class="peso-pct">${t}</div>`;
+        c3.innerHTML = '<div class="peso-pct">${t}</div>';
       }
 
       // Coluna 4: % na mistura como texto curto "X% G - Y% A - Z% S"
