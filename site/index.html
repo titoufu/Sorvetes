@@ -1051,11 +1051,24 @@
     function setDeltaChip(el, delta) { el.textContent = (delta > 0 ? '+' : '') + delta.toFixed(2) + ' pp'; el.classList.remove('ok', 'aj'); if (Math.abs(delta) <= 0.10) { el.classList.add('ok'); } else { el.classList.add('aj'); } }
     function recalc() {
       const r = calc();
-      if (stats) {
-        stats.innerHTML = '<div class="stat"><h3>Gordura (%)</h3><div class="val">${r.gorduraPct.toFixed(2)}</div>${statusPill('gordura',r.gorduraPct)}</div>
-          < div class="stat" ><h3>Açúcares (%)</h3><div class="val">${r.acucarPct.toFixed(2)}</div>${ statusPill('acucar', r.acucarPct) }</div >
-            <div class="stat"><h3>Sólidos (%)</h3><div class="val">${r.solidosPct.toFixed(2)}</div>${statusPill('solidos', r.solidosPct)}</div>';
-      }
+   if (stats) {
+  stats.innerHTML = `
+    <div class="stat">
+      <h3>Gordura (%)</h3>
+      <div class="val">${r.gorduraPct.toFixed(2)}</div>
+      ${statusPill('gordura', r.gorduraPct)}
+    </div>
+    <div class="stat">
+      <h3>Açúcares (%)</h3>
+      <div class="val">${r.acucarPct.toFixed(2)}</div>
+      ${statusPill('acucar', r.acucarPct)}
+    </div>
+    <div class="stat">
+      <h3>Sólidos (%)</h3>
+      <div class="val">${r.solidosPct.toFixed(2)}</div>
+      ${statusPill('solidos', r.solidosPct)}
+    </div>`;
+}
       const t = PRESETS[current].targets;
       stickyGTarget.textContent = t.gordura.toFixed(1); stickyATarget.textContent = t.acucar.toFixed(1); stickySTarget.textContent = t.solidos.toFixed(1);
       stickyGNow.textContent = r.gorduraPct.toFixed(1); stickyANow.textContent = r.acucarPct.toFixed(1); stickySNow.textContent = r.solidosPct.toFixed(1);
