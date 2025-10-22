@@ -631,29 +631,32 @@ document.addEventListener('DOMContentLoaded', init);
 <script>
 (function(){
   // Helpers para encurtar composição e contribuições
-  function shortenCompText(text){
+    function shortenCompText(text){
     if (!text) return text;
-    let t = String(text).replace(/\s+/g,' ').trim();
-    // "por 100 g → gordura X% • açúcares Y% • sólidos Z%" -> "X% G - Y% A - Z% S"
-    let m = t.match(/por\s*100\s*g\s*→?\s*gordur[aa]\s*([\d.,]+)%\s*[•·\-–]\s*aç(?:u|ú)cares?\s*([\d.,]+)%\s*[•·\-–]\s*só?lidos?\s*([\d.,]+)%/i);
+    const t = String(text);
+    const m = t.match(/gord[a-z]*\s*([\d.,]+)%[\s\S]*?a[cç]u[cç]ar[a-z]*\s*([\d.,]+)%[\s\S]*?s[oó]lid[a-z]*\s*([\d.,]+)%/i);
     if (m){
-      const g = m[1].replace(',', '.'), a = m[2].replace(',', '.'), s = m[3].replace(',', '.');
+      const g = m[1].replace(',', '.');
+      const a = m[2].replace(',', '.');
+      const s = m[3].replace(',', '.');
       return `${g}% G - ${a}% A - ${s}% S`;
+    }
+    return t.replace(/\s*•\s*/g, ' - ');
+  }
+% G - ${a}% A - ${s}% S`;
     }
     // Se já estiver com bullets "•", troca por hífens
     t = t.replace(/\s*•\s*/g, ' - ');
     return t;
   }
-  function parseGAS(text){
-    // Aceita "Gord 12.5%" / "Gordura 12.5%" / "Açú 0%" / "Açúcar 0%" / "Sólid 37%" / "Sólidos 37%"
-    const s = String(text);
-    const g = (s.match(/Gord(?:ura)?\s*([\d.,]+)%/i)||[])[1];
-    const a = (s.match(/A[cç]u[cç](?:ar(?:es)?)?\s*([\d.,]+)%/i)||[])[1];
-    const so = (s.match(/S[oó]lid(?:os)?\s*([\d.,]+)%/i)||[])[1];
-    return [g?.replace(',', '.'), a?.replace(',', '.'), so?.replace(',', '.')];
+    function parseGAS(text){
+    const s = String(text||'');
+    const g = (s.match(/gord[a-z]*\s*([\d.,]+)%/i)||[])[1];
+    const a = (s.match(/a[cç]u[cç]ar[a-z]*\s*([\d.,]+)%/i)||[])[1];
+    const so = (s.match(/s[oó]lid[a-z]*\s*([\d.,]+)%/i)||[])[1];
+    return [g?g.replace(',', '.'):null, a?a.replace(',', '.'):null, so?so.replace(',', '.'):null];
   }
-
-  // Enhance rows by ensuring expected structure/classes exist without breaking your logic.
+// Enhance rows by ensuring expected structure/classes exist without breaking your logic.
   function enhanceTable(){
     const tbl = document.getElementById('tbl');
     if(!tbl) return;
