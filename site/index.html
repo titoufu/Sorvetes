@@ -1262,114 +1262,196 @@ async function loadRecipesModal() {
       return dateMatch ? new Date(dateMatch[1].split('/').reverse().join('-')) : new Date(0);
     }
 
-    // Função para exibir a lista de receitas
-    function displayRecipesList(recipes) {
-      const listContainer = document.getElementById("recipesList");
-      const searchTerm = document.getElementById("recipeSearch").value.toLowerCase();
-      const sortBy = document.getElementById("recipeSort").value;
+// Configuração da pasta de receitas - LISTA ESTÁTICA
+const RECIPES_FOLDER = "https://raw.githubusercontent.com/titoufu/Sorvetes/main/Receitas%20Testadas/";
 
-      // Filtrar e ordenar
-      let filteredRecipes = recipes.filter(recipe =>
-        recipe.title.toLowerCase().includes(searchTerm) ||
-        recipe.filename.toLowerCase().includes(searchTerm)
-      );
+// Lista estática das receitas disponíveis (atualize manualmente quando adicionar novas)
+const RECIPES_STATIC = [
+  {
+    filename: "Maracujá_Creme.txt",
+    title: "Maracujá Creme",
+    date: "2024-12-15"
+  },
+  {
+    filename: "Morango_Creme.txt", 
+    title: "Morango Creme",
+    date: "2024-12-15"
+  },
+  {
+    filename: "Morango_Gelato.txt",
+    title: "Morango Gelato", 
+    date: "2024-12-15"
+  }
+  // Adicione aqui novas receitas manualmente
+];
 
-      filteredRecipes.sort((a, b) => {
-        if (sortBy === 'date') {
-          return b.date - a.date;
-        } else {
-          return a.title.localeCompare(b.title);
-        }
-      });
+// Função para carregar o modal de receitas (SEM carregar conteúdo automaticamente)
+function loadRecipesModal() {
+  const dlg = document.getElementById("dlgRecipes");
+  const listContainer = document.getElementById("recipesList");
+  const countElement = document.getElementById("recipesCount");
+  
+  // Esconder conteúdo de receita selecionada
+  document.getElementById("recipeContent").style.display = 'none';
+  
+  // Atualizar contador
+  countElement.textContent = `${RECIPES_STATIC.length} receitas disponíveis`;
+  
+  // Exibir lista estática
+  displayStaticRecipesList(RECIPES_STATIC);
+  
+  dlg.showModal();
+}
 
-      // Gerar HTML da lista
-      if (filteredRecipes.length === 0) {
-        listContainer.innerHTML = '<div class="mini muted" style="text-align:center;padding:20px">Nenhuma receita encontrada</div>';
-        return;
-      }
-
-      listContainer.innerHTML = filteredRecipes.map(recipe => `
-    <div class="recipe-item" style="padding:12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--card);transition:background 0.2s" 
-         onclick="showRecipe('${recipe.filename.replace(/'/g, "\\'")}', '${recipe.title.replace(/'/g, "\\'")}', \`${recipe.content.replace(/`/g, '\\`')}\`)">
+// Função para exibir a lista estática de receitas
+function displayStaticRecipesList(recipes) {
+  const listContainer = document.getElementById("recipesList");
+  const searchTerm = document.getElementById("recipeSearch").value.toLowerCase();
+  const sortBy = document.getElementById("recipeSort").value;
+  
+  // Filtrar
+  let filteredRecipes = recipes.filter(recipe => 
+    recipe.title.toLowerCase().includes(searchTerm) ||
+    recipe.filename.toLowerCase().includes(searchTerm)
+  );
+  
+  // Ordenar
+  filteredRecipes.sort((a, b) => {
+    if (sortBy === 'date') {
+      return new Date(b.date) - new Date(a.date);
+    } else {
+      return a.title.localeCompare(b.title);
+    }
+  });
+  
+  if (filteredRecipes.length === 0) {
+    listContainer.innerHTML = '<div class="mini muted" style="text-align:center;padding:20px">Nenhuma receita encontrada</div>';
+    return;
+  }
+  
+  // Gerar HTML da lista
+  listContainer.innerHTML = filteredRecipes.map(recipe => `
+    <div class="recipe-item" style="padding:12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--card);transition:all 0.2s" 
+         onmouseover="this.style.background='var(--bg)'" 
+         onmouseout="this.style.background='var(--card)'"
+         onclick="loadSingleRecipe('${recipe.filename.replace(/'/g, "\\'")}', '${recipe.title.replace(/'/g, "\\'")}')">
       <div style="font-weight:700;margin-bottom:4px">${recipe.title}</div>
       <div class="mini muted" style="display:flex;justify-content:space-between">
         <span>${recipe.filename}</span>
-        <span>${recipe.date.toLocaleDateString('pt-BR')}</span>
+        <span>${new Date(recipe.date).toLocaleDateString('pt-BR')}</span>
       </div>
+      <div class="mini" style="color:var(--pri);margin-top:4px">Clique para carregar →</div>
     </div>
   `).join('');
+}
+
+// Função para carregar UMA ÚNICA receita quando o usuário clicar
+async function loadSingleRecipe(filename, title) {
+  const listContainer = document.getElementById("recipesList");
+  
+  try {
+    // Mostrar loading apenas para esta receita
+    listContainer.innerHTML = `
+      <div class="mini muted" style="text-align:center;padding:20px">
+        Carregando "${title}"...
+      </div>
+    `;
+    
+    // Fazer apenas UMA requisição
+    const response = await fetch(RECIPES_FOLDER + filename + '?t=' + Date.now());
+    
+    if (response.ok) {
+      const content = await response.text();
+      showRecipe(filename, title, content);
+      
+      // Restaurar lista após carregar
+      displayStaticRecipesList(RECIPES_STATIC);
+      
+    } else {
+      throw new Error(`HTTP ${response.status}`);
     }
+    
+  } catch (error) {
+    alert("Erro ao carregar a receita. Tente novamente em alguns segundos.");
+    console.error("Erro ao carregar receita:", error);
+    
+    // Restaurar lista em caso de erro
+    displayStaticRecipesList(RECIPES_STATIC);
+  }
+}
 
-    // Função para exibir o conteúdo de uma receita
-    function showRecipe(filename, title, content) {
-      document.getElementById("recipeTitle").textContent = title;
-      document.getElementById("recipeText").textContent = content;
-      document.getElementById("recipeContent").style.display = 'block';
+// Função para exibir o conteúdo de uma receita (mantida igual)
+function showRecipe(filename, title, content) {
+  document.getElementById("recipeTitle").textContent = title;
+  document.getElementById("recipeText").textContent = content;
+  document.getElementById("recipeContent").style.display = 'block';
+  
+  // Scroll para a receita selecionada
+  document.getElementById("recipeContent").scrollIntoView({ behavior: 'smooth' });
+  
+  // Configurar botão de carregar
+  document.getElementById("btnLoadRecipe").onclick = () => loadRecipeFromContent(content, title);
+}
 
-      // Scroll para a receita selecionada
-      document.getElementById("recipeContent").scrollIntoView({ behavior: 'smooth' });
-
-      // Configurar botão de carregar
-      document.getElementById("btnLoadRecipe").onclick = () => loadRecipeFromContent(content, title);
-    }
-
-    // Função para carregar uma receita no editor
-    function loadRecipeFromContent(content, title) {
-      try {
-        // Extrair ingredientes e quantidades do conteúdo
-        const lines = content.split('\n');
-        const ingredientsSection = content.split('INGREDIENTES:')[1]?.split('DETALHES TÉCNICOS:')[0];
-
-        if (ingredientsSection) {
-          // Limpar receita atual
-          gramsMix = {};
-
-          // Parse cada linha de ingrediente
-          const ingredientLines = ingredientsSection.split('\n').filter(line =>
-            line.trim().startsWith('•') && line.includes(':')
-          );
-
-          ingredientLines.forEach(line => {
-            const match = line.match(/•\s*(.+?):\s*(\d+)g\s*\([^)]+\)/);
-            if (match) {
-              const ingredient = match[1].trim();
-              const quantidade = parseInt(match[2]);
-
-              if (ingredient && !isNaN(quantidade)) {
-                gramsMix[ingredient] = quantidade;
-              }
-            }
-          });
-
-          // Atualizar a interface
-          renderTable();
-          recalc();
-
-          // Fechar modal
-          document.getElementById("dlgRecipes").close();
-
-          // Mostrar confirmação
-          alert(`Receita "${title}" carregada com sucesso!`);
+// Função para carregar uma receita no editor (mantida igual)
+function loadRecipeFromContent(content, title) {
+  try {
+    // Extrair ingredientes e quantidades do conteúdo
+    const lines = content.split('\n');
+    const ingredientsSection = content.split('INGREDIENTES:')[1]?.split('DETALHES TÉCNICOS:')[0];
+    
+    if (ingredientsSection) {
+      // Limpar receita atual
+      gramsMix = {};
+      
+      // Parse cada linha de ingrediente
+      const ingredientLines = ingredientsSection.split('\n').filter(line => 
+        line.trim().startsWith('•') && line.includes(':')
+      );
+      
+      ingredientLines.forEach(line => {
+        const match = line.match(/•\s*(.+?):\s*(\d+)g\s*\([^)]+\)/);
+        if (match) {
+          const ingredient = match[1].trim();
+          const quantidade = parseInt(match[2]);
+          
+          if (ingredient && !isNaN(quantidade)) {
+            gramsMix[ingredient] = quantidade;
+          }
         }
-      } catch (error) {
-        alert("Erro ao carregar a receita: " + error.message);
-        console.error("Erro ao carregar receita:", error);
-      }
+      });
+      
+      // Atualizar a interface
+      renderTable();
+      recalc();
+      
+      // Fechar modal
+      document.getElementById("dlgRecipes").close();
+      
+      // Mostrar confirmação
+      alert(`Receita "${title}" carregada com sucesso!`);
     }
+  } catch (error) {
+    alert("Erro ao carregar a receita: " + error.message);
+    console.error("Erro ao carregar receita:", error);
+  }
+}
 
-    // Configurar eventos do modal de receitas
-    function setupRecipesModal() {
-      const dlg = document.getElementById("dlgRecipes");
-      const btnOpen = document.getElementById("btnViewRecipes");
-      const btnClose = document.getElementById("btnCloseRecipes");
-      const searchInput = document.getElementById("recipeSearch");
-      const sortSelect = document.getElementById("recipeSort");
-
-      btnOpen.addEventListener("click", loadRecipesModal);
-      btnClose.addEventListener("click", () => dlg.close());
-      searchInput.addEventListener("input", () => loadRecipesModal());
-      sortSelect.addEventListener("change", () => loadRecipesModal());
-    }
+// Configurar eventos do modal de receitas (atualizada)
+function setupRecipesModal() {
+  const dlg = document.getElementById("dlgRecipes");
+  const btnOpen = document.getElementById("btnViewRecipes");
+  const btnClose = document.getElementById("btnCloseRecipes");
+  const searchInput = document.getElementById("recipeSearch");
+  const sortSelect = document.getElementById("recipeSort");
+  
+  btnOpen.addEventListener("click", loadRecipesModal);
+  btnClose.addEventListener("click", () => dlg.close());
+  
+  // Busca e ordenação agora atualizam apenas a lista estática
+  searchInput.addEventListener("input", () => displayStaticRecipesList(RECIPES_STATIC));
+  sortSelect.addEventListener("change", () => displayStaticRecipesList(RECIPES_STATIC));
+}
     document.addEventListener('DOMContentLoaded', init);
   </script>
 
