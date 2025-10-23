@@ -768,6 +768,7 @@
 
     <div class="bottombar">
       <button id="btnExport" class="secondary" style="max-width:200px">Exportar Receita</button>
+      <button id="btnViewRecipes" class="secondary" style="max-width:200px">Receitas Salvas</button>
       <button id="btnBlur" class="secondary" style="max-width:200px">OK</button>
     </div>
   </div>
@@ -807,7 +808,40 @@
       </div>
     </div>
   </dialog>
+  <!-- Modal para visualizar receitas salvas -->
+  <dialog id="dlgRecipes" style="border:none;border-radius:16px;padding:0;max-width:min(920px,95vw);">
+    <div
+      style="background:var(--card);color:var(--ink);padding:12px 12px 14px;border-radius:16px;box-shadow:var(--shadow);min-width:min(920px,95vw);max-height:90vh;display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <h3 style="margin:0;font-size:16px">Receitas Salvas</h3>
+        <div class="mini muted" id="recipesCount" style="margin-left:auto">—</div>
+        <button id="btnCloseRecipes" class="secondary" style="max-width:120px">Fechar</button>
+      </div>
 
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <input id="recipeSearch" placeholder="Buscar receita..." style="flex:1">
+        <select id="recipeSort">
+          <option value="name">Ordenar por nome</option>
+          <option value="date">Ordenar por data</option>
+        </select>
+      </div>
+
+      <div style="flex:1;overflow:auto;border:1px dashed var(--line);border-radius:12px;padding:12px">
+        <div id="recipesList" style="display:grid;gap:8px">
+          <!-- Lista de receitas será carregada aqui -->
+        </div>
+      </div>
+
+      <div id="recipeContent" style="display:none;margin-top:12px;border-top:1px solid var(--line);padding-top:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <h4 id="recipeTitle" style="margin:0">Título da Receita</h4>
+          <button id="btnLoadRecipe" class="btn-outline" style="max-width:150px">Carregar Receita</button>
+        </div>
+        <pre id="recipeText"
+          style="background:var(--bg);padding:12px;border-radius:8px;max-height:300px;overflow:auto;white-space:pre-wrap;font-size:14px;margin:0"></pre>
+      </div>
+    </div>
+  </dialog>
   <script>
     const TARGETS = [1000, 1500, 2000];
     let targetBatch = TARGETS[0];
@@ -1071,6 +1105,7 @@
       themeSel.addEventListener('change', () => { setTheme(themeSel.value); localStorage.setItem('sorvete_theme', themeSel.value || ''); });
       presetSel.innerHTML = Object.keys(PRESETS).map(p => `<option ${p === current ? 'selected' : ''}>${p}</option>`).join(''); applyPreset(current);
       presetSel.addEventListener('change', () => { applyPreset(presetSel.value); });
+       setupRecipesModal();
       document.getElementById('btnExport').addEventListener('click', exportarReceita);
       document.getElementById('btnReset').addEventListener('click', () => applyPreset(current));
       document.getElementById('btnT1').addEventListener('click', () => setTarget(1000));
@@ -1079,67 +1114,236 @@
       document.getElementById('btnBlur').addEventListener('click', () => { if (document.activeElement && document.activeElement.blur) { document.activeElement.blur(); } });
     }
     function exportarReceita() {
-  const r = calc();
-  const ingredientesAtivos = Object.entries(gramsMix)
-    .filter(([ingrediente, quantidade]) => quantidade > 0)
-    .sort((a, b) => b[1] - a[1]); // Ordena por quantidade (maior primeiro)
+      const r = calc();
+      const ingredientesAtivos = Object.entries(gramsMix)
+        .filter(([ingrediente, quantidade]) => quantidade > 0)
+        .sort((a, b) => b[1] - a[1]); // Ordena por quantidade (maior primeiro)
 
-  if (ingredientesAtivos.length === 0) {
-    alert("Nenhum ingrediente com quantidade maior que zero para exportar.");
-    return;
-  }
+      if (ingredientesAtivos.length === 0) {
+        alert("Nenhum ingrediente com quantidade maior que zero para exportar.");
+        return;
+      }
 
-  // Cabeçalho
-  let texto = `RECEITA DE SORVETE - ${current}\n`;
-  texto += `Data: ${new Date().toLocaleDateString('pt-BR')}\n`;
-  texto += `Peso total: ${r.total.toFixed(0)}g\n`;
-  texto += `Composição: Gordura ${r.gorduraPct.toFixed(1)}% | Açúcar ${r.acucarPct.toFixed(1)}% | Sólidos ${r.solidosPct.toFixed(1)}%\n`;
-  texto += "=".repeat(50) + "\n\n";
+      // Cabeçalho
+      let texto = `RECEITA DE SORVETE - ${current}\n`;
+      texto += `Data: ${new Date().toLocaleDateString('pt-BR')}\n`;
+      texto += `Peso total: ${r.total.toFixed(0)}g\n`;
+      texto += `Composição: Gordura ${r.gorduraPct.toFixed(1)}% | Açúcar ${r.acucarPct.toFixed(1)}% | Sólidos ${r.solidosPct.toFixed(1)}%\n`;
+      texto += "=".repeat(50) + "\n\n";
 
-  // Ingredientes
-  texto += "INGREDIENTES:\n";
-  ingredientesAtivos.forEach(([ingrediente, quantidade]) => {
-    const percentual = r.percent[ingrediente] || 0;
-    texto += `• ${ingrediente}: ${quantidade.toFixed(0)}g (${percentual.toFixed(1)}%)\n`;
-  });
+      // Ingredientes
+      texto += "INGREDIENTES:\n";
+      ingredientesAtivos.forEach(([ingrediente, quantidade]) => {
+        const percentual = r.percent[ingrediente] || 0;
+        texto += `• ${ingrediente}: ${quantidade.toFixed(0)}g (${percentual.toFixed(1)}%)\n`;
+      });
 
-  // Detalhes da composição
-  texto += "\n" + "=".repeat(50) + "\n";
-  texto += "DETALHES TÉCNICOS:\n";
-  
-  // Contribuição de cada ingrediente
-  texto += "\nContribuições na mistura:\n";
-  ingredientesAtivos.forEach(([ingrediente]) => {
-    const fg = r.fatParts[ingrediente] || 0;
-    const sg = r.sugarParts[ingrediente] || 0;
-    const tg = r.solidsParts[ingrediente] || 0;
-    
-    const fc = r.fatG > 0 ? (fg / r.fatG * 100) : 0;
-    const sc = r.sugarG > 0 ? (sg / r.sugarG * 100) : 0;
-    const tc = r.solidsG > 0 ? (tg / r.solidsG * 100) : 0;
+      // Detalhes da composição
+      texto += "\n" + "=".repeat(50) + "\n";
+      texto += "DETALHES TÉCNICOS:\n";
 
-    texto += `• ${ingrediente}: Gord ${fc.toFixed(1)}% | Açúc ${sc.toFixed(1)}% | Sólid ${tc.toFixed(1)}%\n`;
-  });
+      // Contribuição de cada ingrediente
+      texto += "\nContribuições na mistura:\n";
+      ingredientesAtivos.forEach(([ingrediente]) => {
+        const fg = r.fatParts[ingrediente] || 0;
+        const sg = r.sugarParts[ingrediente] || 0;
+        const tg = r.solidsParts[ingrediente] || 0;
 
-  // Metas vs Atual
-  const t = PRESETS[current].targets;
-  texto += "\nCOMPARAÇÃO COM METAS:\n";
-  texto += `Gordura: ${r.gorduraPct.toFixed(1)}% (Alvo: ${t.gordura}%) - Δ ${(r.gorduraPct - t.gordura).toFixed(1)}pp\n`;
-  texto += `Açúcar: ${r.acucarPct.toFixed(1)}% (Alvo: ${t.acucar}%) - Δ ${(r.acucarPct - t.acucar).toFixed(1)}pp\n`;
-  texto += `Sólidos: ${r.solidosPct.toFixed(1)}% (Alvo: ${t.solidos}%) - Δ ${(r.solidosPct - t.solidos).toFixed(1)}pp\n`;
+        const fc = r.fatG > 0 ? (fg / r.fatG * 100) : 0;
+        const sc = r.sugarG > 0 ? (sg / r.sugarG * 100) : 0;
+        const tc = r.solidsG > 0 ? (tg / r.solidsG * 100) : 0;
 
-  // Criar e baixar o arquivo
-  const blob = new Blob([texto], { type: 'text/plain;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `receita-sorvete-${current.toLowerCase()}-${new Date().toISOString().split('T')[0]}.txt`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
+        texto += `• ${ingrediente}: Gord ${fc.toFixed(1)}% | Açúc ${sc.toFixed(1)}% | Sólid ${tc.toFixed(1)}%\n`;
+      });
 
+      // Metas vs Atual
+      const t = PRESETS[current].targets;
+      texto += "\nCOMPARAÇÃO COM METAS:\n";
+      texto += `Gordura: ${r.gorduraPct.toFixed(1)}% (Alvo: ${t.gordura}%) - Δ ${(r.gorduraPct - t.gordura).toFixed(1)}pp\n`;
+      texto += `Açúcar: ${r.acucarPct.toFixed(1)}% (Alvo: ${t.acucar}%) - Δ ${(r.acucarPct - t.acucar).toFixed(1)}pp\n`;
+      texto += `Sólidos: ${r.solidosPct.toFixed(1)}% (Alvo: ${t.solidos}%) - Δ ${(r.solidosPct - t.solidos).toFixed(1)}pp\n`;
+
+      // Criar e baixar o arquivo
+      const blob = new Blob([texto], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `receita-sorvete-${current.toLowerCase()}-${new Date().toISOString().split('T')[0]}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+    // Configuração da pasta de receitas
+    const RECIPES_FOLDER = "https://raw.githubusercontent.com/titoufu/Sorvetes/main/Receitas%20Testadas/";
+    const RECIPES_LIST = [
+      "Maracujá_Creme.txt",
+      "Morango_Creme.txt",
+      "Morango_Gelato.txt"
+      // Adicione aqui os nomes dos outros arquivos que você tiver
+    ];
+
+    // Função para carregar e exibir receitas
+    async function loadRecipesModal() {
+      const dlg = document.getElementById("dlgRecipes");
+      const listContainer = document.getElementById("recipesList");
+      const countElement = document.getElementById("recipesCount");
+
+      // Mostrar loading
+      listContainer.innerHTML = '<div class="mini muted" style="text-align:center;padding:20px">Carregando receitas...</div>';
+
+      try {
+        const recipes = [];
+
+        // Carregar cada receita
+        for (const filename of RECIPES_LIST) {
+          try {
+            const response = await fetch(RECIPES_FOLDER + filename);
+            if (response.ok) {
+              const content = await response.text();
+              const firstLine = content.split('\n')[0] || 'Receita sem título';
+              const title = firstLine.replace('RECEITA DE SORVETE - ', '').trim();
+
+              recipes.push({
+                filename,
+                title,
+                content,
+                date: extractDateFromContent(content)
+              });
+            }
+          } catch (error) {
+            console.warn(`Erro ao carregar ${filename}:`, error);
+          }
+        }
+
+        // Atualizar contador
+        countElement.textContent = `${recipes.length} receitas`;
+
+        // Ordenar e exibir
+        displayRecipesList(recipes);
+
+      } catch (error) {
+        listContainer.innerHTML = '<div class="mini muted" style="text-align:center;padding:20px;color:var(--bad)">Erro ao carregar receitas</div>';
+        console.error("Erro ao carregar receitas:", error);
+      }
+
+      dlg.showModal();
+    }
+
+    // Função para extrair data do conteúdo
+    function extractDateFromContent(content) {
+      const dateMatch = content.match(/Data:\s*(\d{2}\/\d{2}\/\d{4})/);
+      return dateMatch ? new Date(dateMatch[1].split('/').reverse().join('-')) : new Date(0);
+    }
+
+    // Função para exibir a lista de receitas
+    function displayRecipesList(recipes) {
+      const listContainer = document.getElementById("recipesList");
+      const searchTerm = document.getElementById("recipeSearch").value.toLowerCase();
+      const sortBy = document.getElementById("recipeSort").value;
+
+      // Filtrar e ordenar
+      let filteredRecipes = recipes.filter(recipe =>
+        recipe.title.toLowerCase().includes(searchTerm) ||
+        recipe.filename.toLowerCase().includes(searchTerm)
+      );
+
+      filteredRecipes.sort((a, b) => {
+        if (sortBy === 'date') {
+          return b.date - a.date;
+        } else {
+          return a.title.localeCompare(b.title);
+        }
+      });
+
+      // Gerar HTML da lista
+      if (filteredRecipes.length === 0) {
+        listContainer.innerHTML = '<div class="mini muted" style="text-align:center;padding:20px">Nenhuma receita encontrada</div>';
+        return;
+      }
+
+      listContainer.innerHTML = filteredRecipes.map(recipe => `
+    <div class="recipe-item" style="padding:12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--card);transition:background 0.2s" 
+         onclick="showRecipe('${recipe.filename.replace(/'/g, "\\'")}', '${recipe.title.replace(/'/g, "\\'")}', \`${recipe.content.replace(/`/g, '\\`')}\`)">
+      <div style="font-weight:700;margin-bottom:4px">${recipe.title}</div>
+      <div class="mini muted" style="display:flex;justify-content:space-between">
+        <span>${recipe.filename}</span>
+        <span>${recipe.date.toLocaleDateString('pt-BR')}</span>
+      </div>
+    </div>
+  `).join('');
+    }
+
+    // Função para exibir o conteúdo de uma receita
+    function showRecipe(filename, title, content) {
+      document.getElementById("recipeTitle").textContent = title;
+      document.getElementById("recipeText").textContent = content;
+      document.getElementById("recipeContent").style.display = 'block';
+
+      // Scroll para a receita selecionada
+      document.getElementById("recipeContent").scrollIntoView({ behavior: 'smooth' });
+
+      // Configurar botão de carregar
+      document.getElementById("btnLoadRecipe").onclick = () => loadRecipeFromContent(content, title);
+    }
+
+    // Função para carregar uma receita no editor
+    function loadRecipeFromContent(content, title) {
+      try {
+        // Extrair ingredientes e quantidades do conteúdo
+        const lines = content.split('\n');
+        const ingredientsSection = content.split('INGREDIENTES:')[1]?.split('DETALHES TÉCNICOS:')[0];
+
+        if (ingredientsSection) {
+          // Limpar receita atual
+          gramsMix = {};
+
+          // Parse cada linha de ingrediente
+          const ingredientLines = ingredientsSection.split('\n').filter(line =>
+            line.trim().startsWith('•') && line.includes(':')
+          );
+
+          ingredientLines.forEach(line => {
+            const match = line.match(/•\s*(.+?):\s*(\d+)g\s*\([^)]+\)/);
+            if (match) {
+              const ingredient = match[1].trim();
+              const quantidade = parseInt(match[2]);
+
+              if (ingredient && !isNaN(quantidade)) {
+                gramsMix[ingredient] = quantidade;
+              }
+            }
+          });
+
+          // Atualizar a interface
+          renderTable();
+          recalc();
+
+          // Fechar modal
+          document.getElementById("dlgRecipes").close();
+
+          // Mostrar confirmação
+          alert(`Receita "${title}" carregada com sucesso!`);
+        }
+      } catch (error) {
+        alert("Erro ao carregar a receita: " + error.message);
+        console.error("Erro ao carregar receita:", error);
+      }
+    }
+
+    // Configurar eventos do modal de receitas
+    function setupRecipesModal() {
+      const dlg = document.getElementById("dlgRecipes");
+      const btnOpen = document.getElementById("btnViewRecipes");
+      const btnClose = document.getElementById("btnCloseRecipes");
+      const searchInput = document.getElementById("recipeSearch");
+      const sortSelect = document.getElementById("recipeSort");
+
+      btnOpen.addEventListener("click", loadRecipesModal);
+      btnClose.addEventListener("click", () => dlg.close());
+      searchInput.addEventListener("input", () => loadRecipesModal());
+      sortSelect.addEventListener("change", () => loadRecipesModal());
+    }
     document.addEventListener('DOMContentLoaded', init);
   </script>
 
@@ -1236,34 +1440,34 @@
 
 
   <script>
-(function(){
-  function keepOnlyStep10(root=document){
-    const buttons = root.querySelectorAll('#tbl td:nth-child(2) .helpers button');
-    buttons.forEach(btn=>{
-      const t = (btn.textContent||'').trim();
-      const step = (btn.getAttribute('data-step')||'').trim();
-      if (t === '+1' || t === '-1' || step === '1' || step === '-1'){
-        btn.remove();
+    (function () {
+      function keepOnlyStep10(root = document) {
+        const buttons = root.querySelectorAll('#tbl td:nth-child(2) .helpers button');
+        buttons.forEach(btn => {
+          const t = (btn.textContent || '').trim();
+          const step = (btn.getAttribute('data-step') || '').trim();
+          if (t === '+1' || t === '-1' || step === '1' || step === '-1') {
+            btn.remove();
+          }
+        });
       }
-    });
-  }
-    document.addEventListener('DOMContentLoaded', ()=>{
-    keepOnlyStep10();
-    const obs = new MutationObserver((mutations)=>{
-      mutations.forEach(mutation=>{
-        if (mutation.addedNodes.length) {
-          keepOnlyStep10();
+      document.addEventListener('DOMContentLoaded', () => {
+        keepOnlyStep10();
+        const obs = new MutationObserver((mutations) => {
+          mutations.forEach(mutation => {
+            if (mutation.addedNodes.length) {
+              keepOnlyStep10();
+            }
+          });
+        });
+
+        const target = document.getElementById('tbl') || document.body;
+        if (target) {
+          obs.observe(target, { childList: true, subtree: true });
         }
       });
-    });
-    
-    const target = document.getElementById('tbl') || document.body;
-    if (target) {
-      obs.observe(target, {childList:true, subtree:true});
-    }
-  });
-})();
-</script>
+    })();
+  </script>
 
 </body>
 
