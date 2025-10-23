@@ -1183,27 +1183,29 @@
       // Adicione aqui os nomes dos outros arquivos que você tiver
     ];
 
-    // Função para carregar e exibir receitas
-    async function loadRecipesModal() {
-      const dlg = document.getElementById("dlgRecipes");
-      const listContainer = document.getElementById("recipesList");
-      const countElement = document.getElementById("recipesCount");
-
-      // Mostrar loading
-      listContainer.innerHTML = '<div class="mini muted" style="text-align:center;padding:20px">Carregando receitas...</div>';
-
-      try {
-        const recipes = [];
-
-        // Carregar cada receita
-        for (const filename of RECIPES_LIST) {
+// Função para carregar e exibir receitas com rate limiting
+async function loadRecipesModal() {
+  const dlg = document.getElementById("dlgRecipes");
+  const listContainer = document.getElementById("recipesList");
+  const countElement = document.getElementById("recipesCount");
+  
+  // Mostrar loading
+  listContainer.innerHTML = '<div class="mini muted" style="text-align:center;padding:20px">Carregando receitas...</div>';
+  
+  try {
+    const recipes = [];
+    
+    // Função com delay entre requisições
+    const fetchWithDelay = async (filename, delay) => {
+      return new Promise(resolve => {
+        setTimeout(async () => {
           try {
-            const response = await fetch(RECIPES_FOLDER + filename);
+            const response = await fetch(RECIPES_FOLDER + filename + '?t=' + Date.now());
             if (response.ok) {
               const content = await response.text();
               const firstLine = content.split('\n')[0] || 'Receita sem título';
               const title = firstLine.replace('RECEITA DE SORVETE - ', '').trim();
-
+              
               recipes.push({
                 filename,
                 title,
@@ -1214,21 +1216,45 @@
           } catch (error) {
             console.warn(`Erro ao carregar ${filename}:`, error);
           }
-        }
-
-        // Atualizar contador
-        countElement.textContent = `${recipes.length} receitas`;
-
-        // Ordenar e exibir
-        displayRecipesList(recipes);
-
-      } catch (error) {
-        listContainer.innerHTML = '<div class="mini muted" style="text-align:center;padding:20px;color:var(--bad)">Erro ao carregar receitas</div>';
-        console.error("Erro ao carregar receitas:", error);
-      }
-
-      dlg.showModal();
+          resolve();
+        }, delay);
+      });
+    };
+    
+    // Carregar cada receita com delay de 500ms entre elas
+    for (let i = 0; i < RECIPES_LIST.length; i++) {
+      await fetchWithDelay(RECIPES_LIST[i], i * 500);
+      
+      // Atualizar progresso
+      const progress = Math.round((i + 1) / RECIPES_LIST.length * 100);
+      listContainer.innerHTML = `
+        <div class="mini muted" style="text-align:center;padding:20px">
+          Carregando receitas... ${progress}%<br>
+          <small>${i + 1} de ${RECIPES_LIST.length}</small>
+        </div>
+      `;
     }
+    
+    // Atualizar contador
+    countElement.textContent = `${recipes.length} receitas`;
+    
+    // Ordenar e exibir
+    displayRecipesList(recipes);
+    
+  } catch (error) {
+    listContainer.innerHTML = `
+      <div class="mini muted" style="text-align:center;padding:20px;color:var(--bad)">
+        Erro ao carregar receitas<br>
+        <small>Tente novamente em alguns segundos</small>
+      </div>
+      <button onclick="loadRecipesModal()" class="btn-outline" style="margin:0 auto;display:block">Tentar Novamente</button>
+    `;
+    console.error("Erro ao carregar receitas:", error);
+  }
+  
+  dlg.showModal();
+}
+    
 
     // Função para extrair data do conteúdo
     function extractDateFromContent(content) {
