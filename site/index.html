@@ -1215,6 +1215,50 @@
       
       dlg.showModal();
     }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    // Configuração da pasta de receitas - LISTA ESTÁTICA
+    const RECIPES_FOLDER = "https://raw.githubusercontent.com/titoufu/Sorvetes/main/Receitas%20Testadas/";
+
+    // Lista estática das receitas disponíveis (atualize manualmente quando adicionar novas)
+    const RECIPES_STATIC = [
+      {
+        filename: "Maracujá_Creme.txt",
+        title: "Maracujá Creme",
+        date: "2024-12-15"
+      },
+      {
+        filename: "Morango_Creme.txt", 
+        title: "Morango Creme",
+        date: "2024-12-15"
+      },
+      {
+        filename: "Morango_Gelato.txt",
+        title: "Morango Gelato", 
+        date: "2024-12-15"
+      }
+      // Adicione aqui novas receitas manualmente
+    ];
+
+    // Cache local para receitas já carregadas
+    const recipesCache = new Map();
+
+    // Função para carregar o modal de receitas (SEM carregar conteúdo automaticamente)
+    function loadRecipesModal() {
+      const dlg = document.getElementById("dlgRecipes");
+      const listContainer = document.getElementById("recipesList");
+      const countElement = document.getElementById("recipesCount");
+      
+      // Esconder conteúdo de receita selecionada
+      document.getElementById("recipeContent").style.display = 'none';
+      
+      // Atualizar contador
+      countElement.textContent = `${RECIPES_STATIC.length} receitas disponíveis`;
+      
+      // Exibir lista estática
+      displayStaticRecipesList(RECIPES_STATIC);
+      
+      dlg.showModal();
+    }
 
     // Função para exibir a lista estática de receitas
     function displayStaticRecipesList(recipes) {
@@ -1243,19 +1287,25 @@
       }
       
       // Gerar HTML da lista
-      listContainer.innerHTML = filteredRecipes.map(recipe => `
+      listContainer.innerHTML = filteredRecipes.map(recipe => {
+        const isCached = recipesCache.has(recipe.filename);
+        const cacheIndicator = isCached ? ' ✅' : '';
+        
+        return `
         <div class="recipe-item" style="padding:12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--card);transition:all 0.2s" 
              onmouseover="this.style.background='var(--bg)'" 
              onmouseout="this.style.background='var(--card)'"
              onclick="loadSingleRecipe('${recipe.filename.replace(/'/g, "\\'")}', '${recipe.title.replace(/'/g, "\\'")}')">
-          <div style="font-weight:700;margin-bottom:4px">${recipe.title}</div>
+          <div style="font-weight:700;margin-bottom:4px">${recipe.title}${cacheIndicator}</div>
           <div class="mini muted" style="display:flex;justify-content:space-between">
             <span>${recipe.filename}</span>
             <span>${new Date(recipe.date).toLocaleDateString('pt-BR')}</span>
           </div>
-          <div class="mini" style="color:var(--pri);margin-top:4px">Clique para carregar →</div>
+          <div class="mini" style="color:var(--pri);margin-top:4px">
+            ${isCached ? 'Carregada do cache' : 'Clique para carregar →'}
+          </div>
         </div>
-      `).join('');
+      `}).join('');
     }
 
     // Função para carregar UMA ÚNICA receita quando o usuário clicar
@@ -1263,30 +1313,54 @@
       const listContainer = document.getElementById("recipesList");
       
       try {
+        // Verificar se já temos no cache
+        if (recipesCache.has(filename)) {
+          const content = recipesCache.get(filename);
+          showRecipe(filename, title, content);
+          return;
+        }
+        
         // Mostrar loading apenas para esta receita
         listContainer.innerHTML = `
           <div class="mini muted" style="text-align:center;padding:20px">
             Carregando "${title}"...
+            <br><small>Aguarde alguns segundos entre as requisições</small>
           </div>
         `;
         
-        // Fazer apenas UMA requisição
+        // Adicionar delay aleatório entre 2-5 segundos para evitar rate limiting
+        await new Promise(resolve => setTimeout(resolve, 2000 + Math.random() * 3000));
+        
+        // Fazer apenas UMA requisição com cache-busting
         const response = await fetch(RECIPES_FOLDER + filename + '?t=' + Date.now());
         
         if (response.ok) {
           const content = await response.text();
+          
+          // Salvar no cache
+          recipesCache.set(filename, content);
+          
           showRecipe(filename, title, content);
           
           // Restaurar lista após carregar
           displayStaticRecipesList(RECIPES_STATIC);
           
+        } else if (response.status === 429) {
+          // Rate limiting - tentar novamente depois
+          throw new Error('GitHub está limitando requisições. Tente novamente em 1 minuto.');
         } else {
           throw new Error(`HTTP ${response.status}`);
         }
         
       } catch (error) {
-        alert("Erro ao carregar a receita. Tente novamente em alguns segundos.");
         console.error("Erro ao carregar receita:", error);
+        
+        // Mensagem mais específica para rate limiting
+        if (error.message.includes('429') || error.message.includes('limitando')) {
+          alert("⚠️ GitHub está limitando requisições rápidas.\n\nPor favor:\n• Aguarde 1-2 minutos\n• Ou faça download local das receitas\n• Recarregue a página e tente novamente");
+        } else {
+          alert("Erro ao carregar a receita: " + error.message);
+        }
         
         // Restaurar lista em caso de erro
         displayStaticRecipesList(RECIPES_STATIC);
@@ -1365,6 +1439,7 @@
       searchInput.addEventListener("input", () => displayStaticRecipesList(RECIPES_STATIC));
       sortSelect.addEventListener("change", () => displayStaticRecipesList(RECIPES_STATIC));
     }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     document.addEventListener('DOMContentLoaded', init);
   </script>
 
