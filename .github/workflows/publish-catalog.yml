@@ -47,17 +47,13 @@ jobs:
       - name: 🧱 Gerar JSON do catálogo
         run: python admin_scaffold/admin/build_json.py admin_scaffold/admin/ingredients_master.csv site/ingredients_master.json
 
-      - name: 🚀 Commit e criar PR automático
+      - name: 🚀 Criar PR automático com atualização do catálogo
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add site/ingredients_master.json
-          git commit -m "Atualiza catálogo de ingredientes automaticamente" || echo "Nada a commitar"
+          git commit -m "🤖 Atualiza catálogo de ingredientes automaticamente" || echo "Nada a commitar"
           git push origin HEAD:update-catalogo-auto
-
-          gh pr create --title "🤖 Atualização automática do catálogo" \
-                      --body "Gerado automaticamente pelo workflow." \
-                      --base main \
-                      --head update-catalogo-auto || echo "PR já existe "
+          gh pr create --title "🤖 Atualização automática do catálogo" --body "Gerado automaticamente pelo workflow." --base main --head update-catalogo-auto || echo "PR já existe"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
