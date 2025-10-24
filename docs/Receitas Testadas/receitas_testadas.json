@@ -1,8 +1,12 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2025-10-24T21:21:45Z",
-  "count": 4,
+  "updated_at": "2025-10-24T22:52:30Z",
+  "count": 5,
   "receitas": [
+    {
+      "titulo": "Amora Gelato",
+      "arquivo": "Amora_Gelato.txt"
+    },
     {
       "titulo": "Manga Gelato",
       "arquivo": "Manga_Gelato.txt"
