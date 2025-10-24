@@ -1,52 +1,50 @@
-name: Publish Ingredients Catalog
+name: Publicar catálogo
 
 on:
   push:
-    branches: [ "main" ]
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+    paths:
+      - "admin_scaffold/admin/ingredients_master.csv"
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    # Permissões explícitas (necessárias para commit/push)
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
     steps:
-      - name: Checkout
+      - name: 🧭 Checkout do repositório
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      # 🚨 Segurança adicional: só executa se o commit for seu ou do bot
+      - name: 🔒 Verificar autor do commit
+        run: |
+          AUTHOR=$(git log -1 --pretty=format:'%an')
+          echo "Autor detectado: $AUTHOR"
+          if [ "$AUTHOR" != "titoufu" ] && [ "$AUTHOR" != "github-actions[bot]" ]; then
+            echo "⛔ Commit não autorizado. Somente 'titoufu' ou 'github-actions[bot]' podem atualizar o catálogo."
+            exit 1
+          fi
+
+      - name: 🐍 Configurar Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.x"
+          python-version: "3.12"
 
-      - name: Validate CSV
+      - name: ✅ Validar CSV
         run: python admin_scaffold/admin/validate.py admin_scaffold/admin/ingredients_master.csv
 
-      - name: Build JSON
+      - name: 🧱 Gerar JSON do catálogo
         run: python admin_scaffold/admin/build_json.py admin_scaffold/admin/ingredients_master.csv site/ingredients_master.json
 
-      - name: List site contents (debug)
+      - name: 🚀 Commit e push automáticos
         run: |
-          echo "Files under site/:"
-          ls -la site
-
-      - name: Upload artifact (site/)
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add site/ingredients_master.json
+          git commit -m "Atualiza catálogo de ingredientes automaticamente" || echo "Nada a commitar"
+          git push
