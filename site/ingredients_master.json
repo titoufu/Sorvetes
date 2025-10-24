@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2025-10-24T17:19:02Z",
+  "updated_at": "2025-10-24T17:31:59Z",
   "count": 35,
   "ingredients": [
     {
@@ -590,10 +590,10 @@
       "solids_pct": 0.0,
       "density_g_ml": 1.0,
       "vegan": true,
-      "allergens": "none",
+      "allergens": "none ",
       "is_active": true,
       "notes": "Água ou polpa de fruta natural.",
-      "version": "1.0.0 ",
+      "version": "1.0.0",
       "updated_at": "",
       "source_url": "",
       "status": "OK"
