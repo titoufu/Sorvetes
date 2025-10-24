@@ -9,46 +9,52 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     permissions:
       contents: write
       pages: write
       id-token: write
 
     steps:
+      # ✅ 1. Clona o repositório completo
       - name: 🧩 Checkout do repositório
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Importante para o git log funcionar
 
+      # ✅ 2. Verifica autor do commit dentro do repositório
       - name: 🔒 Verificar autor do commit
-        working-directory: ${{ github.workspace }}
         run: |
           echo "📁 Diretório atual: $(pwd)"
-          echo "📂 Conteúdo do workspace:"
+          echo "📂 Listando conteúdo:"
           ls -la
-          AUTHOR=$(git log -1 --pretty=format:'%an')
+          echo "➡️ Mudando para workspace..."
+          cd "${GITHUB_WORKSPACE:-.}"
+          echo "📁 Agora em: $(pwd)"
+          ls -la
+          AUTHOR=$(git log -1 --pretty=format:'%an' || echo "DESCONHECIDO")
           echo "Autor detectado: $AUTHOR"
           if [[ "$AUTHOR" != "titoufu" && "$AUTHOR" != "JOSE RIBEIRO" && "$AUTHOR" != "github-actions[bot]" ]]; then
             echo "❌ Commit não autorizado. Somente 'titoufu', 'JOSE RIBEIRO' ou 'github-actions[bot]' podem atualizar o catálogo."
             exit 1
-          else
-            echo "✅ Commit autorizado para atualização do catálogo."
           fi
+          echo "✅ Commit autorizado."
 
+      # ✅ 3. Configura Python
       - name: 🐍 Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
+      # ✅ 4. Valida CSV
       - name: ✅ Validar CSV
-        working-directory: ${{ github.workspace }}
         run: python admin_scaffold/admin/validate.py admin_scaffold/admin/ingredients_master.csv
 
+      # ✅ 5. Gera JSON
       - name: 🧱 Gerar JSON do catálogo
-        working-directory: ${{ github.workspace }}
         run: python admin_scaffold/admin/build_json.py admin_scaffold/admin/ingredients_master.csv site/ingredients_master.json
 
+      # ✅ 6. Commit & Push automáticos
       - name: 🚀 Commit e push automáticos
-        working-directory: ${{ github.workspace }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
