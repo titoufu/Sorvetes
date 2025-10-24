@@ -54,6 +54,6 @@ jobs:
           git add site/ingredients_master.json
           git commit -m "🤖 Atualiza catálogo de ingredientes automaticamente" || echo "Nada a commitar"
           git push origin HEAD:update-catalogo-auto
-          gh pr create --title "🤖 Atualização automática do catálogo" --body "Gerado automaticamente pelo workflow." --base main --head update-catalogo-auto || echo "PR já existe"
+          gh pr create --title "🤖  Atualização automática do catálogo" --body "Gerado automaticamente pelo workflow." --base main --head update-catalogo-auto || echo "PR já existe"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
