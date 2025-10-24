@@ -21,7 +21,7 @@ guar;Goma guar;stabilizer;0;0;100;0,6;VERDADEIRO;;VERDADEIRO;"Estabilizante; 0,2
 lecitina_soja;Lecitina de soja;emulsifier;0;0;100;0,85;VERDADEIRO;soy;VERDADEIRO;Emulsificante 0,3–0,5%.;1.0.0;;;OK
 agua;Água;water;0;0;0;1;VERDADEIRO;;VERDADEIRO;Base aquosa.;1.0.0;;;OK
 leite_coco_17;Leite de coco (17% gordura);plant_milk;17;2;22;1,02;VERDADEIRO;tree_nuts;VERDADEIRO;Médias: gordura 17%, açúcares 2%, sólidos 22%.;1.0.0;;;OK
-manga;Manga (polpa);fruit;0,6;13,5;15;1,02;VERDADEIRO;;VERDADEIRO;"Brix ~15; açúcares ~13,5%.";1.0.0;;;OK
+manga;Manga (polpa);fruit;0,6;13,50;15;1,02;VERDADEIRO;;VERDADEIRO;"Brix ~15; açúcares ~13,5%.";1.0.0;;;OK
 morango;Morango (polpa);fruit;0,5;7,2;8;1,02;VERDADEIRO;;VERDADEIRO;"Brix ~8; açúcares ~7–7,5%.";1.0.0;;;OK
 maracuja;Maracujá (polpa);fruit;0,7;11,7;13;1,02;VERDADEIRO;;VERDADEIRO;"Brix ~13; atenção à acidez.";1.0.0;;;OK
 banana;Banana (polpa);fruit;0,4;20;22;1,05;VERDADEIRO;;VERDADEIRO;"Brix ~22; muito corpo.";1.0.0;;;OK

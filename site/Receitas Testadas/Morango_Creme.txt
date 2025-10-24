@@ -1,7 +1,7 @@
 RECEITA DE SORVETE - Creme
-Data: 22/10/2025
-Peso total: 1001g
-Composição: Gordura 11.8% | Açúcar 18.5% | Sólidos 39.9%
+Data: 24/10/2025
+Peso total: 1000g
+Composição: Gordura 11.8% | Açúcar 18.5% | Sólidos 41.1%
 ==================================================
 
 INGREDIENTES:
@@ -10,20 +10,27 @@ INGREDIENTES:
 • Açúcar (sacarose): 165g (16.5%)
 • Leite integral: 139g (13.9%)
 • Leite em pó integral: 110g (11.0%)
-• Água/Polpa: 63g (6.3%)
+• Água/Polpa: 50g (5.0%)
+• Estabilizante: 6g (0.6%)
+• Emulsificante: 6g (0.6%)
 
 ==================================================
 DETALHES TÉCNICOS:
 
 Contribuições na mistura:
-• Morango (polpa): Gord 1.2% | Açúc 11.0% | Sólid 5.7%
-• Creme de leite 35%: Gord 70.9% | Açúc 0.0% | Sólid 22.2%
-• Açúcar (sacarose): Gord 0.0% | Açúc 89.0% | Sólid 41.3%
-• Leite integral: Gord 3.8% | Açúc 0.0% | Sólid 4.3%
-• Leite em pó integral: Gord 24.1% | Açúc 0.0% | Sólid 26.4%
+• Morango (polpa): Gord 1.2% | Açúc 11.0% | Sólid 5.5%
+• Creme de leite 35%: Gord 70.9% | Açúc 0.0% | Sólid 21.6%
+• Açúcar (sacarose): Gord 0.0% | Açúc 89.0% | Sólid 40.1%
+• Leite integral: Gord 3.8% | Açúc 0.0% | Sólid 4.2%
+• Leite em pó integral: Gord 24.1% | Açúc 0.0% | Sólid 25.7%
 • Água/Polpa: Gord 0.0% | Açúc 0.0% | Sólid 0.0%
+• Estabilizante: Gord 0.0% | Açúc 0.0% | Sólid 1.5%
+• Emulsificante: Gord 0.0% | Açúc 0.0% | Sólid 1.5%
 
 COMPARAÇÃO COM METAS:
 Gordura: 11.8% (Alvo: 12%) - Δ -0.2pp
 Açúcar: 18.5% (Alvo: 18%) - Δ 0.5pp
-Sólidos: 39.9% (Alvo: 39%) - Δ 0.9pp
+Sólidos: 41.1% (Alvo: 39%) - Δ 2.1pp
+
+==================================================
+CATALOGO_IDS = ["morango","creme35","acucar_sacarose","leite_integral","leite_po_integral","agua_polpa","estabilizante_base","emulsificante_base"]
