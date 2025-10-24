@@ -1215,47 +1215,54 @@
       dlg.showModal();
     }
 
-    // Função para exibir a lista estática de receitas
-    function displayStaticRecipesList(recipes) {
-      const listContainer = document.getElementById("recipesList");
-      const searchTerm = document.getElementById("recipeSearch").value.toLowerCase();
-      const sortBy = document.getElementById("recipeSort").value;
+// Função para exibir a lista de receitas dinâmicas
+function displayStaticRecipesList(recipes) {
+  const listContainer = document.getElementById("recipesList");
+  const searchTerm = document.getElementById("recipeSearch").value.toLowerCase();
+  const sortBy = document.getElementById("recipeSort").value;
 
-      // Filtrar
-      let filteredRecipes = recipes.filter(recipe =>
-        recipe.title.toLowerCase().includes(searchTerm) ||
-        recipe.filename.toLowerCase().includes(searchTerm)
-      );
+  // Filtrar
+  let filteredRecipes = recipes.filter(recipe =>
+    (recipe.titulo && recipe.titulo.toLowerCase().includes(searchTerm)) ||
+    (recipe.arquivo && recipe.arquivo.toLowerCase().includes(searchTerm))
+  );
 
-      // Ordenar
-      filteredRecipes.sort((a, b) => {
-        if (sortBy === 'date') {
-          return new Date(b.date) - new Date(a.date);
-        } else {
-          return a.title.localeCompare(b.title);
-        }
-      });
-
-      if (filteredRecipes.length === 0) {
-        listContainer.innerHTML = '<div class="mini muted" style="text-align:center;padding:20px">Nenhuma receita encontrada</div>';
-        return;
-      }
-
-      // Gerar HTML da lista
-      listContainer.innerHTML = filteredRecipes.map(recipe => `
-        <div class="recipe-item" style="padding:12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--card);transition:all 0.2s" 
-             onmouseover="this.style.background='var(--bg)'" 
-             onmouseout="this.style.background='var(--card)'"
-             onclick="loadSingleRecipe('${recipe.filename.replace(/'/g, "\\'")}', '${recipe.title.replace(/'/g, "\\'")}')">
-          <div style="font-weight:700;margin-bottom:4px">${recipe.title}</div>
-          <div class="mini muted" style="display:flex;justify-content:space-between">
-            <span>${recipe.filename}</span>
-            <span>${new Date(recipe.date).toLocaleDateString('pt-BR')}</span>
-          </div>
-          <div class="mini" style="color:var(--pri);margin-top:4px">Clique para carregar →</div>
-        </div>
-      `).join('');
+  // Ordenar
+  filteredRecipes.sort((a, b) => {
+    if (sortBy === 'date') {
+      // não há data individual, então mantém ordem alfabética
+      return a.titulo.localeCompare(b.titulo, 'pt-BR');
+    } else {
+      return a.titulo.localeCompare(b.titulo, 'pt-BR');
     }
+  });
+
+  // Se nenhuma receita encontrada
+  if (filteredRecipes.length === 0) {
+    listContainer.innerHTML =
+      '<div class="mini muted" style="text-align:center;padding:20px">Nenhuma receita encontrada</div>';
+    return;
+  }
+
+  // Gerar HTML da lista
+  listContainer.innerHTML = filteredRecipes
+    .map(recipe => `
+      <div class="recipe-item"
+           style="padding:12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--card);transition:all 0.2s" 
+           onmouseover="this.style.background='var(--bg)'" 
+           onmouseout="this.style.background='var(--card)'"
+           onclick="loadSingleRecipe('${recipe.arquivo.replace(/'/g, "\\'")}', '${recipe.titulo.replace(/'/g, "\\'")}')">
+        <div style="font-weight:700;margin-bottom:4px">${recipe.titulo}</div>
+        <div class="mini muted" style="display:flex;justify-content:space-between">
+          <span>${recipe.arquivo}</span>
+          <span>${new Date().toLocaleDateString('pt-BR')}</span>
+        </div>
+        <div class="mini" style="color:var(--pri);margin-top:4px">Clique para carregar →</div>
+      </div>
+    `)
+    .join('');
+}
+
 
     // Função para carregar UMA ÚNICA receita quando o usuário clicar
     async function loadSingleRecipe(filename, title) {
