@@ -19,14 +19,12 @@ jobs:
       - name: 🧩 Checkout do repositório
         uses: actions/checkout@v4
 
-      # 🚨 Diagnóstico e segurança
       - name: 🔒 Verificar autor do commit
+        working-directory: ${{ github.workspace }}
         run: |
           echo "📁 Diretório atual: $(pwd)"
-          echo "📂 Conteúdo disponível:"
+          echo "📂 Conteúdo do workspace:"
           ls -la
-          cd "${{ github.workspace }}"
-          echo "📁 Entrando em workspace: $(pwd)"
           AUTHOR=$(git log -1 --pretty=format:'%an')
           echo "Autor detectado: $AUTHOR"
           if [[ "$AUTHOR" != "titoufu" && "$AUTHOR" != "JOSE RIBEIRO" && "$AUTHOR" != "github-actions[bot]" ]]; then
@@ -42,14 +40,16 @@ jobs:
           python-version: "3.12"
 
       - name: ✅ Validar CSV
+        working-directory: ${{ github.workspace }}
         run: python admin_scaffold/admin/validate.py admin_scaffold/admin/ingredients_master.csv
 
       - name: 🧱 Gerar JSON do catálogo
+        working-directory: ${{ github.workspace }}
         run: python admin_scaffold/admin/build_json.py admin_scaffold/admin/ingredients_master.csv site/ingredients_master.json
 
       - name: 🚀 Commit e push automáticos
+        working-directory: ${{ github.workspace }}
         run: |
-          cd "${{ github.workspace }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add site/ingredients_master.json
