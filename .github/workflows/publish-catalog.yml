@@ -45,8 +45,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main || true
+          git fetch origin main
+          git rebase origin/main || true
           git add site/ingredients_master.json
           git commit -m "🤖 Atualização automática do catálogo" || echo "Nada a commitar"
-          git push origin HEAD:main
+          git push origin HEAD:main || (git pull --rebase origin main && git push origin HEAD:main)
+
 
