@@ -19,16 +19,22 @@ jobs:
     steps:
       - name: 🧭 Checkout do repositório
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # necessário para git log funcionar
 
-      # 🚨 Segurança adicional: só executa se o commit for seu ou do bot
-      - name: 🔒 Verificar autor do commit
+      # 🚨 Segurança: só executa se o commit for do autor autorizado
+      - name: 🔒 Verificar autor do commit (versão robusta)
         run: |
-          AUTHOR=$(git log -1 --pretty=format:'%an')
+          AUTHOR=$(git log -1 --pretty=format:'%an' || echo "desconhecido")
+          AUTHOR_LC=$(echo "$AUTHOR" | tr '[:upper:]' '[:lower:]')
           echo "Autor detectado: $AUTHOR"
-          if [ "$AUTHOR" != "titoufu" ] && [ "$AUTHOR" != "github-actions[bot]" ]; then
-            echo "⛔ Commit não autorizado. Somente 'titoufu' ou 'github-actions[bot]' podem atualizar o catálogo."
+
+          if [[ "$AUTHOR_LC" != "titoufu" && "$AUTHOR_LC" != "github-actions[bot]" && "$AUTHOR_LC" != "jose ribeiro" ]]; then
+            echo "⛔ Commit não autorizado. Somente 'titoufu', 'github-actions[bot]' ou 'JOSE RIBEIRO' podem atualizar o catálogo."
             exit 1
           fi
+
+          echo "✅ Commit autorizado para atualização do catálogo."
 
       - name: 🐍 Configurar Python
         uses: actions/setup-python@v5
