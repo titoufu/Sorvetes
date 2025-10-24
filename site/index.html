@@ -1105,7 +1105,7 @@
       themeSel.addEventListener('change', () => { setTheme(themeSel.value); localStorage.setItem('sorvete_theme', themeSel.value || ''); });
       presetSel.innerHTML = Object.keys(PRESETS).map(p => `<option ${p === current ? 'selected' : ''}>${p}</option>`).join(''); applyPreset(current);
       presetSel.addEventListener('change', () => { applyPreset(presetSel.value); });
-       setupRecipesModal();
+      setupRecipesModal();
       document.getElementById('btnExport').addEventListener('click', exportarReceita);
       document.getElementById('btnReset').addEventListener('click', () => applyPreset(current));
       document.getElementById('btnT1').addEventListener('click', () => setTarget(1000));
@@ -1186,13 +1186,13 @@
         date: "2024-12-15"
       },
       {
-        filename: "Morango_Creme.txt", 
+        filename: "Morango_Creme.txt",
         title: "Morango Creme",
         date: "2024-12-15"
       },
       {
         filename: "Morango_Gelato.txt",
-        title: "Morango Gelato", 
+        title: "Morango Gelato",
         date: "2024-12-15"
       }
       // Adicione aqui novas receitas manualmente
@@ -1203,16 +1203,16 @@
       const dlg = document.getElementById("dlgRecipes");
       const listContainer = document.getElementById("recipesList");
       const countElement = document.getElementById("recipesCount");
-      
+
       // Esconder conteúdo de receita selecionada
       document.getElementById("recipeContent").style.display = 'none';
-      
+
       // Atualizar contador
       countElement.textContent = `${RECIPES_STATIC.length} receitas disponíveis`;
-      
+
       // Exibir lista estática
       displayStaticRecipesList(RECIPES_STATIC);
-      
+
       dlg.showModal();
     }
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -1227,13 +1227,13 @@
         date: "2024-12-15"
       },
       {
-        filename: "Morango_Creme.txt", 
+        filename: "Morango_Creme.txt",
         title: "Morango Creme",
         date: "2024-12-15"
       },
       {
         filename: "Morango_Gelato.txt",
-        title: "Morango Gelato", 
+        title: "Morango Gelato",
         date: "2024-12-15"
       }
       // Adicione aqui novas receitas manualmente
@@ -1247,16 +1247,16 @@
       const dlg = document.getElementById("dlgRecipes");
       const listContainer = document.getElementById("recipesList");
       const countElement = document.getElementById("recipesCount");
-      
+
       // Esconder conteúdo de receita selecionada
       document.getElementById("recipeContent").style.display = 'none';
-      
+
       // Atualizar contador
       countElement.textContent = `${RECIPES_STATIC.length} receitas disponíveis`;
-      
+
       // Exibir lista estática
       displayStaticRecipesList(RECIPES_STATIC);
-      
+
       dlg.showModal();
     }
 
@@ -1265,13 +1265,13 @@
       const listContainer = document.getElementById("recipesList");
       const searchTerm = document.getElementById("recipeSearch").value.toLowerCase();
       const sortBy = document.getElementById("recipeSort").value;
-      
+
       // Filtrar
-      let filteredRecipes = recipes.filter(recipe => 
+      let filteredRecipes = recipes.filter(recipe =>
         recipe.title.toLowerCase().includes(searchTerm) ||
         recipe.filename.toLowerCase().includes(searchTerm)
       );
-      
+
       // Ordenar
       filteredRecipes.sort((a, b) => {
         if (sortBy === 'date') {
@@ -1280,17 +1280,17 @@
           return a.title.localeCompare(b.title);
         }
       });
-      
+
       if (filteredRecipes.length === 0) {
         listContainer.innerHTML = '<div class="mini muted" style="text-align:center;padding:20px">Nenhuma receita encontrada</div>';
         return;
       }
-      
+
       // Gerar HTML da lista
       listContainer.innerHTML = filteredRecipes.map(recipe => {
         const isCached = recipesCache.has(recipe.filename);
         const cacheIndicator = isCached ? ' ✅' : '';
-        
+
         return `
         <div class="recipe-item" style="padding:12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--card);transition:all 0.2s" 
              onmouseover="this.style.background='var(--bg)'" 
@@ -1309,9 +1309,16 @@
     }
 
     // Função para carregar UMA ÚNICA receita quando o usuário clicar
+    let lastFetchTime = 0;
     async function loadSingleRecipe(filename, title) {
+      const now = Date.now();
+      if (now - lastFetchTime < 5000) { // menos de 5 segundos
+        alert("Aguarde alguns segundos antes de abrir outra receita.");
+        return;
+      }
+      lastFetchTime = now;
       const listContainer = document.getElementById("recipesList");
-      
+
       try {
         // Verificar se já temos no cache
         if (recipesCache.has(filename)) {
@@ -1319,7 +1326,7 @@
           showRecipe(filename, title, content);
           return;
         }
-        
+
         // Mostrar loading apenas para esta receita
         listContainer.innerHTML = `
           <div class="mini muted" style="text-align:center;padding:20px">
@@ -1327,41 +1334,41 @@
             <br><small>Aguarde alguns segundos entre as requisições</small>
           </div>
         `;
-        
+
         // Adicionar delay aleatório entre 2-5 segundos para evitar rate limiting
         await new Promise(resolve => setTimeout(resolve, 2000 + Math.random() * 3000));
-        
+
         // Fazer apenas UMA requisição com cache-busting
         const response = await fetch(RECIPES_FOLDER + filename + '?t=' + Date.now());
-        
+
         if (response.ok) {
           const content = await response.text();
-          
+
           // Salvar no cache
           recipesCache.set(filename, content);
-          
+
           showRecipe(filename, title, content);
-          
+
           // Restaurar lista após carregar
           displayStaticRecipesList(RECIPES_STATIC);
-          
+
         } else if (response.status === 429) {
           // Rate limiting - tentar novamente depois
           throw new Error('GitHub está limitando requisições. Tente novamente em 1 minuto.');
         } else {
           throw new Error(`HTTP ${response.status}`);
         }
-        
+
       } catch (error) {
         console.error("Erro ao carregar receita:", error);
-        
+
         // Mensagem mais específica para rate limiting
         if (error.message.includes('429') || error.message.includes('limitando')) {
           alert("⚠️ GitHub está limitando requisições rápidas.\n\nPor favor:\n• Aguarde 1-2 minutos\n• Ou faça download local das receitas\n• Recarregue a página e tente novamente");
         } else {
           alert("Erro ao carregar a receita: " + error.message);
         }
-        
+
         // Restaurar lista em caso de erro
         displayStaticRecipesList(RECIPES_STATIC);
       }
@@ -1372,10 +1379,10 @@
       document.getElementById("recipeTitle").textContent = title;
       document.getElementById("recipeText").textContent = content;
       document.getElementById("recipeContent").style.display = 'block';
-      
+
       // Scroll para a receita selecionada
       document.getElementById("recipeContent").scrollIntoView({ behavior: 'smooth' });
-      
+
       // Configurar botão de carregar
       document.getElementById("btnLoadRecipe").onclick = () => loadRecipeFromContent(content, title);
     }
@@ -1386,35 +1393,35 @@
         // Extrair ingredientes e quantidades do conteúdo
         const lines = content.split('\n');
         const ingredientsSection = content.split('INGREDIENTES:')[1]?.split('DETALHES TÉCNICOS:')[0];
-        
+
         if (ingredientsSection) {
           // Limpar receita atual
           gramsMix = {};
-          
+
           // Parse cada linha de ingrediente
-          const ingredientLines = ingredientsSection.split('\n').filter(line => 
+          const ingredientLines = ingredientsSection.split('\n').filter(line =>
             line.trim().startsWith('•') && line.includes(':')
           );
-          
+
           ingredientLines.forEach(line => {
             const match = line.match(/•\s*(.+?):\s*(\d+)g\s*\([^)]+\)/);
             if (match) {
               const ingredient = match[1].trim();
               const quantidade = parseInt(match[2]);
-              
+
               if (ingredient && !isNaN(quantidade)) {
                 gramsMix[ingredient] = quantidade;
               }
             }
           });
-          
+
           // Atualizar a interface
           renderTable();
           recalc();
-          
+
           // Fechar modal
           document.getElementById("dlgRecipes").close();
-          
+
           // Mostrar confirmação
           alert(`Receita "${title}" carregada com sucesso!`);
         }
@@ -1431,10 +1438,10 @@
       const btnClose = document.getElementById("btnCloseRecipes");
       const searchInput = document.getElementById("recipeSearch");
       const sortSelect = document.getElementById("recipeSort");
-      
+
       btnOpen.addEventListener("click", loadRecipesModal);
       btnClose.addEventListener("click", () => dlg.close());
-      
+
       // Busca e ordenação agora atualizam apenas a lista estática
       searchInput.addEventListener("input", () => displayStaticRecipesList(RECIPES_STATIC));
       sortSelect.addEventListener("change", () => displayStaticRecipesList(RECIPES_STATIC));
