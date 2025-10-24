@@ -599,32 +599,66 @@
       receitaCarregavel = { title, content };
     }
 
-    function loadRecipeFromContent(content, title){
-      try{
-        const ingredientsSection = content.split('INGREDIENTES:')[1]?.split('DETALHES TÉCNICOS:')[0];
-        if(ingredientsSection){
-          gramsMix = {};
-          const lines = ingredientsSection.split('\n').filter(line => line.trim().startsWith('•') && line.includes(':'));
-          lines.forEach(line=>{
-            const m=line.match(/•\s*(.+?):\s*(\d+)g\s*\([^)]+\)/);
-            if(m){
-              const ingredient=m[1].trim(); const quantidade=parseInt(m[2],10);
-              if(ingredient && !isNaN(quantidade)) gramsMix[ingredient]=quantidade;
-            }
-          });
-          // Garantir que todos os ingredientes existam no catálogo COMPOS
-          Object.keys(gramsMix).forEach(k=>{
-            if(!COMPOS.hasOwnProperty(k)){ console.warn(`Ingrediente "${k}" não estava em COMPOS. Adicionado [0,0,0].`); COMPOS[k]=[0,0,0]; }
-          });
-          renderTable(); recalc();
-          document.getElementById("dlgRecipes").close();
-          alert(`Receita "${title}" carregada com sucesso!`);
+    function loadRecipeFromContent(content, title) {
+  try {
+    // Extrair ingredientes e quantidades do conteúdo da receita
+    const ingredientsSection = content.split('INGREDIENTES:')[1]?.split('DETALHES TÉCNICOS:')[0];
+
+    if (ingredientsSection) {
+      gramsMix = {};
+
+      // Extrair linhas válidas do texto
+      const lines = ingredientsSection
+        .split('\n')
+        .filter(line => line.trim().startsWith('•') && line.includes(':'));
+
+      // Converter para objeto {ingrediente: quantidade}
+      lines.forEach(line => {
+        const match = line.match(/•\s*(.+?):\s*(\d+)g\s*\([^)]+\)/);
+        if (match) {
+          const ingredient = match[1].trim();
+          const quantidade = parseInt(match[2], 10);
+          if (ingredient && !isNaN(quantidade)) gramsMix[ingredient] = quantidade;
         }
-      }catch(err){
-        alert("Erro ao carregar a receita: "+err.message);
-        console.error("Erro ao carregar receita:", err);
-      }
+      });
+
+      // ✅ Buscar dados reais do catálogo antes de usar zeros
+      Object.keys(gramsMix).forEach(ingredient => {
+        if (!COMPOS.hasOwnProperty(ingredient)) {
+          const found = (catalogData.ingredients || []).find(
+            item => item.name?.toLowerCase() === ingredient.toLowerCase()
+          );
+
+          if (found) {
+            COMPOS[ingredient] = [
+              Number(found.fat_pct) || 0,
+              Number(found.solids_pct) || 0,
+              Number(found.sugar_pct) || 0,
+            ];
+            console.log(`✔ Ingrediente "${ingredient}" adicionado com dados do catálogo.`);
+          } else {
+            console.warn(
+              `⚠ Ingrediente "${ingredient}" não encontrado no catálogo. Adicionado como [0,0,0].`
+            );
+            COMPOS[ingredient] = [0, 0, 0];
+          }
+        }
+      });
+
+      // Atualizar a interface e cálculos
+      renderTable();
+      recalc();
+
+      // Fechar modal e confirmar
+      document.getElementById('dlgRecipes').close();
+      alert(`Receita "${title}" carregada com sucesso!`);
     }
+  } catch (error) {
+    alert('Erro ao carregar a receita: ' + error.message);
+    console.error('Erro ao carregar receita:', error);
+  }
+}
+
 
     function setupRecipesModal(){
       const dlg = document.getElementById("dlgRecipes");
