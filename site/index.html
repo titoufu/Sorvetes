@@ -1327,6 +1327,17 @@ function setupRecipesModal() {
   searchInput.addEventListener("input", () => displayStaticRecipesList(receitas));
   sortSelect.addEventListener("change", () => displayStaticRecipesList(receitas));
 }
+// ============================================================
+// 🌐 Torna as funções principais acessíveis globalmente
+// ============================================================
+window.loadRecipesModal = loadRecipesModal;
+window.displayStaticRecipesList = displayStaticRecipesList;
+window.loadSingleRecipe = loadSingleRecipe;
+window.showRecipe = showRecipe;
+window.loadRecipeFromContent = loadRecipeFromContent;
+window.setupRecipesModal = setupRecipesModal;
+window.renderTable = renderTable;
+window.recalc = recalc;
 
 
     document.addEventListener('DOMContentLoaded', init);
