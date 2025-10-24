@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2025-10-24T21:23:02Z",
-  "count": 35,
+  "updated_at": "2025-10-24T21:28:16Z",
+  "count": 36,
   "ingredients": [
     {
       "id": "leite_integral",
-      "name": "Leite integralllllll",
+      "name": "Leite integral",
       "category": "dairy",
       "fat_pct": 3.2,
       "sugar_pct": 0.0,
@@ -593,6 +593,23 @@
       "allergens": "none",
       "is_active": true,
       "notes": "Água ou polpa de fruta natural.",
+      "version": "1.0.0",
+      "updated_at": "",
+      "source_url": "",
+      "status": "OK"
+    },
+    {
+      "id": "amora",
+      "name": "Amora (polpa)",
+      "category": "fruit",
+      "fat_pct": 0.2,
+      "sugar_pct": 11.7,
+      "solids_pct": 13.0,
+      "density_g_ml": 1.02,
+      "vegan": true,
+      "allergens": "",
+      "is_active": true,
+      "notes": "Brix ~13; enzimas podem afetar textura.",
       "version": "1.0.0",
       "updated_at": "",
       "source_url": "",
