@@ -21,16 +21,21 @@ jobs:
         with:
           fetch-depth: 0  # Importante para o git log funcionar
 
-      # ✅ 2. Verifica autor do commit dentro do repositório
+      # ✅ 2. Verifica autor do commit (CORRIGIDO)
       - name: 🔒 Verificar autor do commit
         run: |
           echo "📁 Diretório atual: $(pwd)"
           echo "📂 Listando conteúdo:"
           ls -la
-          echo "➡️ Mudando para workspace..."
-          cd "${GITHUB_WORKSPACE:-.}"
-          echo "📁 Agora em: $(pwd)"
-          ls -la
+          
+          # Verifica se estamos no diretório correto
+          if [ -d ".git" ]; then
+            echo "✅ Diretório .git encontrado no local atual"
+          else
+            echo "❌ Diretório .git NÃO encontrado. Procurando..."
+            find . -name ".git" -type d 2>/dev/null || echo "Nenhum diretório .git encontrado"
+          fi
+          
           AUTHOR=$(git log -1 --pretty=format:'%an' || echo "DESCONHECIDO")
           echo "Autor detectado: $AUTHOR"
           if [[ "$AUTHOR" != "titoufu" && "$AUTHOR" != "JOSE RIBEIRO" && "$AUTHOR" != "github-actions[bot]" ]]; then
