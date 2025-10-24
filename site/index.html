@@ -913,6 +913,7 @@
     let gramsMix = {};
     let polpaSolids = 0.0;
 
+
     // Catálogo
     const FALLBACK_CATALOG = "https://titoufu.github.io/Sorvetes/ingredients_master.json";
     let catalogData = { ingredients: [], updated_at: "" };
@@ -1174,29 +1175,26 @@
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }
-    // Configuração da pasta de receitas
+
     // Configuração da pasta de receitas - LISTA ESTÁTICA
     const RECIPES_FOLDER = "https://titoufu.github.io/Sorvetes/Receitas%20Testadas/";
+    // Caminho do JSON com a lista de receitas
+    const JSON_RECEITAS = "Receitas Testadas/receitas_testadas.json";
+    let receitas = [];
 
-    // Lista estática das receitas disponíveis (atualize manualmente quando adicionar novas)
-    const RECIPES_STATIC = [
-      {
-        filename: "Maracujá_Creme.txt",
-        title: "Maracujá Creme",
-        date: "2024-12-15"
-      },
-      {
-        filename: "Morango_Creme.txt",
-        title: "Morango Creme",
-        date: "2024-12-15"
-      },
-      {
-        filename: "Morango_Gelato.txt",
-        title: "Morango Gelato",
-        date: "2024-12-15"
-      }
-      // Adicione aqui novas receitas manualmente
-    ];
+    // Carregar lista de receitas do JSON
+    fetch(JSON_RECEITAS)
+      .then(response => {
+        if (!response.ok) throw new Error("Erro ao carregar receitas_testadas.json");
+        return response.json();
+      })
+      .then(data => {
+        receitas = data.receitas || [];
+        console.log(`📘 ${receitas.length} receitas carregadas do JSON.`);
+        popularListaReceitas();  // <-- função já existente que monta o menu
+      })
+      .catch(error => console.error("⚠️ Falha ao carregar lista de receitas:", error));
+
 
     // Função para carregar o modal de receitas (SEM carregar conteúdo automaticamente)
     function loadRecipesModal() {
