@@ -24,6 +24,7 @@ jobs:
       # 🚨 Segurança: só executa se o commit for do autor autorizado
       - name: 🔒 Verificar autor do commit
         run: |
+          cd "${GITHUB_WORKSPACE}"
           AUTHOR=$(git log -1 --pretty=format:'%an')
           echo "Autor detectado: $AUTHOR"
           if [[ "$AUTHOR" != "titoufu" && "$AUTHOR" != "JOSE RIBEIRO" && "$AUTHOR" != "github-actions[bot]" ]]; then
@@ -46,6 +47,7 @@ jobs:
 
       - name: 🚀 Commit e push automáticos
         run: |
+          cd "${GITHUB_WORKSPACE}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add site/ingredients_master.json
