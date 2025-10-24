@@ -21,23 +21,24 @@ jobs:
         with:
           fetch-depth: 0  # Importante para o git log funcionar
 
-      # ✅ 2. Verifica autor do commit (CORRIGIDO)
+      # ✅ 2. Verifica autor do commit (VERSÃO ALTERNATIVA)
       - name: 🔒 Verificar autor do commit
         run: |
           echo "📁 Diretório atual: $(pwd)"
-          echo "📂 Listando conteúdo:"
+          echo "📂 Verificando estrutura do repositório:"
           ls -la
           
-          # Verifica se estamos no diretório correto
-          if [ -d ".git" ]; then
-            echo "✅ Diretório .git encontrado no local atual"
-          else
-            echo "❌ Diretório .git NÃO encontrado. Procurando..."
-            find . -name ".git" -type d 2>/dev/null || echo "Nenhum diretório .git encontrado"
-          fi
+          # Força o reconhecimento do repositório git
+          git status --short || echo "Git status falhou"
           
-          AUTHOR=$(git log -1 --pretty=format:'%an' || echo "DESCONHECIDO")
-          echo "Autor detectado: $AUTHOR"
+          # Obtém informações do commit que disparou o workflow
+          echo "📋 Informações do evento:"
+          echo "SHA: ${{ github.sha }}"
+          echo "Ref: ${{ github.ref }}"
+          
+          # Método alternativo usando a API do GitHub
+          AUTHOR="${{ github.actor }}"
+          echo "Autor detectado via github.actor: $AUTHOR"
           if [[ "$AUTHOR" != "titoufu" && "$AUTHOR" != "JOSE RIBEIRO" && "$AUTHOR" != "github-actions[bot]" ]]; then
             echo "❌ Commit não autorizado. Somente 'titoufu', 'JOSE RIBEIRO' ou 'github-actions[bot]' podem atualizar o catálogo."
             exit 1
