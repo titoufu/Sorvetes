@@ -1,5 +1,5 @@
 RECEITA DE SORVETE - Gelato
-Data: 23/10/2025
+Data: 24/10/2025
 Peso total: 1493g
 Composição: Gordura 9.0% | Açúcar 18.2% | Sólidos 38.6%
 ==================================================
@@ -29,3 +29,6 @@ COMPARAÇÃO COM METAS:
 Gordura: 9.0% (Alvo: 9%) - Δ -0.0pp
 Açúcar: 18.2% (Alvo: 18%) - Δ 0.2pp
 Sólidos: 38.6% (Alvo: 38%) - Δ 0.6pp
+
+==================================================
+CATALOGO_IDS = ["manga","creme17","leite_condensado","leite_integral","leite_po_integral","estabilizante_base","emulsificante_base"]

@@ -1,7 +1,7 @@
 RECEITA DE SORVETE - Creme
-Data: 22/10/2025
+Data: 24/10/2025
 Peso total: 1000g
-Composição: Gordura 11.7% | Açúcar 17.7% | Sólidos 38.9%
+Composição: Gordura 11.7% | Açúcar 17.7% | Sólidos 40.1%
 ==================================================
 
 INGREDIENTES:
@@ -10,20 +10,27 @@ INGREDIENTES:
 • Leite integral: 177g (17.7%)
 • Açúcar (sacarose): 150g (15.0%)
 • Leite em pó integral: 104g (10.4%)
-• Água/Polpa: 101g (10.1%)
+• Água/Polpa: 89g (8.9%)
+• Estabilizante: 6g (0.6%)
+• Emulsificante: 6g (0.6%)
 
 ==================================================
 DETALHES TÉCNICOS:
 
 Contribuições na mistura:
-• Creme de leite 35%: Gord 70.5% | Açúc 0.0% | Sólid 22.3%
-• Maracujá (polpa): Gord 1.4% | Açúc 15.4% | Sólid 7.8%
-• Leite integral: Gord 4.9% | Açúc 0.0% | Sólid 5.7%
-• Açúcar (sacarose): Gord 0.0% | Açúc 84.6% | Sólid 38.5%
-• Leite em pó integral: Gord 23.2% | Açúc 0.0% | Sólid 25.7%
+• Creme de leite 35%: Gord 70.5% | Açúc 0.0% | Sólid 21.7%
+• Maracujá (polpa): Gord 1.4% | Açúc 15.4% | Sólid 7.5%
+• Leite integral: Gord 4.9% | Açúc 0.0% | Sólid 5.5%
+• Açúcar (sacarose): Gord 0.0% | Açúc 84.6% | Sólid 37.4%
+• Leite em pó integral: Gord 23.2% | Açúc 0.0% | Sólid 24.9%
 • Água/Polpa: Gord 0.0% | Açúc 0.0% | Sólid 0.0%
+• Estabilizante: Gord 0.0% | Açúc 0.0% | Sólid 1.5%
+• Emulsificante: Gord 0.0% | Açúc 0.0% | Sólid 1.5%
 
 COMPARAÇÃO COM METAS:
 Gordura: 11.7% (Alvo: 12%) - Δ -0.3pp
 Açúcar: 17.7% (Alvo: 18%) - Δ -0.3pp
-Sólidos: 38.9% (Alvo: 39%) - Δ -0.1pp
+Sólidos: 40.1% (Alvo: 39%) - Δ 1.1pp
+
+==================================================
+CATALOGO_IDS = ["creme35","maracuja","leite_integral","acucar_sacarose","leite_po_integral","agua_polpa","estabilizante_base","emulsificante_base"]
