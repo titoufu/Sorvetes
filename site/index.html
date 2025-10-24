@@ -984,34 +984,74 @@
     // Exportar
     // ==========================
     function exportarReceita() {
-      const r = calc();
-      const ingredientesAtivos = Object.entries(gramsMix).filter(([_, q]) => q > 0).sort((a, b) => b[1] - a[1]);
-      if (!ingredientesAtivos.length) { alert("Nenhum ingrediente com quantidade maior que zero para exportar."); return; }
-      let texto = `RECEITA DE SORVETE - ${current}\n`;
-      texto += `Data: ${new Date().toLocaleDateString('pt-BR')}\n`;
-      texto += `Peso total: ${r.total.toFixed(0)}g\n`;
-      texto += `Composição: Gordura ${r.gorduraPct.toFixed(1)}% | Açúcar ${r.acucarPct.toFixed(1)}% | Sólidos ${r.solidosPct.toFixed(1)}%\n`;
-      texto += "=".repeat(50) + "\n\n";
-      texto += "INGREDIENTES:\n";
-      ingredientesAtivos.forEach(([ing, q]) => {
-        const pct = r.percent[ing] || 0;
-        texto += `• ${ing}: ${q.toFixed(0)}g (${pct.toFixed(1)}%)\n`;
-      });
-      texto += "\n" + "=".repeat(50) + "\nDETALHES TÉCNICOS:\n\nContribuições na mistura:\n";
-      ingredientesAtivos.forEach(([ing]) => {
-        const fg = r.fatParts[ing] || 0, sg = r.sugarParts[ing] || 0, tg = r.solidsParts[ing] || 0;
-        const fc = r.fatG > 0 ? (fg / r.fatG * 100) : 0, sc = r.sugarG > 0 ? (sg / r.sugarG * 100) : 0, tc = r.solidsG > 0 ? (tg / r.solidsG * 100) : 0;
-        texto += `• ${ing}: Gord ${fc.toFixed(1)}% | Açúc ${sc.toFixed(1)}% | Sólid ${tc.toFixed(1)}%\n`;
-      });
-      const t = PRESETS[current].targets;
-      texto += `\nCOMPARAÇÃO COM METAS:\nGordura: ${r.gorduraPct.toFixed(1)}% (Alvo: ${t.gordura}%) - Δ ${(r.gorduraPct - t.gordura).toFixed(1)}pp\n`;
-      texto += `Açúcar: ${r.acucarPct.toFixed(1)}% (Alvo: ${t.acucar}%) - Δ ${(r.acucarPct - t.acucar).toFixed(1)}pp\n`;
-      texto += `Sólidos: ${r.solidosPct.toFixed(1)}% (Alvo: ${t.solidos}%) - Δ ${(r.solidosPct - t.solidos).toFixed(1)}pp\n`;
-      const blob = new Blob([texto], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob); const a = document.createElement('a');
-      a.href = url; a.download = `receita-sorvete-${current.toLowerCase()}-${new Date().toISOString().split('T')[0]}.txt`;
-      document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
-    }
+  const r = calc();
+  const ingredientesAtivos = Object.entries(gramsMix)
+    .filter(([_, q]) => q > 0)
+    .sort((a, b) => b[1] - a[1]);
+
+  if (!ingredientesAtivos.length) {
+    alert("Nenhum ingrediente com quantidade maior que zero para exportar.");
+    return;
+  }
+
+  let texto = `RECEITA DE SORVETE - ${current}\n`;
+  texto += `Data: ${new Date().toLocaleDateString('pt-BR')}\n`;
+  texto += `Peso total: ${r.total.toFixed(0)}g\n`;
+  texto += `Composição: Gordura ${r.gorduraPct.toFixed(1)}% | Açúcar ${r.acucarPct.toFixed(1)}% | Sólidos ${r.solidosPct.toFixed(1)}%\n`;
+  texto += "=".repeat(50) + "\n\n";
+  texto += "INGREDIENTES:\n";
+
+  ingredientesAtivos.forEach(([ing, q]) => {
+    const pct = r.percent[ing] || 0;
+    texto += `• ${ing}: ${q.toFixed(0)}g (${pct.toFixed(1)}%)\n`;
+  });
+
+  texto += "\n" + "=".repeat(50) + "\nDETALHES TÉCNICOS:\n\nContribuições na mistura:\n";
+
+  ingredientesAtivos.forEach(([ing]) => {
+    const fg = r.fatParts[ing] || 0,
+          sg = r.sugarParts[ing] || 0,
+          tg = r.solidsParts[ing] || 0;
+    const fc = r.fatG > 0 ? (fg / r.fatG * 100) : 0,
+          sc = r.sugarG > 0 ? (sg / r.sugarG * 100) : 0,
+          tc = r.solidsG > 0 ? (tg / r.solidsG * 100) : 0;
+    texto += `• ${ing}: Gord ${fc.toFixed(1)}% | Açúc ${sc.toFixed(1)}% | Sólid ${tc.toFixed(1)}%\n`;
+  });
+
+  const t = PRESETS[current].targets;
+  texto += `\nCOMPARAÇÃO COM METAS:\nGordura: ${r.gorduraPct.toFixed(1)}% (Alvo: ${t.gordura}%) - Δ ${(r.gorduraPct - t.gordura).toFixed(1)}pp\n`;
+  texto += `Açúcar: ${r.acucarPct.toFixed(1)}% (Alvo: ${t.acucar}%) - Δ ${(r.acucarPct - t.acucar).toFixed(1)}pp\n`;
+  texto += `Sólidos: ${r.solidosPct.toFixed(1)}% (Alvo: ${t.solidos}%) - Δ ${(r.solidosPct - t.solidos).toFixed(1)}pp\n`;
+
+  // ============================================================
+  // 🆕 Adição da seção de IDs de catálogo (rodapé do arquivo)
+  // ============================================================
+  const idList = ingredientesAtivos.map(([ing]) => {
+    const found = (catalogData.ingredients || []).find(item =>
+      item.name?.toLowerCase() === ing.toLowerCase() ||
+      item.id?.toLowerCase() === ing.toLowerCase()
+    );
+    return found?.id || "desconhecido";
+  });
+
+  texto += "\n" + "=".repeat(50) + "\n";
+  texto += `CATALOGO_IDS = [${idList.map(id => `"${id}"`).join(",")}]\n`;
+  // ============================================================
+
+  const blob = new Blob([texto], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `receita-sorvete-${current.toLowerCase()}-${new Date().toISOString().split('T')[0]}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  console.log("📦 Exportação concluída com sucesso!");
+  console.log("➡ IDs exportados:", idList);
+}
+
 
     // ==========================
     // Receitas (dinâmico por JSON)
