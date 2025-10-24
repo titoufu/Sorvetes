@@ -10,21 +10,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # Permissões explícitas (necessárias para commit/push)
     permissions:
       contents: write
       pages: write
       id-token: write
 
     steps:
-      # 🧩 Faz checkout do repositório antes de qualquer comando git
       - name: 🧩 Checkout do repositório
         uses: actions/checkout@v4
 
-      # 🚨 Segurança: só executa se o commit for do autor autorizado
+      # 🚨 Diagnóstico e segurança
       - name: 🔒 Verificar autor do commit
         run: |
-          cd "${GITHUB_WORKSPACE}"
+          echo "📁 Diretório atual: $(pwd)"
+          echo "📂 Conteúdo disponível:"
+          ls -la
+          cd "${{ github.workspace }}"
+          echo "📁 Entrando em workspace: $(pwd)"
           AUTHOR=$(git log -1 --pretty=format:'%an')
           echo "Autor detectado: $AUTHOR"
           if [[ "$AUTHOR" != "titoufu" && "$AUTHOR" != "JOSE RIBEIRO" && "$AUTHOR" != "github-actions[bot]" ]]; then
@@ -47,7 +49,7 @@ jobs:
 
       - name: 🚀 Commit e push automáticos
         run: |
-          cd "${GITHUB_WORKSPACE}"
+          cd "${{ github.workspace }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add site/ingredients_master.json
