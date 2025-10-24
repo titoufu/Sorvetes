@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2025-10-24T03:20:12Z",
+  "updated_at": "2025-10-24T17:57:36Z",
   "count": 35,
   "ingredients": [
     {
       "id": "leite_integral",
-      "name": "Leite integral",
+      "name": "Leite integralllllll",
       "category": "dairy",
       "fat_pct": 3.2,
       "sugar_pct": 0.0,
@@ -593,7 +593,7 @@
       "allergens": "none",
       "is_active": true,
       "notes": "Água ou polpa de fruta natural.",
-      "version": "1.0.0",
+      "version": "1.0.0 ",
       "updated_at": "",
       "source_url": "",
       "status": "OK"
