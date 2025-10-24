@@ -17,8 +17,11 @@ jobs:
       id-token: write
 
     steps:
+      # 🧩 Faz checkout do repositório antes de qualquer comando git
+      - name: 🧩 Checkout do repositório
+        uses: actions/checkout@v4
 
-      # 🚨 Segurança adicional: só executa se o commit for seu ou do bot
+      # 🚨 Segurança: só executa se o commit for do autor autorizado
       - name: 🔒 Verificar autor do commit
         run: |
           AUTHOR=$(git log -1 --pretty=format:'%an')
@@ -26,8 +29,9 @@ jobs:
           if [[ "$AUTHOR" != "titoufu" && "$AUTHOR" != "JOSE RIBEIRO" && "$AUTHOR" != "github-actions[bot]" ]]; then
             echo "❌ Commit não autorizado. Somente 'titoufu', 'JOSE RIBEIRO' ou 'github-actions[bot]' podem atualizar o catálogo."
             exit 1
+          else
+            echo "✅ Commit autorizado para atualização do catálogo."
           fi
-
 
       - name: 🐍 Configurar Python
         uses: actions/setup-python@v5
