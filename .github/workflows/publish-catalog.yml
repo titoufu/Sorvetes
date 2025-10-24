@@ -49,3 +49,4 @@ jobs:
           git add site/ingredients_master.json
           git commit -m "🤖 Atualização automática do catálogo" || echo "Nada a commitar"
           git push origin HEAD:main
+
