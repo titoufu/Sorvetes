@@ -1175,47 +1175,61 @@
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }
+// =========================================================
+// 📘 CONFIGURAÇÃO DE RECEITAS - LISTA DINÂMICA VIA JSON
+// =========================================================
 
-    // Configuração da pasta de receitas - LISTA ESTÁTICA
-    const RECIPES_FOLDER = "https://titoufu.github.io/Sorvetes/Receitas%20Testadas/";
-    // Caminho do JSON com a lista de receitas
-    const JSON_RECEITAS = "Receitas Testadas/receitas_testadas.json";
-    let receitas = [];
+// Pasta onde estão os arquivos .txt hospedados (GitHub Pages)
+const RECIPES_FOLDER = "https://titoufu.github.io/Sorvetes/Receitas%20Testadas/";
 
-    // Carregar lista de receitas do JSON
-    fetch(JSON_RECEITAS)
-      .then(response => {
-        if (!response.ok) throw new Error("Erro ao carregar receitas_testadas.json");
-        return response.json();
-      })
-      .then(data => {
-        receitas = data.receitas || [];
-        console.log(`📘 ${receitas.length} receitas carregadas do JSON.`);
-       displayStaticRecipesList(receitas);  // usa a função já definida
+// Caminho do arquivo JSON gerado automaticamente pelo script atualizar_receitas.py
+const JSON_RECEITAS = "Receitas Testadas/receitas_testadas.json";
 
-      })
-      .catch(error => console.error("⚠️ Falha ao carregar lista de receitas:", error));
+// Array global que armazenará as receitas carregadas
+let receitas = [];
+
+// ---------------------------------------------------------
+// 🔄 Carrega lista de receitas do arquivo JSON
+// ---------------------------------------------------------
+fetch(JSON_RECEITAS)
+  .then(response => {
+    if (!response.ok) throw new Error("Erro ao carregar receitas_testadas.json");
+    return response.json();
+  })
+  .then(data => {
+    receitas = data.receitas || [];
+    console.log(`📘 ${receitas.length} receitas carregadas do JSON.`);
+    displayStaticRecipesList(receitas);
+  })
+  .catch(error => console.error("⚠️ Falha ao carregar lista de receitas:", error));
 
 
-    // Função para carregar o modal de receitas (SEM carregar conteúdo automaticamente)
-    function loadRecipesModal() {
-      const dlg = document.getElementById("dlgRecipes");
-      const listContainer = document.getElementById("recipesList");
-      const countElement = document.getElementById("recipesCount");
+// =========================================================
+// 📋 MODAL DE RECEITAS - EXIBIÇÃO E INTERAÇÃO
+// =========================================================
 
-      // Esconder conteúdo de receita selecionada
-      document.getElementById("recipeContent").style.display = 'none';
+// Função para abrir o modal de receitas
+function loadRecipesModal() {
+  const dlg = document.getElementById("dlgRecipes");
+  const countElement = document.getElementById("recipesCount");
 
-      // Atualizar contador
-      countElement.textContent = `${RECIPES_STATIC.length} receitas disponíveis`;
+  // Esconde o conteúdo da receita selecionada
+  document.getElementById("recipeContent").style.display = 'none';
 
-      // Exibir lista estática
-      displayStaticRecipesList(RECIPES_STATIC);
+  // Atualiza o contador (usa o array global "receitas")
+  countElement.textContent = `${receitas.length} receitas disponíveis`;
 
-      dlg.showModal();
-    }
+  // Exibe a lista de receitas atuais
+  displayStaticRecipesList(receitas);
 
-// Função para exibir a lista de receitas dinâmicas
+  dlg.showModal();
+}
+
+
+// =========================================================
+// 🧾 LISTAGEM DAS RECEITAS
+// =========================================================
+
 function displayStaticRecipesList(recipes) {
   const listContainer = document.getElementById("recipesList");
   const searchTerm = document.getElementById("recipeSearch").value.toLowerCase();
@@ -1228,16 +1242,9 @@ function displayStaticRecipesList(recipes) {
   );
 
   // Ordenar
-  filteredRecipes.sort((a, b) => {
-    if (sortBy === 'date') {
-      // não há data individual, então mantém ordem alfabética
-      return a.titulo.localeCompare(b.titulo, 'pt-BR');
-    } else {
-      return a.titulo.localeCompare(b.titulo, 'pt-BR');
-    }
-  });
+  filteredRecipes.sort((a, b) => a.titulo.localeCompare(b.titulo, 'pt-BR'));
 
-  // Se nenhuma receita encontrada
+  // Caso nenhuma receita encontrada
   if (filteredRecipes.length === 0) {
     listContainer.innerHTML =
       '<div class="mini muted" style="text-align:center;padding:20px">Nenhuma receita encontrada</div>';
@@ -1264,124 +1271,64 @@ function displayStaticRecipesList(recipes) {
 }
 
 
-    // Função para carregar UMA ÚNICA receita quando o usuário clicar
-    async function loadSingleRecipe(filename, title) {
-      const listContainer = document.getElementById("recipesList");
+// =========================================================
+// 📖 CARREGAR RECEITA SELECIONADA
+// =========================================================
 
-      try {
-        // Mostrar loading apenas para esta receita
-        listContainer.innerHTML = `
-          <div class="mini muted" style="text-align:center;padding:20px">
-            Carregando "${title}"...
-          </div>
-        `;
+async function loadSingleRecipe(filename, title) {
+  const listContainer = document.getElementById("recipesList");
 
-        // Fazer apenas UMA requisição
-        const response = await fetch(RECIPES_FOLDER + filename + '?t=' + Date.now());
+  try {
+    // Exibe mensagem de carregamento
+    listContainer.innerHTML = `
+      <div class="mini muted" style="text-align:center;padding:20px">
+        Carregando "${title}"...
+      </div>
+    `;
 
-        if (response.ok) {
-          const content = await response.text();
-          showRecipe(filename, title, content);
+    // Requisição única do arquivo .txt
+    const response = await fetch(RECIPES_FOLDER + filename + '?t=' + Date.now());
 
-          // Restaurar lista após carregar
-          displayStaticRecipesList(RECIPES_STATIC);
+    if (response.ok) {
+      const content = await response.text();
+      showRecipe(filename, title, content);
 
-        } else {
-          throw new Error(`HTTP ${response.status}`);
-        }
-
-      } catch (error) {
-        alert("Erro ao carregar a receita. Tente novamente em alguns segundos.");
-        console.error("Erro ao carregar receita:", error);
-
-        // Restaurar lista em caso de erro
-        displayStaticRecipesList(RECIPES_STATIC);
-      }
+      // Restaura lista após carregar
+      displayStaticRecipesList(receitas);
+    } else {
+      throw new Error(`HTTP ${response.status}`);
     }
 
-    // Função para exibir o conteúdo de uma receita
-    function showRecipe(filename, title, content) {
-      document.getElementById("recipeTitle").textContent = title;
-      document.getElementById("recipeText").textContent = content;
-      document.getElementById("recipeContent").style.display = 'block';
+  } catch (error) {
+    alert("Erro ao carregar a receita. Tente novamente em alguns segundos.");
+    console.error("Erro ao carregar receita:", error);
 
-      // Scroll para a receita selecionada
-      document.getElementById("recipeContent").scrollIntoView({ behavior: 'smooth' });
-
-      // Configurar botão de carregar
-      document.getElementById("btnLoadRecipe").onclick = () => loadRecipeFromContent(content, title);
-    }
-
-    // Função para carregar uma receita no editor
-
-    function loadRecipeFromContent(content, title) {
-      try {
-        // Extrair ingredientes e quantidades do conteúdo
-        const lines = content.split('\n');
-        const ingredientsSection = content.split('INGREDIENTES:')[1]?.split('DETALHES TÉCNICOS:')[0];
-
-        if (ingredientsSection) {
-          // Limpar receita atual
-          gramsMix = {};
-
-          // Parse cada linha de ingrediente
-          const ingredientLines = ingredientsSection.split('\n').filter(line =>
-            line.trim().startsWith('•') && line.includes(':')
-          );
-
-          ingredientLines.forEach(line => {
-            const match = line.match(/•\s*(.+?):\s*(\d+)g\s*\([^)]+\)/);
-            if (match) {
-              const ingredient = match[1].trim();
-              const quantidade = parseInt(match[2]);
-
-              if (ingredient && !isNaN(quantidade)) {
-                gramsMix[ingredient] = quantidade;
-              }
-            }
-          });
-
-          // 🟢 ADIÇÃO AUTOMÁTICA DE INGREDIENTES AUSENTES NO CATÁLOGO
-          Object.keys(gramsMix).forEach(ingredient => {
-            if (!COMPOS.hasOwnProperty(ingredient)) {
-              console.warn(`Ingrediente "${ingredient}" não encontrado em COMPOS. Adicionado com valores padrão [0,0,0].`);
-              COMPOS[ingredient] = [0, 0, 0];
-            }
-          });
-          // 🔵 Fim da correção
-
-          // Atualizar a interface
-          renderTable();
-          recalc();
-
-          // Fechar modal
-          document.getElementById("dlgRecipes").close();
-
-          // Mostrar confirmação
-          alert(`Receita "${title}" carregada com sucesso!`);
-        }
-      } catch (error) {
-        alert("Erro ao carregar a receita: " + error.message);
-        console.error("Erro ao carregar receita:", error);
-      }
-    }
+    // Restaura lista em caso de erro
+    displayStaticRecipesList(receitas);
+  }
+}
 
 
-    // Configurar eventos do modal de receitas
-    function setupRecipesModal() {
-      const dlg = document.getElementById("dlgRecipes");
-      const btnOpen = document.getElementById("btnViewRecipes");
-      const btnClose = document.getElementById("btnCloseRecipes");
-      const searchInput = document.getElementById("recipeSearch");
-      const sortSelect = document.getElementById("recipeSort");
+// =========================================================
+// ⚙️ CONFIGURAÇÃO DE EVENTOS DO MODAL
+// =========================================================
 
-      btnOpen.addEventListener("click", loadRecipesModal);
-      btnClose.addEventListener("click", () => dlg.close());
+function setupRecipesModal() {
+  const dlg = document.getElementById("dlgRecipes");
+  const btnOpen = document.getElementById("btnViewRecipes");
+  const btnClose = document.getElementById("btnCloseRecipes");
+  const searchInput = document.getElementById("recipeSearch");
+  const sortSelect = document.getElementById("recipeSort");
 
-      // Busca e ordenação agora atualizam apenas a lista estática
-      searchInput.addEventListener("input", () => displayStaticRecipesList(RECIPES_STATIC));
-      sortSelect.addEventListener("change", () => displayStaticRecipesList(RECIPES_STATIC));
-    }
+  btnOpen.addEventListener("click", loadRecipesModal);
+  btnClose.addEventListener("click", () => dlg.close());
+
+  // Busca e ordenação agora usam o array dinâmico "receitas"
+  searchInput.addEventListener("input", () => displayStaticRecipesList(receitas));
+  sortSelect.addEventListener("change", () => displayStaticRecipesList(receitas));
+}
+
+
     document.addEventListener('DOMContentLoaded', init);
   </script>
 
