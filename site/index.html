@@ -1072,73 +1072,74 @@
       // Armazenar para carregar no editor quando clicar no botão
       receitaCarregavel = { title, content };
     }
-
-    function loadRecipeFromContent(content, title) {
-      try {
-        // Extrair seção de ingredientes da receita
-        const ingredientsSection = content.split('INGREDIENTES:')[1]?.split('DETALHES TÉCNICOS:')[0];
-
-        if (ingredientsSection) {
-          gramsMix = {};
-
-          // Extrair linhas válidas do texto (com marcador • e valor em gramas)
-          const lines = ingredientsSection
-            .split('\n')
-            .filter(line => line.trim().startsWith('•') && line.includes(':'));
-
-          // Converter para objeto { ingrediente: quantidade }
-          lines.forEach(line => {
-            const match = line.match(/•\s*(.+?):\s*(\d+)g\s*\([^)]+\)/);
-            if (match) {
-              const ingredient = match[1].trim();
-              const quantidade = parseInt(match[2], 10);
-              if (ingredient && !isNaN(quantidade)) gramsMix[ingredient] = quantidade;
-            }
-          });
-
-          // ✅ Adicionar ingredientes ausentes usando dados do catálogo
-          Object.keys(gramsMix).forEach(ingredient => {
-            if (!COMPOS.hasOwnProperty(ingredient)) {
-              // Procurar o ingrediente no catálogo mestre pelo campo "name"
-              const found = (catalogData.ingredients || []).find(
-                item => item.name?.toLowerCase() === ingredient.toLowerCase()
-              );
-
-              if (found) {
-                // Adiciona com valores reais de gordura, açúcar e sólidos
-                COMPOS[ingredient] = [
-                  Number(found.fat_pct) || 0,
-                  Number(found.sugar_pct) || 0,
-                  Number(found.solids_pct) || 0,
-                ];
-                console.log(
-                  `✔ Ingrediente "${ingredient}" encontrado no catálogo e adicionado com valores: ` +
-                  `Gordura=${found.fat_pct}%, Açúcar=${found.sugar_pct}%, Sólidos=${found.solids_pct}%`
-                );
-              } else {
-                // Caso não exista no catálogo
-                COMPOS[ingredient] = [0, 0, 0];
-                console.warn(
-                  `⚠ Ingrediente "${ingredient}" não encontrado no catálogo. Adicionado com valores padrão [0, 0, 0].`
-                );
-              }
-            }
-          });
-
-          // Atualizar a interface e cálculos
-          renderTable();
-          recalc();
-
-          // Fechar modal e confirmar
-          document.getElementById('dlgRecipes').close();
-          alert(`Receita "${title}" carregada com sucesso!`);
-        }
-      } catch (error) {
-        alert('Erro ao carregar a receita: ' + error.message);
-        console.error('Erro ao carregar receita:', error);
+    // Busca no catálogo mestre (ingredients_master.json) pelo campo "name" (fallback por "id")
+    function findCatalogItemByName(ingredientName) {
+      if (!catalogData || !Array.isArray(catalogData.ingredients) || catalogData.ingredients.length === 0) {
+        console.warn("Catálogo vazio ou não carregado ainda. Usando [0,0,0] se necessário.");
+        return null;
       }
+      const needle = (ingredientName || "").trim().toLowerCase();
+      // match por name
+      let found = catalogData.ingredients.find(it => (it.name || "").trim().toLowerCase() === needle);
+      if (found) return found;
+      // fallback por id (caso você use ids parecidos com o nome)
+      found = catalogData.ingredients.find(it => (it.id || "").trim().toLowerCase() === needle);
+      return found || null;
     }
 
+   function loadRecipeFromContent(content, title) {
+  try {
+    const ingredientsSection = content.split('INGREDIENTES:')[1]?.split('DETALHES TÉCNICOS:')[0];
+
+    if (ingredientsSection) {
+      gramsMix = {};
+
+      // Extrai linhas do bloco de ingredientes
+      const lines = ingredientsSection
+        .split('\n')
+        .filter(line => line.trim().startsWith('•') && line.includes(':'));
+
+      // Monta { ingrediente: quantidade }
+      lines.forEach(line => {
+        const match = line.match(/•\s*(.+?):\s*(\d+)g\s*\([^)]+\)/);
+        if (match) {
+          const ingredient = match[1].trim();
+          const quantidade = parseInt(match[2], 10);
+          if (ingredient && !isNaN(quantidade)) gramsMix[ingredient] = quantidade;
+        }
+      });
+
+      // Para cada ingrediente da receita, garantir entrada no COMPOS
+      // ORDEM CORRETA do COMPOS: [gordura, SÓLIDOS, açúcar]
+      Object.keys(gramsMix).forEach(ingredient => {
+        if (!COMPOS.hasOwnProperty(ingredient)) {
+          const found = findCatalogItemByName(ingredient);
+          if (found) {
+            const fat    = Number(found.fat_pct)    || 0;
+            const solids = Number(found.solids_pct) || 0; // sólidos é a 2ª posição
+            const sugar  = Number(found.sugar_pct)  || 0;
+            COMPOS[ingredient] = [fat, solids, sugar];
+            console.log(`✔ "${ingredient}" do catálogo → COMPOS = [fat:${fat} • solids:${solids} • sugar:${sugar}]`);
+          } else {
+            // Só cai aqui se realmente não existir no catálogo
+            COMPOS[ingredient] = [0, 0, 0];
+            console.warn(`⚠ "${ingredient}" não está no catálogo. COMPOS definido como [0,0,0].`);
+          }
+        }
+      });
+
+      renderTable();
+      recalc();
+
+      document.getElementById('dlgRecipes').close();
+      alert(`Receita "${title}" carregada com sucesso!`);
+    }
+  } catch (error) {
+    alert('Erro ao carregar a receita: ' + error.message);
+    console.error('Erro ao carregar receita:', error);
+  }
+}
+ 
 
 
     function setupRecipesModal() {
