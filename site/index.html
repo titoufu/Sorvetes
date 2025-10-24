@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -11,7 +12,7 @@
     if ('serviceWorker' in navigator) {
       fetch('sw.js', { method: 'HEAD' }).then(r => {
         if (r.ok) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(console.warn));
-      }).catch(() => {});
+      }).catch(() => { });
     }
   </script>
 
@@ -22,116 +23,566 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <style>
-    :root{
-      --bg:#f7f8fb;--card:#fff;--ink:#0f172a;--muted:#475569;--pri:#0b63f3;--ok:#16a34a;--warn:#c2410c;--bad:#b91c1c;
-      --fat-b:#991b1b;--sugar-b:#9a3412;--solid-b:#166534;
-      --row-fat-bg:rgba(185,28,28,.12);--row-sugar-bg:rgba(154,52,18,.12);--row-solid-bg:rgba(22,101,52,.12);
-      --shadow:0 10px 28px rgba(2,6,23,.14);--radius:16px;--line:#e2e8f0;--sticky:#ffffffcc
+    :root {
+      --bg: #f7f8fb;
+      --card: #fff;
+      --ink: #0f172a;
+      --muted: #475569;
+      --pri: #0b63f3;
+      --ok: #16a34a;
+      --warn: #c2410c;
+      --bad: #b91c1c;
+      --fat-b: #991b1b;
+      --sugar-b: #9a3412;
+      --solid-b: #166534;
+      --row-fat-bg: rgba(185, 28, 28, .12);
+      --row-sugar-bg: rgba(154, 52, 18, .12);
+      --row-solid-bg: rgba(22, 101, 52, .12);
+      --shadow: 0 10px 28px rgba(2, 6, 23, .14);
+      --radius: 16px;
+      --line: #e2e8f0;
+      --sticky: #ffffffcc
     }
-    [data-theme="escuro"]{
-      --bg:#0b1220;--card:#0f172a;--ink:#e5e7eb;--muted:#94a3b8;--pri:#60a5fa;--ok:#34d399;--warn:#fbbf24;--bad:#f87171;
-      --fat-b:#fecaca;--sugar-b:#fde68a;--solid-b:#86efac;
-      --row-fat-bg:rgba(248,113,113,.18);--row-sugar-bg:rgba(253,186,116,.18);--row-solid-bg:rgba(134,239,172,.18);
-      --line:#1f2a44;--sticky:#0f172acc
+
+    [data-theme="escuro"] {
+      --bg: #0b1220;
+      --card: #0f172a;
+      --ink: #e5e7eb;
+      --muted: #94a3b8;
+      --pri: #60a5fa;
+      --ok: #34d399;
+      --warn: #fbbf24;
+      --bad: #f87171;
+      --fat-b: #fecaca;
+      --sugar-b: #fde68a;
+      --solid-b: #86efac;
+      --row-fat-bg: rgba(248, 113, 113, .18);
+      --row-sugar-bg: rgba(253, 186, 116, .18);
+      --row-solid-bg: rgba(134, 239, 172, .18);
+      --line: #1f2a44;
+      --sticky: #0f172acc
     }
-    [data-theme="suave"]{
-      --pri:#0284c7;--row-fat-bg:rgba(225,29,72,.12);--row-sugar-bg:rgba(180,83,9,.12);--row-solid-bg:rgba(4,120,87,.12)
+
+    [data-theme="suave"] {
+      --pri: #0284c7;
+      --row-fat-bg: rgba(225, 29, 72, .12);
+      --row-sugar-bg: rgba(180, 83, 9, .12);
+      --row-solid-bg: rgba(4, 120, 87, .12)
     }
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell}
-    .wrap{max-width:1100px;margin:0 auto;padding:6px 10px 80px}
-    .stickybar{position:fixed;left:0;right:0;top:0;z-index:1000;padding:8px;background:var(--sticky);border-bottom:1px solid var(--line);border-radius:0 0 12px 12px;box-shadow:0 6px 18px rgba(0,0,0,.08)}
-    .stickygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-    .stickycell{display:flex;flex-direction:column;align-items:flex-start;padding:6px 8px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
-    .stickycell .label{font-size:11px;color:var(--muted)}
-    .stickycell .line{font-weight:800;color:var(--ink)}
-    .stickycell .line .value{font-weight:800}
-    #stickySpacer{height:56px}
-    header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0 12px;flex-wrap:wrap}
-    header h1{font-size:18px;margin:0}
-    .theme{display:flex;gap:8px;align-items:center}
-    .theme select{padding:8px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
-    .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px;margin-bottom:12px}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    @media (max-width:900px){.row{grid-template-columns:1fr}}
-    label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px}
-    input,select,button{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:16px}
-    input[type="number"]{appearance:textfield}
-    input[type="number"]::-webkit-outer-spin-button,input[type="number"]::-webkit-inner-spin-button{appearance:none;margin:0}
-    button{background:var(--pri);color:#fff;border:none;font-weight:700;cursor:pointer}
-    button.secondary{background:#e7efff;color:#0b63f3;border:1px solid #bfd6ff}
-    .btn-group{display:flex;gap:6px;flex-wrap:wrap}
-    .btn-outline{background:transparent;color:var(--pri);border:2px solid var(--pri)}
-    .btn-active{background:var(--pri);color:#fff;border:2px solid var(--pri)}
-    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .stat{background:linear-gradient(180deg,rgba(0,0,0,.04),transparent);border:1px solid var(--line);border-radius:12px;padding:8px}
-    .stat h3{margin:0 0 4px;font-size:12px;color:var(--muted)}
-    .stat .val{font-size:18px;font-weight:800}
-    .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.02em}
-    .ok{background:rgba(22,163,74,.18);color:var(--ok);border:1px solid rgba(22,163,74,.45)}
-    .aj{background:rgba(194,65,12,.16);color:var(--warn);border:1px solid rgba(194,65,12,.45)}
-    table{width:100%;border-collapse:collapse}
-    th,td{padding:8px;border-bottom:1px dashed var(--line);text-align:left;vertical-align:middle}
-    th{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
-    tfoot td{font-weight:800}
-    .muted{color:var(--muted)}
-    .sum-ok{color:var(--ok);font-weight:800}
-    .sum-bad{color:var(--bad);font-weight:800}
-    .toolbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center}
-    .contrib{display:flex;gap:6px;flex-wrap:wrap}
-    .c-pill{padding:4px 9px;border-radius:999px;font-size:12px;font-weight:800}
-    .c-fat{background:rgba(185,28,28,.18);color:var(--fat-b);border:1px solid rgba(185,28,28,.45)}
-    .c-sugar{background:rgba(154,52,18,.18);color:var(--sugar-b);border:1px solid rgba(154,52,18,.45)}
-    .c-solid{background:rgba(22,101,52,.18);color:var(--solid-b);border:1px solid rgba(22,101,52,.45)}
-    .helpers{display:none;gap:6px;margin-top:6px}
-    .helpers button{padding:6px 8px;font-size:12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:#0b63f3}
-    @media (max-width:560px){.helpers{display:flex} header h1{font-size:16px} .stat .val{font-size:16px} input{padding:10px}}
-    .bottombar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:8px;align-items:center;justify-content:center;padding:8px env(safe-area-inset-right) calc(8px + env(safe-area-inset-bottom)) env(safe-area-inset-left);background:var(--sticky);border-top:1px solid var(--line);backdrop-filter:saturate(1.2) blur(4px)}
-    .bottombar button{max-width:220px}
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6px 10px 80px
+    }
+
+    .stickybar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: 1000;
+      padding: 8px;
+      background: var(--sticky);
+      border-bottom: 1px solid var(--line);
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, .08)
+    }
+
+    .stickygrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px
+    }
+
+    .stickycell {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 6px 8px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--card)
+    }
+
+    .stickycell .label {
+      font-size: 11px;
+      color: var(--muted)
+    }
+
+    .stickycell .line {
+      font-weight: 800;
+      color: var(--ink)
+    }
+
+    .stickycell .line .value {
+      font-weight: 800
+    }
+
+    #stickySpacer {
+      height: 56px
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 8px 0 12px;
+      flex-wrap: wrap
+    }
+
+    header h1 {
+      font-size: 18px;
+      margin: 0
+    }
+
+    .theme {
+      display: flex;
+      gap: 8px;
+      align-items: center
+    }
+
+    .theme select {
+      padding: 8px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink)
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 12px;
+      margin-bottom: 12px
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px
+    }
+
+    @media (max-width:900px) {
+      .row {
+        grid-template-columns: 1fr
+      }
+    }
+
+    label {
+      font-size: 12px;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 4px
+    }
+
+    input,
+    select,
+    button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+      font-size: 16px
+    }
+
+    input[type="number"] {
+      appearance: textfield
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      appearance: none;
+      margin: 0
+    }
+
+    button {
+      background: var(--pri);
+      color: #fff;
+      border: none;
+      font-weight: 700;
+      cursor: pointer
+    }
+
+    button.secondary {
+      background: #e7efff;
+      color: #0b63f3;
+      border: 1px solid #bfd6ff
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--pri);
+      border: 2px solid var(--pri)
+    }
+
+    .btn-active {
+      background: var(--pri);
+      color: #fff;
+      border: 2px solid var(--pri)
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px
+    }
+
+    .stat {
+      background: linear-gradient(180deg, rgba(0, 0, 0, .04), transparent);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 8px
+    }
+
+    .stat h3 {
+      margin: 0 0 4px;
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    .stat .val {
+      font-size: 18px;
+      font-weight: 800
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .02em
+    }
+
+    .ok {
+      background: rgba(22, 163, 74, .18);
+      color: var(--ok);
+      border: 1px solid rgba(22, 163, 74, .45)
+    }
+
+    .aj {
+      background: rgba(194, 65, 12, .16);
+      color: var(--warn);
+      border: 1px solid rgba(194, 65, 12, .45)
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse
+    }
+
+    th,
+    td {
+      padding: 8px;
+      border-bottom: 1px dashed var(--line);
+      text-align: left;
+      vertical-align: middle
+    }
+
+    th {
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .04em
+    }
+
+    tfoot td {
+      font-weight: 800
+    }
+
+    .muted {
+      color: var(--muted)
+    }
+
+    .sum-ok {
+      color: var(--ok);
+      font-weight: 800
+    }
+
+    .sum-bad {
+      color: var(--bad);
+      font-weight: 800
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      align-items: center
+    }
+
+    .contrib {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap
+    }
+
+    .c-pill {
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800
+    }
+
+    .c-fat {
+      background: rgba(185, 28, 28, .18);
+      color: var(--fat-b);
+      border: 1px solid rgba(185, 28, 28, .45)
+    }
+
+    .c-sugar {
+      background: rgba(154, 52, 18, .18);
+      color: var(--sugar-b);
+      border: 1px solid rgba(154, 52, 18, .45)
+    }
+
+    .c-solid {
+      background: rgba(22, 101, 52, .18);
+      color: var(--solid-b);
+      border: 1px solid rgba(22, 101, 52, .45)
+    }
+
+    .helpers {
+      display: none;
+      gap: 6px;
+      margin-top: 6px
+    }
+
+    .helpers button {
+      padding: 6px 8px;
+      font-size: 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #0b63f3
+    }
+
+    @media (max-width:560px) {
+      .helpers {
+        display: flex
+      }
+
+      header h1 {
+        font-size: 16px
+      }
+
+      .stat .val {
+        font-size: 16px
+      }
+
+      input {
+        padding: 10px
+      }
+    }
+
+    .bottombar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 60;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      padding: 8px env(safe-area-inset-right) calc(8px + env(safe-area-inset-bottom)) env(safe-area-inset-left);
+      background: var(--sticky);
+      border-top: 1px solid var(--line);
+      backdrop-filter: saturate(1.2) blur(4px)
+    }
+
+    .bottombar button {
+      max-width: 220px
+    }
 
     /* Tabela refinada */
-    #tbl{table-layout:fixed;width:100%;border-collapse:separate;border-spacing:0;background:white}
-    #tbl th,#tbl td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:.65rem .75rem;vertical-align:middle}
-    #tbl th:last-child,#tbl td:last-child{border-right:none}
-    #tbl thead th{background:#f6d9b5;text-align:center;font-weight:700}
-    #tbl thead th:first-child{text-align:left}
-    #tbl tfoot td{background:#f6d9b5;font-weight:700}
-    #tbl tbody tr:nth-child(odd) td{background:#f7f0d5}
-    #tbl tbody tr:nth-child(even) td{background:#d7e4f5}
-    #tbl th:nth-child(1),#tbl td:nth-child(1){width:42%}
-    #tbl th:nth-child(2),#tbl td:nth-child(2){width:22%}
-    #tbl th:nth-child(3),#tbl td:nth-child(3){width:13%;text-align:center}
-    #tbl th:nth-child(4),#tbl td:nth-child(4){width:23%}
-    #tbl td:nth-child(1) .comp{font-size:.92em;opacity:.9}
-    #tbl td:nth-child(2) .qtd-box{display:grid;grid-template-columns:1fr;gap:.35rem;max-width:140px}
-    #tbl td:nth-child(2) .q-input{display:flex;align-items:center;gap:.4rem}
-    #tbl td:nth-child(2) input[type="number"]{width:100%;padding:.35rem .5rem;border:1px solid var(--line);border-radius:8px;font:inherit;text-align:center;background:white}
-    #tbl td:nth-child(2) .helpers{display:flex;gap:.4rem;flex-wrap:wrap}
-    #tbl td:nth-child(2) .helpers button{padding:.25rem .6rem;border-radius:999px;border:1px solid var(--line);background:white;cursor:pointer;font-weight:700;line-height:1}
-    #tbl td:nth-child(2) .helpers button:active{transform:translateY(1px)}
-    #tbl td:nth-child(3) .peso-pct{font-weight:700;text-align:center}
-    #tbl td:nth-child(4) .mix{display:flex;gap:.35rem;flex-wrap:wrap}
-    #tbl td:nth-child(4) .pill{border-radius:999px;padding:.15rem .5rem;font-weight:700;color:#fff}
-    #tbl td:nth-child(4) .pill.g{background:#d64545}
-    #tbl td:nth-child(4) .pill.a{background:#e8a23e}
-    #tbl td:nth-child(4) .pill.s{background:#3aa66b}
+    #tbl {
+      table-layout: fixed;
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: white
+    }
+
+    #tbl th,
+    #tbl td {
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      padding: .65rem .75rem;
+      vertical-align: middle
+    }
+
+    #tbl th:last-child,
+    #tbl td:last-child {
+      border-right: none
+    }
+
+    #tbl thead th {
+      background: #f6d9b5;
+      text-align: center;
+      font-weight: 700
+    }
+
+    #tbl thead th:first-child {
+      text-align: left
+    }
+
+    #tbl tfoot td {
+      background: #f6d9b5;
+      font-weight: 700
+    }
+
+    #tbl tbody tr:nth-child(odd) td {
+      background: #f7f0d5
+    }
+
+    #tbl tbody tr:nth-child(even) td {
+      background: #d7e4f5
+    }
+
+    #tbl th:nth-child(1),
+    #tbl td:nth-child(1) {
+      width: 42%
+    }
+
+    #tbl th:nth-child(2),
+    #tbl td:nth-child(2) {
+      width: 22%
+    }
+
+    #tbl th:nth-child(3),
+    #tbl td:nth-child(3) {
+      width: 13%;
+      text-align: center
+    }
+
+    #tbl th:nth-child(4),
+    #tbl td:nth-child(4) {
+      width: 23%
+    }
+
+    #tbl td:nth-child(1) .comp {
+      font-size: .92em;
+      opacity: .9
+    }
+
+    #tbl td:nth-child(2) .qtd-box {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: .35rem;
+      max-width: 140px
+    }
+
+    #tbl td:nth-child(2) .q-input {
+      display: flex;
+      align-items: center;
+      gap: .4rem
+    }
+
+    #tbl td:nth-child(2) input[type="number"] {
+      width: 100%;
+      padding: .35rem .5rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font: inherit;
+      text-align: center;
+      background: white
+    }
+
+    #tbl td:nth-child(2) .helpers {
+      display: flex;
+      gap: .4rem;
+      flex-wrap: wrap
+    }
+
+    #tbl td:nth-child(2) .helpers button {
+      padding: .25rem .6rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: white;
+      cursor: pointer;
+      font-weight: 700;
+      line-height: 1
+    }
+
+    #tbl td:nth-child(2) .helpers button:active {
+      transform: translateY(1px)
+    }
+
+    #tbl td:nth-child(3) .peso-pct {
+      font-weight: 700;
+      text-align: center
+    }
+
+    #tbl td:nth-child(4) .mix {
+      display: flex;
+      gap: .35rem;
+      flex-wrap: wrap
+    }
+
+    #tbl td:nth-child(4) .pill {
+      border-radius: 999px;
+      padding: .15rem .5rem;
+      font-weight: 700;
+      color: #fff
+    }
+
+    #tbl td:nth-child(4) .pill.g {
+      background: #d64545
+    }
+
+    #tbl td:nth-child(4) .pill.a {
+      background: #e8a23e
+    }
+
+    #tbl td:nth-child(4) .pill.s {
+      background: #3aa66b
+    }
   </style>
 </head>
+
 <body>
   <div class="stickybar">
     <div class="stickygrid">
       <div class="stickycell">
         <div class="label">Gordura (%)</div>
-        <div class="line">Alvo: <span class="value" id="stickyGTarget">—</span> | Atual: <span class="value" id="stickyGNow">—</span></div>
+        <div class="line">Alvo: <span class="value" id="stickyGTarget">—</span> | Atual: <span class="value"
+            id="stickyGNow">—</span></div>
         <div class="mini">Δ <span id="stickyGDelta" class="pill aj">—</span></div>
       </div>
       <div class="stickycell">
         <div class="label">Açúcar (%)</div>
-        <div class="line">Alvo: <span class="value" id="stickyATarget">—</span> | Atual: <span class="value" id="stickyANow">—</span></div>
+        <div class="line">Alvo: <span class="value" id="stickyATarget">—</span> | Atual: <span class="value"
+            id="stickyANow">—</span></div>
         <div class="mini">Δ <span id="stickyADelta" class="pill aj">—</span></div>
       </div>
       <div class="stickycell">
         <div class="label">Sólidos (%)</div>
-        <div class="line">Alvo: <span class="value" id="stickySTarget">—</span> | Atual: <span class="value" id="stickySNow">—</span></div>
+        <div class="line">Alvo: <span class="value" id="stickySTarget">—</span> | Atual: <span class="value"
+            id="stickySNow">—</span></div>
         <div class="mini">Δ <span id="stickySDelta" class="pill aj">—</span></div>
       </div>
     </div>
@@ -141,7 +592,10 @@
   <div class="wrap" id="app">
     <header>
       <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M7 21h10a4 4 0 0 0 0-8 5 5 0 0 0-4-4 4 4 0 0 0-7 3.5v.5A4 4 0 0 0 7 21Z" stroke="currentColor" stroke-width="1.5"/></svg>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+          <path d="M7 21h10a4 4 0 0 0 0-8 5 5 0 0 0-4-4 4 4 0 0 0-7 3.5v.5A4 4 0 0 0 7 21Z" stroke="currentColor"
+            stroke-width="1.5" />
+        </svg>
         <h1>Base de Sorvetes</h1>
       </div>
       <div class="theme">
@@ -217,7 +671,8 @@
 
   <!-- Catálogo -->
   <dialog id="dlgCatalog" style="border:none;border-radius:16px;padding:0;max-width:min(920px,95vw);">
-    <div style="background:var(--card);color:var(--ink);padding:12px 12px 14px;border-radius:16px;box-shadow:var(--shadow);min-width:min(920px,95vw);">
+    <div
+      style="background:var(--card);color:var(--ink);padding:12px 12px 14px;border-radius:16px;box-shadow:var(--shadow);min-width:min(920px,95vw);">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
         <h3 style="margin:0;font-size:16px">Adicionar do catálogo</h3>
         <div class="mini muted" id="catMeta" style="margin-left:auto">—</div>
@@ -235,7 +690,15 @@
       </div>
       <div style="max-height:60vh;overflow:auto;border:1px dashed var(--line);border-radius:12px;padding:6px">
         <table style="width:100%;border-collapse:collapse">
-          <thead><tr><th>Ingrediente</th><th>Categoria</th><th class="mini">gord / sólidos / açúcs</th><th style="width:140px">Qtd (g)</th><th style="width:120px"></th></tr></thead>
+          <thead>
+            <tr>
+              <th>Ingrediente</th>
+              <th>Categoria</th>
+              <th class="mini">gord / sólidos / açúcs</th>
+              <th style="width:140px">Qtd (g)</th>
+              <th style="width:120px"></th>
+            </tr>
+          </thead>
           <tbody id="catTbody"></tbody>
         </table>
       </div>
@@ -244,7 +707,8 @@
 
   <!-- Receitas -->
   <dialog id="dlgRecipes" style="border:none;border-radius:16px;padding:0;max-width:min(920px,95vw);">
-    <div style="background:var(--card);color:var(--ink);padding:12px 12px 14px;border-radius:16px;box-shadow:var(--shadow);min-width:min(920px,95vw);max-height:90vh;display:flex;flex-direction:column;">
+    <div
+      style="background:var(--card);color:var(--ink);padding:12px 12px 14px;border-radius:16px;box-shadow:var(--shadow);min-width:min(920px,95vw);max-height:90vh;display:flex;flex-direction:column;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
         <h3 style="margin:0;font-size:16px">Receitas Salvas</h3>
         <div class="mini muted" id="recipesCount" style="margin-left:auto">—</div>
@@ -268,7 +732,8 @@
           <h4 id="recipeTitle" style="margin:0">Título da Receita</h4>
           <button id="btnLoadRecipe" class="btn-outline" style="max-width:150px">Carregar Receita</button>
         </div>
-        <pre id="recipeText" style="background:var(--bg);padding:12px;border-radius:8px;max-height:300px;overflow:auto;white-space:pre-wrap;font-size:14px;margin:0"></pre>
+        <pre id="recipeText"
+          style="background:var(--bg);padding:12px;border-radius:8px;max-height:300px;overflow:auto;white-space:pre-wrap;font-size:14px;margin:0"></pre>
       </div>
     </div>
   </dialog>
@@ -284,24 +749,33 @@
     let polpaSolids = 0.0;
 
     const COMPOS = {
-      "Leite integral":[3.2,12.5,0.0],
-      "Creme de leite 35%":[35.0,37.0,0.0],
-      "Leite em pó integral":[26.0,96.0,0.0],
-      "Açúcar (sacarose)":[0.0,100.0,100.0],
-      "Glicose/mel (equiv.)":[0.0,80.0,80.0],
-      "Gemas":[30.0,50.0,0.0],
-      "Estabilizante":[0.0,100.0,0.0],
-      "Emulsificante":[0.0,100.0,0.0],
-      "Água/Polpa":[0.0,0.0,0.0]
+      "Leite integral": [3.2, 12.5, 0.0],
+      "Creme de leite 35%": [35.0, 37.0, 0.0],
+      "Leite em pó integral": [26.0, 96.0, 0.0],
+      "Açúcar (sacarose)": [0.0, 100.0, 100.0],
+      "Glicose/mel (equiv.)": [0.0, 80.0, 80.0],
+      "Gemas": [30.0, 50.0, 0.0],
+      "Estabilizante": [0.0, 100.0, 0.0],
+      "Emulsificante": [0.0, 100.0, 0.0],
+      "Água/Polpa": [0.0, 0.0, 0.0]
     };
 
     const PRESETS = {
-      "Creme":{targets:{gordura:12,acucar:18,solidos:39},polpa_solids:0,mix_pct:{
-        "Leite integral":50,"Creme de leite 35%":25,"Leite em pó integral":5,"Açúcar (sacarose)":9,"Glicose/mel (equiv.)":3,"Gemas":4,"Estabilizante":0.3,"Emulsificante":0.4,"Água/Polpa":3.3}},
-      "Gelato":{targets:{gordura:9,acucar:18,solidos:38},polpa_solids:0,mix_pct:{
-        "Leite integral":60,"Creme de leite 35%":18,"Leite em pó integral":5,"Açúcar (sacarose)":9,"Glicose/mel (equiv.)":3,"Gemas":3,"Estabilizante":0.3,"Emulsificante":0.4,"Água/Polpa":1.3}},
-      "Fruta":{targets:{gordura:1,acucar:20,solidos:36},polpa_solids:10,mix_pct:{
-        "Leite integral":0,"Creme de leite 35%":0,"Leite em pó integral":0,"Açúcar (sacarose)":14,"Glicose/mel (equiv.)":6,"Gemas":0,"Estabilizante":0.3,"Emulsificante":0,"Água/Polpa":79.7}}
+      "Creme": {
+        targets: { gordura: 12, acucar: 18, solidos: 39 }, polpa_solids: 0, mix_pct: {
+          "Leite integral": 50, "Creme de leite 35%": 25, "Leite em pó integral": 5, "Açúcar (sacarose)": 9, "Glicose/mel (equiv.)": 3, "Gemas": 4, "Estabilizante": 0.3, "Emulsificante": 0.4, "Água/Polpa": 3.3
+        }
+      },
+      "Gelato": {
+        targets: { gordura: 9, acucar: 18, solidos: 38 }, polpa_solids: 0, mix_pct: {
+          "Leite integral": 60, "Creme de leite 35%": 18, "Leite em pó integral": 5, "Açúcar (sacarose)": 9, "Glicose/mel (equiv.)": 3, "Gemas": 3, "Estabilizante": 0.3, "Emulsificante": 0.4, "Água/Polpa": 1.3
+        }
+      },
+      "Fruta": {
+        targets: { gordura: 1, acucar: 20, solidos: 36 }, polpa_solids: 10, mix_pct: {
+          "Leite integral": 0, "Creme de leite 35%": 0, "Leite em pó integral": 0, "Açúcar (sacarose)": 14, "Glicose/mel (equiv.)": 6, "Gemas": 0, "Estabilizante": 0.3, "Emulsificante": 0, "Água/Polpa": 79.7
+        }
+      }
     };
 
     // ==========================
@@ -332,80 +806,80 @@
     const FALLBACK_CATALOG = "https://titoufu.github.io/Sorvetes/ingredients_master.json";
     let catalogData = { ingredients: [], updated_at: "" };
 
-    async function getCatalogUrl(){
-      try{
-        const r = await fetch("config.json",{cache:"no-store"});
-        if(r.ok){
+    async function getCatalogUrl() {
+      try {
+        const r = await fetch("config.json", { cache: "no-store" });
+        if (r.ok) {
           const cfg = await r.json();
-          if(cfg && cfg.ingredients_catalog_url) return cfg.ingredients_catalog_url;
+          if (cfg && cfg.ingredients_catalog_url) return cfg.ingredients_catalog_url;
         }
-      }catch{}
+      } catch { }
       return FALLBACK_CATALOG;
     }
-    async function loadCatalog(){
+    async function loadCatalog() {
       const url = await getCatalogUrl();
-      const r = await fetch(url + (url.includes("?")?"&":"?") + "t=" + Date.now());
-      if(!r.ok) throw new Error("Falha ao carregar catálogo: " + r.status);
+      const r = await fetch(url + (url.includes("?") ? "&" : "?") + "t=" + Date.now());
+      if (!r.ok) throw new Error("Falha ao carregar catálogo: " + r.status);
       const data = await r.json();
-      const valid = (data.ingredients||[]).filter(i => i && String(i.id||"").trim() && String(i.name||"").trim() && i.is_active!==false);
+      const valid = (data.ingredients || []).filter(i => i && String(i.id || "").trim() && String(i.name || "").trim() && i.is_active !== false);
       catalogData = { ingredients: valid, updated_at: data.updated_at || "—" };
       renderCatalogModal();
     }
-    function renderCatalogModal(){
+    function renderCatalogModal() {
       document.getElementById("catMeta").textContent = `${catalogData.ingredients.length} itens · atualizado ${catalogData.updated_at}`;
       const sel = document.getElementById("catFilter");
       const cats = Array.from(new Set(catalogData.ingredients.map(i => i.category || "—"))).sort();
       sel.innerHTML = `<option value="">Todas</option>` + cats.map(c => `<option value="${c}">${c}</option>`).join("");
       drawCatalogRows();
     }
-    function drawCatalogRows(){
+    function drawCatalogRows() {
       const q = document.getElementById("catSearch").value.toLowerCase().trim();
       const cf = document.getElementById("catFilter").value;
       const tbd = document.getElementById("catTbody");
       const items = catalogData.ingredients
-        .filter(i => !cf || (i.category||"—")===cf)
-        .filter(i => !q || (i.name||"").toLowerCase().includes(q) || (i.category||"").toLowerCase().includes(q) || (i.id||"").toLowerCase().includes(q))
-        .slice(0,400);
+        .filter(i => !cf || (i.category || "—") === cf)
+        .filter(i => !q || (i.name || "").toLowerCase().includes(q) || (i.category || "").toLowerCase().includes(q) || (i.id || "").toLowerCase().includes(q))
+        .slice(0, 400);
       tbd.innerHTML = "";
-      for(const it of items){
+      for (const it of items) {
         const tr = document.createElement("tr");
-        const f=Number(it.fat_pct||0), s=Number(it.solids_pct||0), a=Number(it.sugar_pct||0);
+        const f = Number(it.fat_pct || 0), s = Number(it.solids_pct || 0), a = Number(it.sugar_pct || 0);
         tr.innerHTML = `
-          <td><b>${it.name||it.id}</b><div class="mini muted">${it.id}</div></td>
-          <td>${it.category||"—"}</td>
+          <td><b>${it.name || it.id}</b><div class="mini muted">${it.id}</div></td>
+          <td>${it.category || "—"}</td>
           <td class="mini">gord ${f.toFixed(1)}% • sólidos ${s.toFixed(1)}% • açúcs ${a.toFixed(1)}%</td>
           <td><input type="number" min="0" step="1" value="0" style="width:120px"></td>
           <td><button class="btn-outline">Adicionar</button></td>`;
         const qty = tr.querySelector("input");
-        tr.querySelector("button").addEventListener("click",()=>{
-          const g = Math.max(0, Math.round(Number((qty.value||"0").replace(",", "."))));
-          if(g<=0) return;
+        tr.querySelector("button").addEventListener("click", () => {
+          const g = Math.max(0, Math.round(Number((qty.value || "0").replace(",", "."))));
+          if (g <= 0) return;
           const name = it.name || it.id;
-          COMPOS[name] = [f,s,a];
-          if(!(name in gramsMix)) gramsMix[name]=0;
+          COMPOS[name] = [f, s, a];
+          if (!(name in gramsMix)) gramsMix[name] = 0;
           gramsMix[name] = gramsMix[name] + g;
           renderTable(); recalc();
         });
         tbd.appendChild(tr);
       }
     }
-    (function wireCatalogUI(){
+    (function wireCatalogUI() {
       const dlg = document.getElementById("dlgCatalog");
       const btnOpen = document.getElementById("btnAddFromCatalog");
       const btnClose = document.getElementById("btnCloseDlg");
       const s1 = document.getElementById("catSearch");
       const s2 = document.getElementById("catFilter");
-      btnOpen.addEventListener("click", async ()=>{
-        try{
-          if(!catalogData.ingredients.length) await loadCatalog();
-          s1.value=""; s2.value="";
+      btnOpen.addEventListener("click", async () => {
+        try {
+          if (!catalogData.ingredients.length) await loadCatalog();
+          s1.value = ""; s2.value = "";
           drawCatalogRows();
           dlg.showModal();
-        }catch(e){
-          alert("Não foi possível carregar o catálogo.\n"+e.message);
+        } catch (e) {
+          alert("Não foi possível carregar o catálogo.\n" + e.message);
         }
       });
-      btnClose.addEventListener("click", ()=> dlg.close());
+      btnClose.addEventListener("click", () => dlg.close());
       s1.addEventListener("input", drawCatalogRows);
       s2.addEventListener("change", drawCatalogRows);
     })();
@@ -413,129 +887,129 @@
     // ==========================
     // Tema / Lote / Presets
     // ==========================
-    function setTheme(name){ if(!name){app.removeAttribute('data-theme');return;} app.setAttribute('data-theme',name); }
-    function setTarget(val){ targetBatch = val; normalizeToTarget(); updateTargetButtons(); }
-    function updateTargetButtons(){
-      const map = {1000:'btnT1',1500:'btnT15',2000:'btnT2'};
-      for(const [val,id] of Object.entries(map)){
-        const btn=document.getElementById(id);
+    function setTheme(name) { if (!name) { app.removeAttribute('data-theme'); return; } app.setAttribute('data-theme', name); }
+    function setTarget(val) { targetBatch = val; normalizeToTarget(); updateTargetButtons(); }
+    function updateTargetButtons() {
+      const map = { 1000: 'btnT1', 1500: 'btnT15', 2000: 'btnT2' };
+      for (const [val, id] of Object.entries(map)) {
+        const btn = document.getElementById(id);
         btn.classList.remove('btn-active'); btn.classList.add('btn-outline');
-        if(Number(val)===targetBatch){ btn.classList.add('btn-active'); btn.classList.remove('btn-outline'); }
+        if (Number(val) === targetBatch) { btn.classList.add('btn-active'); btn.classList.remove('btn-outline'); }
       }
-      loteInfo.value = `${(targetBatch/1000).toFixed(1)} kg (alvo)`;
+      loteInfo.value = `${(targetBatch / 1000).toFixed(1)} kg (alvo)`;
     }
-    function applyPreset(name){
+    function applyPreset(name) {
       current = name;
       const p = PRESETS[name];
       polpaSolids = p.polpa_solids || 0;
       gramsMix = {};
-      for(const k of Object.keys(p.mix_pct)){
-        gramsMix[k] = Math.round(targetBatch * (p.mix_pct[k]/100));
+      for (const k of Object.keys(p.mix_pct)) {
+        gramsMix[k] = Math.round(targetBatch * (p.mix_pct[k] / 100));
       }
       renderTable(); renderComp100(); recalc();
-      const t=PRESETS[current].targets;
+      const t = PRESETS[current].targets;
       stickyGTarget.textContent = t.gordura.toFixed(1);
       stickyATarget.textContent = t.acucar.toFixed(1);
       stickySTarget.textContent = t.solidos.toFixed(1);
     }
-    function renderComp100(){
-      const entries = Object.entries(COMPOS).map(([k,[g,s,a]]) => `<div>• <b>${k}</b> — gordura ${g}% • açúcares ${a}% • sólidos ${s}% (por 100 g)</div>`).join("");
+    function renderComp100() {
+      const entries = Object.entries(COMPOS).map(([k, [g, s, a]]) => `<div>• <b>${k}</b> — gordura ${g}% • açúcares ${a}% • sólidos ${s}% (por 100 g)</div>`).join("");
       comp100Div.innerHTML = entries;
     }
 
     // ==========================
     // Tabela / Cálculo
     // ==========================
-    function addHelpers(td,name){
-      const bar=document.createElement('div'); bar.className='helpers';
-      for(const [label,delta] of [["-10",-10],["+10",10]]){
-        const b=document.createElement('button'); b.type="button"; b.textContent=label;
-        b.addEventListener('click',()=>{ gramsMix[name]=Math.max(0,Math.round(Number(gramsMix[name]||0)+Number(delta))); renderTable(); recalc(); });
+    function addHelpers(td, name) {
+      const bar = document.createElement('div'); bar.className = 'helpers';
+      for (const [label, delta] of [["-10", -10], ["+10", 10]]) {
+        const b = document.createElement('button'); b.type = "button"; b.textContent = label;
+        b.addEventListener('click', () => { gramsMix[name] = Math.max(0, Math.round(Number(gramsMix[name] || 0) + Number(delta))); renderTable(); recalc(); });
         bar.appendChild(b);
       }
       td.appendChild(bar);
     }
-    function renderTable(){
-      tbody.innerHTML="";
-      for(const k of Object.keys(gramsMix)){
-        const tr=document.createElement('tr'); tr.dataset.ing=k;
-        const td1=document.createElement('td'), td2=document.createElement('td'), td3=document.createElement('td'), td4=document.createElement('td');
+    function renderTable() {
+      tbody.innerHTML = "";
+      for (const k of Object.keys(gramsMix)) {
+        const tr = document.createElement('tr'); tr.dataset.ing = k;
+        const td1 = document.createElement('td'), td2 = document.createElement('td'), td3 = document.createElement('td'), td4 = document.createElement('td');
         td1.innerHTML = `<div><b>${k}</b></div><div class="mini muted">por 100 g → gordura ${COMPOS[k][0]}% • açúcares ${COMPOS[k][2]}% • sólidos ${COMPOS[k][1]}%</div>`;
-        const inp=document.createElement('input'); inp.type="number"; inp.step="1"; inp.min="0"; inp.inputMode="numeric"; inp.pattern="[0-9]*"; inp.value=gramsMix[k]; inp.style.width="120px";
-        const onChange=()=>{ const raw=(inp.value||"").toString().replace(',','.'); const v=Number(raw); gramsMix[k]=isFinite(v)&&v>=0?v:0; recalc(); };
-        inp.addEventListener('input',onChange); inp.addEventListener('change',onChange); td2.appendChild(inp);
-        addHelpers(td2,k);
-        td3.setAttribute('data-pct-cell',k); td4.setAttribute('data-contrib-cell',k);
+        const inp = document.createElement('input'); inp.type = "number"; inp.step = "1"; inp.min = "0"; inp.inputMode = "numeric"; inp.pattern = "[0-9]*"; inp.value = gramsMix[k]; inp.style.width = "120px";
+        const onChange = () => { const raw = (inp.value || "").toString().replace(',', '.'); const v = Number(raw); gramsMix[k] = isFinite(v) && v >= 0 ? v : 0; recalc(); };
+        inp.addEventListener('input', onChange); inp.addEventListener('change', onChange); td2.appendChild(inp);
+        addHelpers(td2, k);
+        td3.setAttribute('data-pct-cell', k); td4.setAttribute('data-contrib-cell', k);
         tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3); tr.appendChild(td4); tbody.appendChild(tr);
       }
     }
-    function calc(){
-      const total = Object.values(gramsMix).reduce((a,b)=>a+Number(b||0),0);
-      const comp={...COMPOS}; if(polpaSolids>0){ comp["Água/Polpa"]=[0.0,polpaSolids,0.0]; }
-      let fatG=0, solidsG=0, sugarG=0; const fatParts={}, solidsParts={}, sugarParts={};
-      for(const k of Object.keys(gramsMix)){
-        const g=Number(gramsMix[k]||0), f=g*(comp[k][0]/100), s=g*(comp[k][1]/100), a=g*(comp[k][2]/100);
-        fatG+=f; solidsG+=s; sugarG+=a; fatParts[k]=f; solidsParts[k]=s; sugarParts[k]=a;
+    function calc() {
+      const total = Object.values(gramsMix).reduce((a, b) => a + Number(b || 0), 0);
+      const comp = { ...COMPOS }; if (polpaSolids > 0) { comp["Água/Polpa"] = [0.0, polpaSolids, 0.0]; }
+      let fatG = 0, solidsG = 0, sugarG = 0; const fatParts = {}, solidsParts = {}, sugarParts = {};
+      for (const k of Object.keys(gramsMix)) {
+        const g = Number(gramsMix[k] || 0), f = g * (comp[k][0] / 100), s = g * (comp[k][1] / 100), a = g * (comp[k][2] / 100);
+        fatG += f; solidsG += s; sugarG += a; fatParts[k] = f; solidsParts[k] = s; sugarParts[k] = a;
       }
-      const percent={}; for(const k of Object.keys(gramsMix)){ percent[k]= total>0 ? (gramsMix[k]/total*100) : 0; }
-      return { total, percent, gorduraPct: total>0?(fatG/total)*100:0, solidosPct: total>0?(solidsG/total)*100:0, acucarPct: total>0?(sugarG/total)*100:0, fatG, solidsG, sugarG, fatParts, solidsParts, sugarParts };
+      const percent = {}; for (const k of Object.keys(gramsMix)) { percent[k] = total > 0 ? (gramsMix[k] / total * 100) : 0; }
+      return { total, percent, gorduraPct: total > 0 ? (fatG / total) * 100 : 0, solidosPct: total > 0 ? (solidsG / total) * 100 : 0, acucarPct: total > 0 ? (sugarG / total) * 100 : 0, fatG, solidsG, sugarG, fatParts, solidsParts, sugarParts };
     }
-    function statusPill(name,val){ let ok=false, txt="Ajustar", cls="aj"; if(name==="gordura") ok=(val>=8&&val<=16); if(name==="acucar") ok=(val>=16&&val<=22); if(name==="solidos") ok=(val>=36&&val<=42); if(ok){txt="OK";cls="ok";} return `<span class="pill ${cls}">${txt}</span>`; }
-    function setDeltaChip(el,delta){ el.textContent=(delta>0?'+':'')+delta.toFixed(2)+' pp'; el.classList.remove('ok','aj'); if(Math.abs(delta)<=0.10){el.classList.add('ok');} else {el.classList.add('aj');} }
-    function recalc(){
-      const r=calc();
-      const t=PRESETS[current].targets;
-      stickyGTarget.textContent=t.gordura.toFixed(1); stickyATarget.textContent=t.acucar.toFixed(1); stickySTarget.textContent=t.solidos.toFixed(1);
-      stickyGNow.textContent=r.gorduraPct.toFixed(1); stickyANow.textContent=r.acucarPct.toFixed(1); stickySNow.textContent=r.solidosPct.toFixed(1);
+    function statusPill(name, val) { let ok = false, txt = "Ajustar", cls = "aj"; if (name === "gordura") ok = (val >= 8 && val <= 16); if (name === "acucar") ok = (val >= 16 && val <= 22); if (name === "solidos") ok = (val >= 36 && val <= 42); if (ok) { txt = "OK"; cls = "ok"; } return `<span class="pill ${cls}">${txt}</span>`; }
+    function setDeltaChip(el, delta) { el.textContent = (delta > 0 ? '+' : '') + delta.toFixed(2) + ' pp'; el.classList.remove('ok', 'aj'); if (Math.abs(delta) <= 0.10) { el.classList.add('ok'); } else { el.classList.add('aj'); } }
+    function recalc() {
+      const r = calc();
+      const t = PRESETS[current].targets;
+      stickyGTarget.textContent = t.gordura.toFixed(1); stickyATarget.textContent = t.acucar.toFixed(1); stickySTarget.textContent = t.solidos.toFixed(1);
+      stickyGNow.textContent = r.gorduraPct.toFixed(1); stickyANow.textContent = r.acucarPct.toFixed(1); stickySNow.textContent = r.solidosPct.toFixed(1);
       setDeltaChip(stickyGDelta, r.gorduraPct - t.gordura); setDeltaChip(stickyADelta, r.acucarPct - t.acucar); setDeltaChip(stickySDelta, r.solidosPct - t.solidos);
-      for(const tr of tbody.querySelectorAll('tr')){
-        const name=tr.dataset.ing; const pctCell=tr.querySelector('td[data-pct-cell]'); const contribCell=tr.querySelector('td[data-contrib-cell]');
-        const pct=r.percent[name]||0;
-        pctCell.textContent = isFinite(pct)? pct.toFixed(2)+" %" : "—";
-        const fg=r.fatParts[name]||0, sg=r.sugarParts[name]||0, tg=r.solidsParts[name]||0;
-        const fc=r.fatG>0?(fg/r.fatG*100):0, sc=r.sugarG>0?(sg/r.sugarG*100):0, tc=r.solidsG>0?(tg/r.solidsG*100):0;
-        contribCell.innerHTML=`<div class="contrib"><span class="c-pill c-fat">Gord ${fc.toFixed(1)}%</span><span class="c-pill c-sugar">Açúc ${sc.toFixed(1)}%</span><span class="c-pill c-solid">Sólid ${tc.toFixed(1)}%</span></div>`;
+      for (const tr of tbody.querySelectorAll('tr')) {
+        const name = tr.dataset.ing; const pctCell = tr.querySelector('td[data-pct-cell]'); const contribCell = tr.querySelector('td[data-contrib-cell]');
+        const pct = r.percent[name] || 0;
+        pctCell.textContent = isFinite(pct) ? pct.toFixed(2) + " %" : "—";
+        const fg = r.fatParts[name] || 0, sg = r.sugarParts[name] || 0, tg = r.solidsParts[name] || 0;
+        const fc = r.fatG > 0 ? (fg / r.fatG * 100) : 0, sc = r.sugarG > 0 ? (sg / r.sugarG * 100) : 0, tc = r.solidsG > 0 ? (tg / r.solidsG * 100) : 0;
+        contribCell.innerHTML = `<div class="contrib"><span class="c-pill c-fat">Gord ${fc.toFixed(1)}%</span><span class="c-pill c-sugar">Açúc ${sc.toFixed(1)}%</span><span class="c-pill c-solid">Sólid ${tc.toFixed(1)}%</span></div>`;
       }
-      const near=Math.abs(r.total-targetBatch)<0.5; sumG.className=near?"sum-ok":"sum-bad";
-      sumG.textContent=r.total.toFixed(0)+" g"; sumPct.textContent=r.total>0?"100.00 %":"—"; targetInfo.textContent=`(alvo atual: ${targetBatch} g)`;
+      const near = Math.abs(r.total - targetBatch) < 0.5; sumG.className = near ? "sum-ok" : "sum-bad";
+      sumG.textContent = r.total.toFixed(0) + " g"; sumPct.textContent = r.total > 0 ? "100.00 %" : "—"; targetInfo.textContent = `(alvo atual: ${targetBatch} g)`;
     }
-    function normalizeToTarget(){
-      const r=calc(); const total=r.total; if(total<=0) return;
-      const factor=targetBatch/total;
-      for(const k of Object.keys(gramsMix)){ gramsMix[k]=Math.max(0,Math.round(Number(gramsMix[k]||0)*factor)); }
+    function normalizeToTarget() {
+      const r = calc(); const total = r.total; if (total <= 0) return;
+      const factor = targetBatch / total;
+      for (const k of Object.keys(gramsMix)) { gramsMix[k] = Math.max(0, Math.round(Number(gramsMix[k] || 0) * factor)); }
       renderTable(); recalc();
     }
 
     // ==========================
     // Exportar
     // ==========================
-    function exportarReceita(){
-      const r=calc();
-      const ingredientesAtivos=Object.entries(gramsMix).filter(([_,q])=>q>0).sort((a,b)=>b[1]-a[1]);
-      if(!ingredientesAtivos.length){ alert("Nenhum ingrediente com quantidade maior que zero para exportar."); return; }
-      let texto=`RECEITA DE SORVETE - ${current}\n`;
-      texto+=`Data: ${new Date().toLocaleDateString('pt-BR')}\n`;
-      texto+=`Peso total: ${r.total.toFixed(0)}g\n`;
-      texto+=`Composição: Gordura ${r.gorduraPct.toFixed(1)}% | Açúcar ${r.acucarPct.toFixed(1)}% | Sólidos ${r.solidosPct.toFixed(1)}%\n`;
-      texto+="=".repeat(50)+"\n\n";
-      texto+="INGREDIENTES:\n";
-      ingredientesAtivos.forEach(([ing,q])=>{
-        const pct=r.percent[ing]||0;
-        texto+=`• ${ing}: ${q.toFixed(0)}g (${pct.toFixed(1)}%)\n`;
+    function exportarReceita() {
+      const r = calc();
+      const ingredientesAtivos = Object.entries(gramsMix).filter(([_, q]) => q > 0).sort((a, b) => b[1] - a[1]);
+      if (!ingredientesAtivos.length) { alert("Nenhum ingrediente com quantidade maior que zero para exportar."); return; }
+      let texto = `RECEITA DE SORVETE - ${current}\n`;
+      texto += `Data: ${new Date().toLocaleDateString('pt-BR')}\n`;
+      texto += `Peso total: ${r.total.toFixed(0)}g\n`;
+      texto += `Composição: Gordura ${r.gorduraPct.toFixed(1)}% | Açúcar ${r.acucarPct.toFixed(1)}% | Sólidos ${r.solidosPct.toFixed(1)}%\n`;
+      texto += "=".repeat(50) + "\n\n";
+      texto += "INGREDIENTES:\n";
+      ingredientesAtivos.forEach(([ing, q]) => {
+        const pct = r.percent[ing] || 0;
+        texto += `• ${ing}: ${q.toFixed(0)}g (${pct.toFixed(1)}%)\n`;
       });
-      texto+="\n"+"=".repeat(50)+"\nDETALHES TÉCNICOS:\n\nContribuições na mistura:\n";
-      ingredientesAtivos.forEach(([ing])=>{
-        const fg=r.fatParts[ing]||0, sg=r.sugarParts[ing]||0, tg=r.solidsParts[ing]||0;
-        const fc=r.fatG>0?(fg/r.fatG*100):0, sc=r.sugarG>0?(sg/r.sugarG*100):0, tc=r.solidsG>0?(tg/r.solidsG*100):0;
-        texto+=`• ${ing}: Gord ${fc.toFixed(1)}% | Açúc ${sc.toFixed(1)}% | Sólid ${tc.toFixed(1)}%\n`;
+      texto += "\n" + "=".repeat(50) + "\nDETALHES TÉCNICOS:\n\nContribuições na mistura:\n";
+      ingredientesAtivos.forEach(([ing]) => {
+        const fg = r.fatParts[ing] || 0, sg = r.sugarParts[ing] || 0, tg = r.solidsParts[ing] || 0;
+        const fc = r.fatG > 0 ? (fg / r.fatG * 100) : 0, sc = r.sugarG > 0 ? (sg / r.sugarG * 100) : 0, tc = r.solidsG > 0 ? (tg / r.solidsG * 100) : 0;
+        texto += `• ${ing}: Gord ${fc.toFixed(1)}% | Açúc ${sc.toFixed(1)}% | Sólid ${tc.toFixed(1)}%\n`;
       });
-      const t=PRESETS[current].targets;
-      texto+=`\nCOMPARAÇÃO COM METAS:\nGordura: ${r.gorduraPct.toFixed(1)}% (Alvo: ${t.gordura}%) - Δ ${(r.gorduraPct - t.gordura).toFixed(1)}pp\n`;
-      texto+=`Açúcar: ${r.acucarPct.toFixed(1)}% (Alvo: ${t.acucar}%) - Δ ${(r.acucarPct - t.acucar).toFixed(1)}pp\n`;
-      texto+=`Sólidos: ${r.solidosPct.toFixed(1)}% (Alvo: ${t.solidos}%) - Δ ${(r.solidosPct - t.solidos).toFixed(1)}pp\n`;
-      const blob=new Blob([texto],{type:'text/plain;charset=utf-8'});
-      const url=URL.createObjectURL(blob); const a=document.createElement('a');
-      a.href=url; a.download=`receita-sorvete-${current.toLowerCase()}-${new Date().toISOString().split('T')[0]}.txt`;
+      const t = PRESETS[current].targets;
+      texto += `\nCOMPARAÇÃO COM METAS:\nGordura: ${r.gorduraPct.toFixed(1)}% (Alvo: ${t.gordura}%) - Δ ${(r.gorduraPct - t.gordura).toFixed(1)}pp\n`;
+      texto += `Açúcar: ${r.acucarPct.toFixed(1)}% (Alvo: ${t.acucar}%) - Δ ${(r.acucarPct - t.acucar).toFixed(1)}pp\n`;
+      texto += `Sólidos: ${r.solidosPct.toFixed(1)}% (Alvo: ${t.solidos}%) - Δ ${(r.solidosPct - t.solidos).toFixed(1)}pp\n`;
+      const blob = new Blob([texto], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob); const a = document.createElement('a');
+      a.href = url; a.download = `receita-sorvete-${current.toLowerCase()}-${new Date().toISOString().split('T')[0]}.txt`;
       document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
     }
 
@@ -543,28 +1017,28 @@
     // Receitas (dinâmico por JSON)
     // ==========================
     const RECIPES_FOLDER = "https://titoufu.github.io/Sorvetes/Receitas%20Testadas/";
-    const JSON_RECEITAS   = "Receitas Testadas/receitas_testadas.json";
+    const JSON_RECEITAS = "Receitas Testadas/receitas_testadas.json";
     let receitas = [];
-    let receitaCarregavel = { title:"", content:"" };
+    let receitaCarregavel = { title: "", content: "" };
 
-    function displayRecipesList(recipes){
-      const listContainer=document.getElementById("recipesList");
-      const searchTerm=(document.getElementById("recipeSearch").value||"").toLowerCase();
-      const sortBy=document.getElementById("recipeSort").value;
+    function displayRecipesList(recipes) {
+      const listContainer = document.getElementById("recipesList");
+      const searchTerm = (document.getElementById("recipeSearch").value || "").toLowerCase();
+      const sortBy = document.getElementById("recipeSort").value;
 
-      let filtered=recipes.filter(r=>
+      let filtered = recipes.filter(r =>
         (r.titulo && r.titulo.toLowerCase().includes(searchTerm)) ||
         (r.arquivo && r.arquivo.toLowerCase().includes(searchTerm))
       );
-      if(sortBy==='name'){ filtered.sort((a,b)=>a.titulo.localeCompare(b.titulo,'pt-BR')); }
+      if (sortBy === 'name') { filtered.sort((a, b) => a.titulo.localeCompare(b.titulo, 'pt-BR')); }
       // (não há data individual; manter por nome mesmo se 'date')
 
-      if(!filtered.length){
+      if (!filtered.length) {
         listContainer.innerHTML = '<div class="mini muted" style="text-align:center;padding:20px">Nenhuma receita encontrada</div>';
         return;
       }
-      listContainer.innerHTML = filtered.map(r=>`
-        <div class="recipe-item" data-filename="${r.arquivo.replace(/"/g,'&quot;')}" data-title="${r.titulo.replace(/"/g,'&quot;')}"
+      listContainer.innerHTML = filtered.map(r => `
+        <div class="recipe-item" data-filename="${r.arquivo.replace(/"/g, '&quot;')}" data-title="${r.titulo.replace(/"/g, '&quot;')}"
              style="padding:12px;border:1px solid var(--line);border-radius:8px;cursor:pointer;background:var(--card);transition:all .2s">
           <div style="font-weight:700;margin-bottom:4px">${r.titulo}</div>
           <div class="mini muted" style="display:flex;justify-content:space-between">
@@ -575,92 +1049,99 @@
       `).join('');
     }
 
-    async function fetchAndPreviewRecipe(filename, title){
-      const listContainer=document.getElementById("recipesList");
-      try{
+    async function fetchAndPreviewRecipe(filename, title) {
+      const listContainer = document.getElementById("recipesList");
+      try {
         listContainer.innerHTML = `<div class="mini muted" style="text-align:center;padding:20px">Carregando "${title}"...</div>`;
         const r = await fetch(RECIPES_FOLDER + filename + '?t=' + Date.now());
-        if(!r.ok) throw new Error("HTTP "+r.status);
+        if (!r.ok) throw new Error("HTTP " + r.status);
         const content = await r.text();
-        showRecipe(filename,title,content); // apenas pré-visualiza
-      }catch(e){
+        showRecipe(filename, title, content); // apenas pré-visualiza
+      } catch (e) {
         alert("Erro ao carregar a receita. Tente novamente.");
         console.error(e);
         displayRecipesList(receitas);
       }
     }
 
-    function showRecipe(filename, title, content){
+    function showRecipe(filename, title, content) {
       document.getElementById("recipeTitle").textContent = title;
-      document.getElementById("recipeText").textContent  = content;
+      document.getElementById("recipeText").textContent = content;
       document.getElementById("recipeContent").style.display = 'block';
-      document.getElementById("recipeContent").scrollIntoView({behavior:'smooth'});
+      document.getElementById("recipeContent").scrollIntoView({ behavior: 'smooth' });
       // Armazenar para carregar no editor quando clicar no botão
       receitaCarregavel = { title, content };
     }
 
     function loadRecipeFromContent(content, title) {
-  try {
-    // Extrair ingredientes e quantidades do conteúdo da receita
-    const ingredientsSection = content.split('INGREDIENTES:')[1]?.split('DETALHES TÉCNICOS:')[0];
+      try {
+        // Extrair seção de ingredientes da receita
+        const ingredientsSection = content.split('INGREDIENTES:')[1]?.split('DETALHES TÉCNICOS:')[0];
 
-    if (ingredientsSection) {
-      gramsMix = {};
+        if (ingredientsSection) {
+          gramsMix = {};
 
-      // Extrair linhas válidas do texto
-      const lines = ingredientsSection
-        .split('\n')
-        .filter(line => line.trim().startsWith('•') && line.includes(':'));
+          // Extrair linhas válidas do texto (com marcador • e valor em gramas)
+          const lines = ingredientsSection
+            .split('\n')
+            .filter(line => line.trim().startsWith('•') && line.includes(':'));
 
-      // Converter para objeto {ingrediente: quantidade}
-      lines.forEach(line => {
-        const match = line.match(/•\s*(.+?):\s*(\d+)g\s*\([^)]+\)/);
-        if (match) {
-          const ingredient = match[1].trim();
-          const quantidade = parseInt(match[2], 10);
-          if (ingredient && !isNaN(quantidade)) gramsMix[ingredient] = quantidade;
+          // Converter para objeto { ingrediente: quantidade }
+          lines.forEach(line => {
+            const match = line.match(/•\s*(.+?):\s*(\d+)g\s*\([^)]+\)/);
+            if (match) {
+              const ingredient = match[1].trim();
+              const quantidade = parseInt(match[2], 10);
+              if (ingredient && !isNaN(quantidade)) gramsMix[ingredient] = quantidade;
+            }
+          });
+
+          // ✅ Adicionar ingredientes ausentes usando dados do catálogo
+          Object.keys(gramsMix).forEach(ingredient => {
+            if (!COMPOS.hasOwnProperty(ingredient)) {
+              // Procurar o ingrediente no catálogo mestre pelo campo "name"
+              const found = (catalogData.ingredients || []).find(
+                item => item.name?.toLowerCase() === ingredient.toLowerCase()
+              );
+
+              if (found) {
+                // Adiciona com valores reais de gordura, açúcar e sólidos
+                COMPOS[ingredient] = [
+                  Number(found.fat_pct) || 0,
+                  Number(found.sugar_pct) || 0,
+                  Number(found.solids_pct) || 0,
+                ];
+                console.log(
+                  `✔ Ingrediente "${ingredient}" encontrado no catálogo e adicionado com valores: ` +
+                  `Gordura=${found.fat_pct}%, Açúcar=${found.sugar_pct}%, Sólidos=${found.solids_pct}%`
+                );
+              } else {
+                // Caso não exista no catálogo
+                COMPOS[ingredient] = [0, 0, 0];
+                console.warn(
+                  `⚠ Ingrediente "${ingredient}" não encontrado no catálogo. Adicionado com valores padrão [0, 0, 0].`
+                );
+              }
+            }
+          });
+
+          // Atualizar a interface e cálculos
+          renderTable();
+          recalc();
+
+          // Fechar modal e confirmar
+          document.getElementById('dlgRecipes').close();
+          alert(`Receita "${title}" carregada com sucesso!`);
         }
-      });
-
-      // ✅ Buscar dados reais do catálogo antes de usar zeros
-      Object.keys(gramsMix).forEach(ingredient => {
-        if (!COMPOS.hasOwnProperty(ingredient)) {
-          const found = (catalogData.ingredients || []).find(
-            item => item.name?.toLowerCase() === ingredient.toLowerCase()
-          );
-
-          if (found) {
-            COMPOS[ingredient] = [
-              Number(found.fat_pct) || 0,
-              Number(found.solids_pct) || 0,
-              Number(found.sugar_pct) || 0,
-            ];
-            console.log(`✔ Ingrediente "${ingredient}" adicionado com dados do catálogo.`);
-          } else {
-            console.warn(
-              `⚠ Ingrediente "${ingredient}" não encontrado no catálogo. Adicionado como [0,0,0].`
-            );
-            COMPOS[ingredient] = [0, 0, 0];
-          }
-        }
-      });
-
-      // Atualizar a interface e cálculos
-      renderTable();
-      recalc();
-
-      // Fechar modal e confirmar
-      document.getElementById('dlgRecipes').close();
-      alert(`Receita "${title}" carregada com sucesso!`);
+      } catch (error) {
+        alert('Erro ao carregar a receita: ' + error.message);
+        console.error('Erro ao carregar receita:', error);
+      }
     }
-  } catch (error) {
-    alert('Erro ao carregar a receita: ' + error.message);
-    console.error('Erro ao carregar receita:', error);
-  }
-}
 
 
-    function setupRecipesModal(){
+
+    function setupRecipesModal() {
       const dlg = document.getElementById("dlgRecipes");
       const btnOpen = document.getElementById("btnViewRecipes");
       const btnClose = document.getElementById("btnCloseRecipes");
@@ -669,28 +1150,28 @@
       const listContainer = document.getElementById("recipesList");
       const btnLoadRecipe = document.getElementById("btnLoadRecipe");
 
-      btnOpen.addEventListener("click", ()=>{
-        document.getElementById("recipeContent").style.display='none';
+      btnOpen.addEventListener("click", () => {
+        document.getElementById("recipeContent").style.display = 'none';
         document.getElementById("recipesCount").textContent = `${receitas.length} receitas disponíveis`;
         displayRecipesList(receitas);
         dlg.showModal();
       });
-      btnClose.addEventListener("click", ()=> dlg.close());
-      searchInput.addEventListener("input", ()=> displayRecipesList(receitas));
-      sortSelect.addEventListener("change", ()=> displayRecipesList(receitas));
+      btnClose.addEventListener("click", () => dlg.close());
+      searchInput.addEventListener("input", () => displayRecipesList(receitas));
+      sortSelect.addEventListener("change", () => displayRecipesList(receitas));
 
       // Event delegation: clique em um item de receita
-      listContainer.addEventListener("click",(ev)=>{
+      listContainer.addEventListener("click", (ev) => {
         const item = ev.target.closest('.recipe-item');
-        if(!item) return;
-        const filename=item.dataset.filename;
-        const title=item.dataset.title;
-        fetchAndPreviewRecipe(filename,title);
+        if (!item) return;
+        const filename = item.dataset.filename;
+        const title = item.dataset.title;
+        fetchAndPreviewRecipe(filename, title);
       });
 
       // Botão "Carregar Receita" (joga no editor/tabela)
-      btnLoadRecipe.addEventListener("click", ()=>{
-        if(!receitaCarregavel.content) { alert("Abra uma receita da lista antes de carregar."); return; }
+      btnLoadRecipe.addEventListener("click", () => {
+        if (!receitaCarregavel.content) { alert("Abra uma receita da lista antes de carregar."); return; }
         loadRecipeFromContent(receitaCarregavel.content, receitaCarregavel.title);
       });
     }
@@ -698,38 +1179,39 @@
     // ==========================
     // Init
     // ==========================
-    function init(){
+    function init() {
       // tema
       const savedTheme = localStorage.getItem('sorvete_theme') || '';
-      themeSel.value=savedTheme; setTheme(savedTheme);
-      themeSel.addEventListener('change',()=>{ setTheme(themeSel.value); localStorage.setItem('sorvete_theme', themeSel.value||''); });
+      themeSel.value = savedTheme; setTheme(savedTheme);
+      themeSel.addEventListener('change', () => { setTheme(themeSel.value); localStorage.setItem('sorvete_theme', themeSel.value || ''); });
 
       // presets
-      presetSel.innerHTML = Object.keys(PRESETS).map(p=>`<option ${p===current?'selected':''}>${p}</option>`).join('');
+      presetSel.innerHTML = Object.keys(PRESETS).map(p => `<option ${p === current ? 'selected' : ''}>${p}</option>`).join('');
       applyPreset(current);
-      presetSel.addEventListener('change',()=> applyPreset(presetSel.value));
+      presetSel.addEventListener('change', () => applyPreset(presetSel.value));
 
       // botões principais
       document.getElementById('btnExport').addEventListener('click', exportarReceita);
-      document.getElementById('btnReset').addEventListener('click', ()=> applyPreset(current));
-      document.getElementById('btnT1').addEventListener('click', ()=> setTarget(1000));
-      document.getElementById('btnT15').addEventListener('click', ()=> setTarget(1500));
-      document.getElementById('btnT2').addEventListener('click', ()=> setTarget(2000));
-      document.getElementById('btnBlur').addEventListener('click', ()=>{ if(document.activeElement && document.activeElement.blur){ document.activeElement.blur(); } });
+      document.getElementById('btnReset').addEventListener('click', () => applyPreset(current));
+      document.getElementById('btnT1').addEventListener('click', () => setTarget(1000));
+      document.getElementById('btnT15').addEventListener('click', () => setTarget(1500));
+      document.getElementById('btnT2').addEventListener('click', () => setTarget(2000));
+      document.getElementById('btnBlur').addEventListener('click', () => { if (document.activeElement && document.activeElement.blur) { document.activeElement.blur(); } });
 
       // catálogo + receitas
       setupRecipesModal();
 
       // carregar lista de receitas (dinâmica)
       fetch(JSON_RECEITAS)
-        .then(r=>{ if(!r.ok) throw new Error("Erro ao carregar receitas_testadas.json"); return r.json(); })
-        .then(data=>{
+        .then(r => { if (!r.ok) throw new Error("Erro ao carregar receitas_testadas.json"); return r.json(); })
+        .then(data => {
           receitas = data.receitas || [];
           console.log(`📘 ${receitas.length} receitas carregadas do JSON.`);
         })
-        .catch(err=> console.error("⚠️ Falha ao carregar lista de receitas:", err));
+        .catch(err => console.error("⚠️ Falha ao carregar lista de receitas:", err));
     }
     document.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
+
 </html>
