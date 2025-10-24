@@ -1,0 +1,34 @@
+RECEITA DE SORVETE - Gelato
+Data: 24/10/2025
+Peso total: 1519g
+Composição: Gordura 8.9% | Açúcar 17.3% | Sólidos 37.6%
+==================================================
+
+INGREDIENTES:
+• Leite condensado: 401g (26.4%)
+• Creme de leite 17%: 401g (26.4%)
+• Amora (polpa): 359g (23.6%)
+• Leite integral: 250g (16.5%)
+• Leite em pó integral: 100g (6.6%)
+• Estabilizante: 4g (0.3%)
+• Emulsificante: 4g (0.3%)
+
+==================================================
+DETALHES TÉCNICOS:
+
+Contribuições na mistura:
+• Leite condensado: Gord 23.8% | Açúc 84.0% | Sólid 51.3%
+• Creme de leite 17%: Gord 50.5% | Açúc 0.0% | Sólid 16.9%
+• Amora (polpa): Gord 0.5% | Açúc 16.0% | Sólid 8.2%
+• Leite integral: Gord 5.9% | Açúc 0.0% | Sólid 5.5%
+• Leite em pó integral: Gord 19.3% | Açúc 0.0% | Sólid 16.8%
+• Estabilizante: Gord 0.0% | Açúc 0.0% | Sólid 0.7%
+• Emulsificante: Gord 0.0% | Açúc 0.0% | Sólid 0.7%
+
+COMPARAÇÃO COM METAS:
+Gordura: 8.9% (Alvo: 9%) - Δ -0.1pp
+Açúcar: 17.3% (Alvo: 18%) - Δ -0.7pp
+Sólidos: 37.6% (Alvo: 38%) - Δ -0.4pp
+
+==================================================
+CATALOGO_IDS = ["leite_condensado","creme17","amora","leite_integral","leite_po_integral","estabilizante_base","emulsificante_base"]

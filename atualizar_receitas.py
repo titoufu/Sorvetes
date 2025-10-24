@@ -4,7 +4,7 @@ import subprocess
 from datetime import datetime
 
 # Caminho da pasta das receitas
-PASTA_RECEITAS = os.path.join("site", "Receitas Testadas")
+PASTA_RECEITAS = os.path.join("docs", "Receitas Testadas")
 ARQUIVO_SAIDA = os.path.join(PASTA_RECEITAS, "receitas_testadas.json")
 
 def gerar_json_receitas():
