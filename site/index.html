@@ -748,17 +748,6 @@
     let gramsMix = {};
     let polpaSolids = 0.0;
 
-    const COMPOS = {
-      "Leite integral": [3.2, 12.5, 0.0],
-      "Creme de leite 35%": [35.0, 37.0, 0.0],
-      "Leite em pó integral": [26.0, 96.0, 0.0],
-      "Açúcar (sacarose)": [0.0, 100.0, 100.0],
-      "Glicose/mel (equiv.)": [0.0, 80.0, 80.0],
-      "Gemas": [30.0, 50.0, 0.0],
-      "Estabilizante": [0.0, 100.0, 0.0],
-      "Emulsificante": [0.0, 100.0, 0.0],
-      "Água/Polpa": [0.0, 0.0, 0.0]
-    };
 
     const PRESETS = {
       "Creme": {
@@ -800,38 +789,76 @@
     const stickyADelta = document.getElementById('stickyADelta');
     const stickySDelta = document.getElementById('stickySDelta');
 
-    // ==========================
-    // Catálogo (ingredients_master.json)
-    // ==========================
-    const FALLBACK_CATALOG = "https://titoufu.github.io/Sorvetes/ingredients_master.json";
-    let catalogData = { ingredients: [], updated_at: "" };
+// ==========================
+// Catálogo (ingredients_master.json)
+// ==========================
+const FALLBACK_CATALOG = "https://titoufu.github.io/Sorvetes/ingredients_master.json";
+let catalogData = { ingredients: [], updated_at: "" };
 
-    async function getCatalogUrl() {
-      try {
-        const r = await fetch("config.json", { cache: "no-store" });
-        if (r.ok) {
-          const cfg = await r.json();
-          if (cfg && cfg.ingredients_catalog_url) return cfg.ingredients_catalog_url;
-        }
-      } catch { }
-      return FALLBACK_CATALOG;
+async function getCatalogUrl() {
+  try {
+    const r = await fetch("config.json", { cache: "no-store" });
+    if (r.ok) {
+      const cfg = await r.json();
+      if (cfg && cfg.ingredients_catalog_url) return cfg.ingredients_catalog_url;
     }
-    async function loadCatalog() {
-      const url = await getCatalogUrl();
-      const r = await fetch(url + (url.includes("?") ? "&" : "?") + "t=" + Date.now());
-      if (!r.ok) throw new Error("Falha ao carregar catálogo: " + r.status);
-      const data = await r.json();
-      const valid = (data.ingredients || []).filter(i => i && String(i.id || "").trim() && String(i.name || "").trim() && i.is_active !== false);
-      catalogData = { ingredients: valid, updated_at: data.updated_at || "—" };
-      renderCatalogModal();
-    }
-    function renderCatalogModal() {
-      document.getElementById("catMeta").textContent = `${catalogData.ingredients.length} itens · atualizado ${catalogData.updated_at}`;
-      const sel = document.getElementById("catFilter");
-      const cats = Array.from(new Set(catalogData.ingredients.map(i => i.category || "—"))).sort();
-      sel.innerHTML = `<option value="">Todas</option>` + cats.map(c => `<option value="${c}">${c}</option>`).join("");
-      drawCatalogRows();
-    }
+  } catch { }
+  return FALLBACK_CATALOG;
+}
+
+async function loadCatalog() {
+  const url = await getCatalogUrl();
+  const r = await fetch(url + (url.includes("?") ? "&" : "?") + "t=" + Date.now());
+  if (!r.ok) throw new Error("Falha ao carregar catálogo: " + r.status);
+
+  const data = await r.json();
+
+  // Filtra apenas ingredientes válidos e ativos
+  const valid = (data.ingredients || []).filter(i =>
+    i &&
+    String(i.id || "").trim() &&
+    String(i.name || "").trim() &&
+    i.is_active !== false
+  );
+
+  catalogData = {
+    ingredients: valid,
+    updated_at: data.updated_at || "—"
+  };
+
+  // ============================================================
+  // 📘 Construção dinâmica da tabela COMPOS a partir do catálogo
+  // ============================================================
+  window.COMPOS = {}; // torna global para uso em cálculos, exportação etc.
+  if (catalogData && Array.isArray(catalogData.ingredients)) {
+    catalogData.ingredients.forEach(it => {
+      const f = Number(it.fat_pct) || 0;
+      const s = Number(it.solids_pct) || 0;
+      const a = Number(it.sugar_pct) || 0;
+      COMPOS[it.name] = [f, s, a];
+    });
+    console.log(`✅ COMPOS carregado dinamicamente com ${Object.keys(COMPOS).length} ingredientes.`);
+  } else {
+    console.warn("⚠️ Catálogo de ingredientes não encontrado ou inválido.");
+  }
+
+  renderCatalogModal();
+}
+
+function renderCatalogModal() {
+  document.getElementById("catMeta").textContent =
+    `${catalogData.ingredients.length} itens · atualizado ${catalogData.updated_at}`;
+
+  const sel = document.getElementById("catFilter");
+  const cats = Array.from(new Set(catalogData.ingredients.map(i => i.category || "—"))).sort();
+
+  sel.innerHTML =
+    `<option value="">Todas</option>` +
+    cats.map(c => `<option value="${c}">${c}</option>`).join("");
+
+  drawCatalogRows();
+}
+
     function drawCatalogRows() {
       const q = document.getElementById("catSearch").value.toLowerCase().trim();
       const cf = document.getElementById("catFilter").value;
