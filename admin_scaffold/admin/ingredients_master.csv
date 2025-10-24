@@ -29,8 +29,8 @@ goiaba;Goiaba (polpa);fruit;0,6;10,8;12;1,02;VERDADEIRO;;VERDADEIRO;"Brix ~12; f
 abacaxi;Abacaxi (polpa);fruit;0,2;11,7;13;1,02;VERDADEIRO;;VERDADEIRO;"Brix ~13; enzimas podem afetar textura.";1.0.0;;;OK
 coco_polpa;Polpa de coco (Coco-da-Baía);fruit_pulp;33;6;39;0,95;VERDADEIRO;tree_nuts;VERDADEIRO;Valores médios da polpa fresca de coco-da-Baía.;1.0.0;;;OK
 acucar_sacarose;Açúcar (sacarose);sweetener;0;100;100;1,59;VERDADEIRO;none;VERDADEIRO;Valor típico de sacarose refinada.;1.0.0;;;OK
-glicose_mel_equiv;Glicose/mel (equiv.);sweetener;0;80;80;1,45;VERDADEIRO;none;VERDADEIRO;Aproximação de glicose líquida/mel.;1.0.0;;;OK
+glicose_mel_equiv;Glicose/mel (equiv.);sweetener;0;80;80,1;1,45;VERDADEIRO;none;VERDADEIRO;Aproximação de glicose líquida/mel.;1.0.0;;;OK
 gemas;Gemas;egg;30;0;50;1,03;FALSO;egg;VERDADEIRO;Base para receitas custard.;1.0.0;;;OK
 estabilizante_base;Estabilizante;additive;0;0;100;0,8;VERDADEIRO;none;VERDADEIRO;Mistura de gomas e mono/di-glicerídeos.;1.0.0;;;OK
 emulsificante_base;Emulsificante;additive;0;0;100;0,8;VERDADEIRO;none;VERDADEIRO;Base sintética para sorvetes.;1.0.0;;;OK
-agua_polpa;Água/Polpa;base;0;0;0;1;VERDADEIRO;none;VERDADEIRO;Água ou polpa de fruta natural.;1.0.0;;;OK
+agua_polpa;Água/Polpa;base;0;0;0;1;VERDADEIRO;none ;VERDADEIRO;Água ou polpa de fruta natural.;1.0.0;;;OK

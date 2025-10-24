@@ -9,26 +9,24 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    # Permissões explícitas (necessárias para commit/push)
     permissions:
       contents: write
-      pages: write
-      id-token: write
 
     steps:
-      - name: 🧭 Checkout do repositório
+      - name: 🧩 Checkout do repositório
         uses: actions/checkout@v4
 
-      # 🚨 Segurança adicional: só executa se o commit for seu ou do bot
-      - name: 🔒 Verificar autor do commit
+      - name: 🔒 Verificar autor do commit (versão final)
         run: |
-          AUTHOR=$(git log -1 --pretty=format:'%an')
+          AUTHOR="${{ github.event.head_commit.author.name }}"
+          ACTOR="${{ github.actor }}"
           echo "Autor detectado: $AUTHOR"
-          if [ "$AUTHOR" != "titoufu" ] && [ "$AUTHOR" != "github-actions[bot]" ]; then
-            echo "⛔ Commit não autorizado. Somente 'titoufu' ou 'github-actions[bot]' podem atualizar o catálogo."
+          echo "Usuário executor: $ACTOR"
+          if [[ "$AUTHOR" != "titoufu" && "$AUTHOR" != "JOSE RIBEIRO" && "$AUTHOR" != "github-actions[bot]" ]]; then
+            echo "❌ Commit não autorizado. Apenas 'titoufu', 'JOSE RIBEIRO' ou 'github-actions[bot]' podem atualizar o catálogo."
             exit 1
           fi
+          echo "✅ Commit autorizado para atualização do catálogo."
 
       - name: 🐍 Configurar Python
         uses: actions/setup-python@v5
