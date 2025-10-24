@@ -41,7 +41,7 @@ jobs:
       - name: 🧱 Gerar JSON do catálogo
         run: python admin_scaffold/admin/build_json.py admin_scaffold/admin/ingredients_master.csv site/ingredients_master.json
 
-      - name: 🚀 Commit e push automáticos
+      - name: 🚀 Commit e push automáticos (via PR)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
