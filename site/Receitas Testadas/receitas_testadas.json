@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "updated_at": "2025-10-24T01:15:02Z",
+  "count": 4,
+  "receitas": [
+    {
+      "titulo": "Manga Gelato",
+      "arquivo": "Manga_Gelato.txt"
+    },
+    {
+      "titulo": "Maracujá Creme",
+      "arquivo": "Maracujá_Creme.txt"
+    },
+    {
+      "titulo": "Morango Creme",
+      "arquivo": "Morango_Creme.txt"
+    },
+    {
+      "titulo": "Morango Gelato",
+      "arquivo": "Morango_Gelato.txt"
+    }
+  ]
+}
