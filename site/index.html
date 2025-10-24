@@ -980,10 +980,10 @@
       renderTable(); recalc();
     }
 
-    // ==========================
-    // Exportar
-    // ==========================
-    function exportarReceita() {
+ // ============================================================
+// 📦 EXPORTAR RECEITA (com IDs corretos do catálogo)
+// ============================================================
+function exportarReceita() {
   const r = calc();
   const ingredientesAtivos = Object.entries(gramsMix)
     .filter(([_, q]) => q > 0)
@@ -1024,20 +1024,25 @@
   texto += `Sólidos: ${r.solidosPct.toFixed(1)}% (Alvo: ${t.solidos}%) - Δ ${(r.solidosPct - t.solidos).toFixed(1)}pp\n`;
 
   // ============================================================
-  // 🆕 Adição da seção de IDs de catálogo (rodapé do arquivo)
+  // 🆕 Adição da seção de IDs de catálogo (rodapé)
   // ============================================================
   const idList = ingredientesAtivos.map(([ing]) => {
-    const found = (catalogData.ingredients || []).find(item =>
-      item.name?.toLowerCase() === ing.toLowerCase() ||
-      item.id?.toLowerCase() === ing.toLowerCase()
-    );
+    // Usa o mesmo método do programa principal
+    const found = typeof findCatalogItemByName === "function"
+      ? findCatalogItemByName(ing)
+      : (catalogData.ingredients || []).find(it =>
+          (it.name || "").trim().toLowerCase() === ing.trim().toLowerCase()
+        );
+
     return found?.id || "desconhecido";
   });
 
   texto += "\n" + "=".repeat(50) + "\n";
   texto += `CATALOGO_IDS = [${idList.map(id => `"${id}"`).join(",")}]\n`;
+
   // ============================================================
 
+  // Cria o arquivo para download
   const blob = new Blob([texto], { type: 'text/plain;charset=utf-8' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -1051,7 +1056,6 @@
   console.log("📦 Exportação concluída com sucesso!");
   console.log("➡ IDs exportados:", idList);
 }
-
 
     // ==========================
     // Receitas (dinâmico por JSON)
