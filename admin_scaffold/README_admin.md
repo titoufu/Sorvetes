@@ -42,7 +42,7 @@ Exemplo:
 git checkout -b atualizar-catalogo-2025-10-24
 ```
 
-### 4️⃣ Commit e push
+### 4️⃣ Commit e  push
 
 ```bash
 git add admin_scaffold/admin/ingredients_master.csv
