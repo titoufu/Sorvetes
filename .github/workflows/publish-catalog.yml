@@ -58,6 +58,6 @@ jobs:
           gh pr create --title "🤖 Atualização automática do catálogo" \
                       --body "Gerado automaticamente pelo workflow." \
                       --base main \
-                      --head update-catalogo-auto || echo "PR já existe"
+                      --head update-catalogo-auto || echo "PR já existe "
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
