@@ -789,75 +789,75 @@
     const stickyADelta = document.getElementById('stickyADelta');
     const stickySDelta = document.getElementById('stickySDelta');
 
-// ==========================
-// Catálogo (ingredients_master.json)
-// ==========================
-const FALLBACK_CATALOG = "./ingredients_master.json";
-let catalogData = { ingredients: [], updated_at: "" };
+    // ==========================
+    // Catálogo (ingredients_master.json)
+    // ==========================
+    const FALLBACK_CATALOG = "./ingredients_master.json";
+    let catalogData = { ingredients: [], updated_at: "" };
 
-async function getCatalogUrl() {
-  try {
-    const r = await fetch("config.json", { cache: "no-store" });
-    if (r.ok) {
-      const cfg = await r.json();
-      if (cfg && cfg.ingredients_catalog_url) return cfg.ingredients_catalog_url;
+    async function getCatalogUrl() {
+      try {
+        const r = await fetch("config.json", { cache: "no-store" });
+        if (r.ok) {
+          const cfg = await r.json();
+          if (cfg && cfg.ingredients_catalog_url) return cfg.ingredients_catalog_url;
+        }
+      } catch { }
+      return FALLBACK_CATALOG;
     }
-  } catch { }
-  return FALLBACK_CATALOG;
-}
 
-async function loadCatalog() {
-  const url = await getCatalogUrl();
-  const r = await fetch(url + (url.includes("?") ? "&" : "?") + "t=" + Date.now());
-  if (!r.ok) throw new Error("Falha ao carregar catálogo: " + r.status);
+    async function loadCatalog() {
+      const url = await getCatalogUrl();
+      const r = await fetch(url + (url.includes("?") ? "&" : "?") + "t=" + Date.now());
+      if (!r.ok) throw new Error("Falha ao carregar catálogo: " + r.status);
 
-  const data = await r.json();
+      const data = await r.json();
 
-  // Filtra apenas ingredientes válidos e ativos
-  const valid = (data.ingredients || []).filter(i =>
-    i &&
-    String(i.id || "").trim() &&
-    String(i.name || "").trim() &&
-    i.is_active !== false
-  );
+      // Filtra apenas ingredientes válidos e ativos
+      const valid = (data.ingredients || []).filter(i =>
+        i &&
+        String(i.id || "").trim() &&
+        String(i.name || "").trim() &&
+        i.is_active !== false
+      );
 
-  catalogData = {
-    ingredients: valid,
-    updated_at: data.updated_at || "—"
-  };
+      catalogData = {
+        ingredients: valid,
+        updated_at: data.updated_at || "—"
+      };
 
-  // ============================================================
-  // 📘 Construção dinâmica da tabela COMPOS a partir do catálogo
-  // ============================================================
-  window.COMPOS = {}; // torna global para uso em cálculos, exportação etc.
-  if (catalogData && Array.isArray(catalogData.ingredients)) {
-    catalogData.ingredients.forEach(it => {
-      const f = Number(it.fat_pct) || 0;
-      const s = Number(it.solids_pct) || 0;
-      const a = Number(it.sugar_pct) || 0;
-      COMPOS[it.name] = [f, s, a];
-    });
-    console.log(`✅ COMPOS carregado dinamicamente com ${Object.keys(COMPOS).length} ingredientes.`);
-  } else {
-    console.warn("⚠️ Catálogo de ingredientes não encontrado ou inválido.");
-  }
+      // ============================================================
+      // 📘 Construção dinâmica da tabela COMPOS a partir do catálogo
+      // ============================================================
+      window.COMPOS = {}; // torna global para uso em cálculos, exportação etc.
+      if (catalogData && Array.isArray(catalogData.ingredients)) {
+        catalogData.ingredients.forEach(it => {
+          const f = Number(it.fat_pct) || 0;
+          const s = Number(it.solids_pct) || 0;
+          const a = Number(it.sugar_pct) || 0;
+          COMPOS[it.name] = [f, s, a];
+        });
+        console.log(`✅ COMPOS carregado dinamicamente com ${Object.keys(COMPOS).length} ingredientes.`);
+      } else {
+        console.warn("⚠️ Catálogo de ingredientes não encontrado ou inválido.");
+      }
 
-  renderCatalogModal();
-}
+      renderCatalogModal();
+    }
 
-function renderCatalogModal() {
-  document.getElementById("catMeta").textContent =
-    `${catalogData.ingredients.length} itens · atualizado ${catalogData.updated_at}`;
+    function renderCatalogModal() {
+      document.getElementById("catMeta").textContent =
+        `${catalogData.ingredients.length} itens · atualizado ${catalogData.updated_at}`;
 
-  const sel = document.getElementById("catFilter");
-  const cats = Array.from(new Set(catalogData.ingredients.map(i => i.category || "—"))).sort();
+      const sel = document.getElementById("catFilter");
+      const cats = Array.from(new Set(catalogData.ingredients.map(i => i.category || "—"))).sort();
 
-  sel.innerHTML =
-    `<option value="">Todas</option>` +
-    cats.map(c => `<option value="${c}">${c}</option>`).join("");
+      sel.innerHTML =
+        `<option value="">Todas</option>` +
+        cats.map(c => `<option value="${c}">${c}</option>`).join("");
 
-  drawCatalogRows();
-}
+      drawCatalogRows();
+    }
 
     function drawCatalogRows() {
       const q = document.getElementById("catSearch").value.toLowerCase().trim();
@@ -1007,88 +1007,89 @@ function renderCatalogModal() {
       renderTable(); recalc();
     }
 
- // ============================================================
-// 📦 EXPORTAR RECEITA (com IDs corretos do catálogo)
-// ============================================================
-function exportarReceita() {
-  const r = calc();
-  const ingredientesAtivos = Object.entries(gramsMix)
-    .filter(([_, q]) => q > 0)
-    .sort((a, b) => b[1] - a[1]);
+    // ============================================================
+    // 📦 EXPORTAR RECEITA (com IDs corretos do catálogo)
+    // ============================================================
+    function exportarReceita() {
+      const r = calc();
+      const ingredientesAtivos = Object.entries(gramsMix)
+        .filter(([_, q]) => q > 0)
+        .sort((a, b) => b[1] - a[1]);
 
-  if (!ingredientesAtivos.length) {
-    alert("Nenhum ingrediente com quantidade maior que zero para exportar.");
-    return;
-  }
+      if (!ingredientesAtivos.length) {
+        alert("Nenhum ingrediente com quantidade maior que zero para exportar.");
+        return;
+      }
 
-  let texto = `RECEITA DE SORVETE - ${current}\n`;
-  texto += `Data: ${new Date().toLocaleDateString('pt-BR')}\n`;
-  texto += `Peso total: ${r.total.toFixed(0)}g\n`;
-  texto += `Composição: Gordura ${r.gorduraPct.toFixed(1)}% | Açúcar ${r.acucarPct.toFixed(1)}% | Sólidos ${r.solidosPct.toFixed(1)}%\n`;
-  texto += "=".repeat(50) + "\n\n";
-  texto += "INGREDIENTES:\n";
+      let texto = `RECEITA DE SORVETE - ${current}\n`;
+      texto += `Data: ${new Date().toLocaleDateString('pt-BR')}\n`;
+      texto += `Peso total: ${r.total.toFixed(0)}g\n`;
+      texto += `Composição: Gordura ${r.gorduraPct.toFixed(1)}% | Açúcar ${r.acucarPct.toFixed(1)}% | Sólidos ${r.solidosPct.toFixed(1)}%\n`;
+      texto += "=".repeat(50) + "\n\n";
+      texto += "INGREDIENTES:\n";
 
-  ingredientesAtivos.forEach(([ing, q]) => {
-    const pct = r.percent[ing] || 0;
-    texto += `• ${ing}: ${q.toFixed(0)}g (${pct.toFixed(1)}%)\n`;
-  });
+      ingredientesAtivos.forEach(([ing, q]) => {
+        const pct = r.percent[ing] || 0;
+        texto += `• ${ing}: ${q.toFixed(0)}g (${pct.toFixed(1)}%)\n`;
+      });
 
-  texto += "\n" + "=".repeat(50) + "\nDETALHES TÉCNICOS:\n\nContribuições na mistura:\n";
+      texto += "\n" + "=".repeat(50) + "\nDETALHES TÉCNICOS:\n\nContribuições na mistura:\n";
 
-  ingredientesAtivos.forEach(([ing]) => {
-    const fg = r.fatParts[ing] || 0,
+      ingredientesAtivos.forEach(([ing]) => {
+        const fg = r.fatParts[ing] || 0,
           sg = r.sugarParts[ing] || 0,
           tg = r.solidsParts[ing] || 0;
-    const fc = r.fatG > 0 ? (fg / r.fatG * 100) : 0,
+        const fc = r.fatG > 0 ? (fg / r.fatG * 100) : 0,
           sc = r.sugarG > 0 ? (sg / r.sugarG * 100) : 0,
           tc = r.solidsG > 0 ? (tg / r.solidsG * 100) : 0;
-    texto += `• ${ing}: Gord ${fc.toFixed(1)}% | Açúc ${sc.toFixed(1)}% | Sólid ${tc.toFixed(1)}%\n`;
-  });
+        texto += `• ${ing}: Gord ${fc.toFixed(1)}% | Açúc ${sc.toFixed(1)}% | Sólid ${tc.toFixed(1)}%\n`;
+      });
 
-  const t = PRESETS[current].targets;
-  texto += `\nCOMPARAÇÃO COM METAS:\nGordura: ${r.gorduraPct.toFixed(1)}% (Alvo: ${t.gordura}%) - Δ ${(r.gorduraPct - t.gordura).toFixed(1)}pp\n`;
-  texto += `Açúcar: ${r.acucarPct.toFixed(1)}% (Alvo: ${t.acucar}%) - Δ ${(r.acucarPct - t.acucar).toFixed(1)}pp\n`;
-  texto += `Sólidos: ${r.solidosPct.toFixed(1)}% (Alvo: ${t.solidos}%) - Δ ${(r.solidosPct - t.solidos).toFixed(1)}pp\n`;
+      const t = PRESETS[current].targets;
+      texto += `\nCOMPARAÇÃO COM METAS:\nGordura: ${r.gorduraPct.toFixed(1)}% (Alvo: ${t.gordura}%) - Δ ${(r.gorduraPct - t.gordura).toFixed(1)}pp\n`;
+      texto += `Açúcar: ${r.acucarPct.toFixed(1)}% (Alvo: ${t.acucar}%) - Δ ${(r.acucarPct - t.acucar).toFixed(1)}pp\n`;
+      texto += `Sólidos: ${r.solidosPct.toFixed(1)}% (Alvo: ${t.solidos}%) - Δ ${(r.solidosPct - t.solidos).toFixed(1)}pp\n`;
 
-  // ============================================================
-  // 🆕 Adição da seção de IDs de catálogo (rodapé)
-  // ============================================================
-  const idList = ingredientesAtivos.map(([ing]) => {
-    // Usa o mesmo método do programa principal
-    const found = typeof findCatalogItemByName === "function"
-      ? findCatalogItemByName(ing)
-      : (catalogData.ingredients || []).find(it =>
-          (it.name || "").trim().toLowerCase() === ing.trim().toLowerCase()
-        );
+      // ============================================================
+      // 🆕 Adição da seção de IDs de catálogo (rodapé)
+      // ============================================================
+      const idList = ingredientesAtivos.map(([ing]) => {
+        // Usa o mesmo método do programa principal
+        const found = typeof findCatalogItemByName === "function"
+          ? findCatalogItemByName(ing)
+          : (catalogData.ingredients || []).find(it =>
+            (it.name || "").trim().toLowerCase() === ing.trim().toLowerCase()
+          );
 
-    return found?.id || "desconhecido";
-  });
+        return found?.id || "desconhecido";
+      });
 
-  texto += "\n" + "=".repeat(50) + "\n";
-  texto += `CATALOGO_IDS = [${idList.map(id => `"${id}"`).join(",")}]\n`;
+      texto += "\n" + "=".repeat(50) + "\n";
+      texto += `CATALOGO_IDS = [${idList.map(id => `"${id}"`).join(",")}]\n`;
 
-  // ============================================================
+      // ============================================================
 
-  // Cria o arquivo para download
-  const blob = new Blob([texto], { type: 'text/plain;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `receita-sorvete-${current.toLowerCase()}-${new Date().toISOString().split('T')[0]}.txt`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+      // Cria o arquivo para download
+      const blob = new Blob([texto], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `receita-sorvete-${current.toLowerCase()}-${new Date().toISOString().split('T')[0]}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
 
-  console.log("📦 Exportação concluída com sucesso!");
-  console.log("➡ IDs exportados:", idList);
-}
+      console.log("📦 Exportação concluída com sucesso!");
+      console.log("➡ IDs exportados:", idList);
+    }
 
     // ==========================
     // Receitas (dinâmico por JSON)
     // ==========================
-    const RECIPES_FOLDER = "https://titoufu.github.io/Sorvetes/Receitas%20Testadas/";
-    const JSON_RECEITAS = "Receitas Testadas/receitas_testadas.json";
+    const RECIPES_FOLDER = "./Receitas%20Testadas/";
+    const JSON_RECEITAS = "./Receitas%20Testadas/receitas_testadas.json";
+
     let receitas = [];
     let receitaCarregavel = { title: "", content: "" };
 
@@ -1158,59 +1159,59 @@ function exportarReceita() {
       return found || null;
     }
 
-   function loadRecipeFromContent(content, title) {
-  try {
-    const ingredientsSection = content.split('INGREDIENTES:')[1]?.split('DETALHES TÉCNICOS:')[0];
+    function loadRecipeFromContent(content, title) {
+      try {
+        const ingredientsSection = content.split('INGREDIENTES:')[1]?.split('DETALHES TÉCNICOS:')[0];
 
-    if (ingredientsSection) {
-      gramsMix = {};
+        if (ingredientsSection) {
+          gramsMix = {};
 
-      // Extrai linhas do bloco de ingredientes
-      const lines = ingredientsSection
-        .split('\n')
-        .filter(line => line.trim().startsWith('•') && line.includes(':'));
+          // Extrai linhas do bloco de ingredientes
+          const lines = ingredientsSection
+            .split('\n')
+            .filter(line => line.trim().startsWith('•') && line.includes(':'));
 
-      // Monta { ingrediente: quantidade }
-      lines.forEach(line => {
-        const match = line.match(/•\s*(.+?):\s*(\d+)g\s*\([^)]+\)/);
-        if (match) {
-          const ingredient = match[1].trim();
-          const quantidade = parseInt(match[2], 10);
-          if (ingredient && !isNaN(quantidade)) gramsMix[ingredient] = quantidade;
+          // Monta { ingrediente: quantidade }
+          lines.forEach(line => {
+            const match = line.match(/•\s*(.+?):\s*(\d+)g\s*\([^)]+\)/);
+            if (match) {
+              const ingredient = match[1].trim();
+              const quantidade = parseInt(match[2], 10);
+              if (ingredient && !isNaN(quantidade)) gramsMix[ingredient] = quantidade;
+            }
+          });
+
+          // Para cada ingrediente da receita, garantir entrada no COMPOS
+          // ORDEM CORRETA do COMPOS: [gordura, SÓLIDOS, açúcar]
+          Object.keys(gramsMix).forEach(ingredient => {
+            if (!COMPOS.hasOwnProperty(ingredient)) {
+              const found = findCatalogItemByName(ingredient);
+              if (found) {
+                const fat = Number(found.fat_pct) || 0;
+                const solids = Number(found.solids_pct) || 0; // sólidos é a 2ª posição
+                const sugar = Number(found.sugar_pct) || 0;
+                COMPOS[ingredient] = [fat, solids, sugar];
+                console.log(`✔ "${ingredient}" do catálogo → COMPOS = [fat:${fat} • solids:${solids} • sugar:${sugar}]`);
+              } else {
+                // Só cai aqui se realmente não existir no catálogo
+                COMPOS[ingredient] = [0, 0, 0];
+                console.warn(`⚠ "${ingredient}" não está no catálogo. COMPOS definido como [0,0,0].`);
+              }
+            }
+          });
+
+          renderTable();
+          recalc();
+
+          document.getElementById('dlgRecipes').close();
+          alert(`Receita "${title}" carregada com sucesso!`);
         }
-      });
-
-      // Para cada ingrediente da receita, garantir entrada no COMPOS
-      // ORDEM CORRETA do COMPOS: [gordura, SÓLIDOS, açúcar]
-      Object.keys(gramsMix).forEach(ingredient => {
-        if (!COMPOS.hasOwnProperty(ingredient)) {
-          const found = findCatalogItemByName(ingredient);
-          if (found) {
-            const fat    = Number(found.fat_pct)    || 0;
-            const solids = Number(found.solids_pct) || 0; // sólidos é a 2ª posição
-            const sugar  = Number(found.sugar_pct)  || 0;
-            COMPOS[ingredient] = [fat, solids, sugar];
-            console.log(`✔ "${ingredient}" do catálogo → COMPOS = [fat:${fat} • solids:${solids} • sugar:${sugar}]`);
-          } else {
-            // Só cai aqui se realmente não existir no catálogo
-            COMPOS[ingredient] = [0, 0, 0];
-            console.warn(`⚠ "${ingredient}" não está no catálogo. COMPOS definido como [0,0,0].`);
-          }
-        }
-      });
-
-      renderTable();
-      recalc();
-
-      document.getElementById('dlgRecipes').close();
-      alert(`Receita "${title}" carregada com sucesso!`);
+      } catch (error) {
+        alert('Erro ao carregar a receita: ' + error.message);
+        console.error('Erro ao carregar receita:', error);
+      }
     }
-  } catch (error) {
-    alert('Erro ao carregar a receita: ' + error.message);
-    console.error('Erro ao carregar receita:', error);
-  }
-}
- 
+
 
 
     function setupRecipesModal() {
@@ -1251,41 +1252,41 @@ function exportarReceita() {
     // ==========================
     // Init
     // ==========================
-document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', init);
 
-async function init() {
-  // 1) Carrega o catálogo primeiro (popula COMPOS a partir do JSON)
-  await loadCatalog();
+    async function init() {
+      // 1) Carrega o catálogo primeiro (popula COMPOS a partir do JSON)
+      await loadCatalog();
 
-  // 2) Só depois inicializa o resto
-  const savedTheme = localStorage.getItem('sorvete_theme') || '';
-  themeSel.value = savedTheme; 
-  setTheme(savedTheme);
-  themeSel.addEventListener('change', () => { 
-    setTheme(themeSel.value); 
-    localStorage.setItem('sorvete_theme', themeSel.value || ''); 
-  });
+      // 2) Só depois inicializa o resto
+      const savedTheme = localStorage.getItem('sorvete_theme') || '';
+      themeSel.value = savedTheme;
+      setTheme(savedTheme);
+      themeSel.addEventListener('change', () => {
+        setTheme(themeSel.value);
+        localStorage.setItem('sorvete_theme', themeSel.value || '');
+      });
 
-  presetSel.innerHTML = Object.keys(PRESETS).map(p => `<option ${p === current ? 'selected' : ''}>${p}</option>`).join('');
-  applyPreset(current);
-  presetSel.addEventListener('change', () => applyPreset(presetSel.value));
+      presetSel.innerHTML = Object.keys(PRESETS).map(p => `<option ${p === current ? 'selected' : ''}>${p}</option>`).join('');
+      applyPreset(current);
+      presetSel.addEventListener('change', () => applyPreset(presetSel.value));
 
-  document.getElementById('btnExport').addEventListener('click', exportarReceita);
-  document.getElementById('btnReset').addEventListener('click', () => applyPreset(current));
-  document.getElementById('btnT1').addEventListener('click', () => setTarget(1000));
-  document.getElementById('btnT15').addEventListener('click', () => setTarget(1500));
-  document.getElementById('btnT2').addEventListener('click', () => setTarget(2000));
-  document.getElementById('btnBlur').addEventListener('click', () => { if (document.activeElement?.blur) document.activeElement.blur(); });
+      document.getElementById('btnExport').addEventListener('click', exportarReceita);
+      document.getElementById('btnReset').addEventListener('click', () => applyPreset(current));
+      document.getElementById('btnT1').addEventListener('click', () => setTarget(1000));
+      document.getElementById('btnT15').addEventListener('click', () => setTarget(1500));
+      document.getElementById('btnT2').addEventListener('click', () => setTarget(2000));
+      document.getElementById('btnBlur').addEventListener('click', () => { if (document.activeElement?.blur) document.activeElement.blur(); });
 
-  setupRecipesModal();
+      setupRecipesModal();
 
-  fetch(JSON_RECEITAS)
-    .then(r => { if (!r.ok) throw new Error("Erro ao carregar receitas_testadas.json"); return r.json(); })
-    .then(data => { receitas = data.receitas || []; console.log(`📘 ${receitas.length} receitas carregadas do JSON.`); })
-    .catch(err => console.error("⚠️ Falha ao carregar lista de receitas:", err));
-}
+      fetch(JSON_RECEITAS)
+        .then(r => { if (!r.ok) throw new Error("Erro ao carregar receitas_testadas.json"); return r.json(); })
+        .then(data => { receitas = data.receitas || []; console.log(`📘 ${receitas.length} receitas carregadas do JSON.`); })
+        .catch(err => console.error("⚠️ Falha ao carregar lista de receitas:", err));
+    }
 
-    
+
 
   </script>
 </body>
