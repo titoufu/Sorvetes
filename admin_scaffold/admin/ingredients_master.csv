@@ -1,5 +1,5 @@
 ﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status
-leite_integral;Leite integral;dairy;3,2;0;12,5;1,03;FALSO;milk;VERDADEIRO;"Valores típicos Brasil; ajuste conforme rótulo.";1.0.0;;;OK
+leite_integral;Leite integralllllll;dairy;3,2;0;12,5;1,03;FALSO;milk;VERDADEIRO;"Valores típicos Brasil; ajuste conforme rótulo.";1.0.0;;;OK
 creme35;Creme de leite 35%;dairy_fat;35;0;37;1;FALSO;milk;VERDADEIRO;"Gordura ~35%; sólidos ~37%.";1.0.0;;;OK
 creme17;Creme de leite 17%;dairy_fat;17;0;24;1,01;FALSO;milk;VERDADEIRO;Estimativa: MSNF ~7%, sólidos totais ~24%.;1.0.0;;;OK
 leite_po_integral;Leite em pó integral;dairy_powder;26;0;96;0,45;FALSO;milk;VERDADEIRO;Sólidos ~96%.;1.0.0;;;OK
@@ -21,7 +21,7 @@ guar;Goma guar;stabilizer;0;0;100;0,6;VERDADEIRO;;VERDADEIRO;"Estabilizante; 0,2
 lecitina_soja;Lecitina de soja;emulsifier;0;0;100;0,85;VERDADEIRO;soy;VERDADEIRO;Emulsificante 0,3–0,5%.;1.0.0;;;OK
 agua;Água;water;0;0;0;1;VERDADEIRO;;VERDADEIRO;Base aquosa.;1.0.0;;;OK
 leite_coco_17;Leite de coco (17% gordura);plant_milk;17;2;22;1,02;VERDADEIRO;tree_nuts;VERDADEIRO;Médias: gordura 17%, açúcares 2%, sólidos 22%.;1.0.0;;;OK
-manga;Manga (polpa);fruit;0,6;13,5;15;1,02;VERDADEIRO;;VERDADEIRO;"Brix ~15; açúcares ~13,5%.";1.0.0;;;OK
+manga;Manga (polpa);fruit;0,6;13,50;15;1,02;VERDADEIRO;;VERDADEIRO;"Brix ~15; açúcares ~13,5%.";1.0.0;;;OK
 morango;Morango (polpa);fruit;0,5;7,2;8;1,02;VERDADEIRO;;VERDADEIRO;"Brix ~8; açúcares ~7–7,5%.";1.0.0;;;OK
 maracuja;Maracujá (polpa);fruit;0,7;11,7;13;1,02;VERDADEIRO;;VERDADEIRO;"Brix ~13; atenção à acidez.";1.0.0;;;OK
 banana;Banana (polpa);fruit;0,4;20;22;1,05;VERDADEIRO;;VERDADEIRO;"Brix ~22; muito corpo.";1.0.0;;;OK
