@@ -1191,7 +1191,8 @@
       .then(data => {
         receitas = data.receitas || [];
         console.log(`📘 ${receitas.length} receitas carregadas do JSON.`);
-        popularListaReceitas();  // <-- função já existente que monta o menu
+       displayStaticRecipesList(receitas);  // usa a função já definida
+
       })
       .catch(error => console.error("⚠️ Falha ao carregar lista de receitas:", error));
 
