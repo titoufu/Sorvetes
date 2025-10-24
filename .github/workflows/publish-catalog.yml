@@ -6,35 +6,29 @@ on:
       - "admin_scaffold/admin/ingredients_master.csv"
   workflow_dispatch:
 
+permissions:
+  contents: write  # permite o bot commitar mesmo em branch protegida
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    # Permissões explícitas (necessárias para commit/push)
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
 
     steps:
       - name: 🧭 Checkout do repositório
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # necessário para git log funcionar
+          fetch-depth: 0
 
-      # 🚨 Segurança: só executa se o commit for do autor autorizado
-      - name: 🔒 Verificar autor do commit (versão robusta)
+      - name: 🔒 Verificar autor do commit
         run: |
-          AUTHOR=$(git log -1 --pretty=format:'%an' || echo "desconhecido")
-          AUTHOR_LC=$(echo "$AUTHOR" | tr '[:upper:]' '[:lower:]')
+          AUTHOR=$(git log -1 --pretty=format:'%an')
           echo "Autor detectado: $AUTHOR"
-
-          if [[ "$AUTHOR_LC" != "titoufu" && "$AUTHOR_LC" != "github-actions[bot]" && "$AUTHOR_LC" != "jose ribeiro" ]]; then
-            echo "⛔ Commit não autorizado. Somente 'titoufu', 'github-actions[bot]' ou 'JOSE RIBEIRO' podem atualizar o catálogo."
+          if [ "$AUTHOR" != "titoufu" ] && [ "$AUTHOR" != "github-actions[bot]" ] && [ "$AUTHOR" != "JOSE RIBEIRO" ]; then
+            echo "⛔ Commit não autorizado. Apenas 'titoufu', 'JOSE RIBEIRO' ou 'github-actions[bot]' podem atualizar o catálogo."
             exit 1
           fi
-
-          echo "✅ Commit autorizado para atualização do catálogo."
+          echo "✅ Commit autorizado."
 
       - name: 🐍 Configurar Python
         uses: actions/setup-python@v5
@@ -47,13 +41,10 @@ jobs:
       - name: 🧱 Gerar JSON do catálogo
         run: python admin_scaffold/admin/build_json.py admin_scaffold/admin/ingredients_master.csv site/ingredients_master.json
 
-      - name: 🚀 Criar PR automático com atualização do catálogo
+      - name: 🚀 Commit e push automáticos
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add site/ingredients_master.json
-          git commit -m "🤖 Atualiza catálogo de ingredientes automaticamente" || echo "Nada a commitar"
-          git push origin HEAD:update-catalogo-auto
-          gh pr create --title "🤖  Atualização automática do catálogo" --body "Gerado automaticamente pelo workflow." --base main --head update-catalogo-auto || echo "PR já existe"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git commit -m "🤖 Atualização automática do catálogo" || echo "Nada a commitar"
+          git push origin HEAD:main
