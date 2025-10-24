@@ -1,5 +1,5 @@
 ﻿id;name;category;fat_pct;sugar_pct;solids_pct;density_g_ml;vegan;allergens;is_active;notes;version;updated_at;source_url;status
-leite_integral;Leite integral;dairy;3,2;0;12,5;1,03;FALSO;milk;VERDADEIRO;"Valores típicos Brasil; ajuste conforme rótulo.";1.0.0;;;OK
+leite_integral;Leite integralllllll;dairy;3,2;0;12,5;1,03;FALSO;milk;VERDADEIRO;"Valores típicos Brasil; ajuste conforme rótulo.";1.0.0;;;OK
 creme35;Creme de leite 35%;dairy_fat;35;0;37;1;FALSO;milk;VERDADEIRO;"Gordura ~35%; sólidos ~37%.";1.0.0;;;OK
 creme17;Creme de leite 17%;dairy_fat;17;0;24;1,01;FALSO;milk;VERDADEIRO;Estimativa: MSNF ~7%, sólidos totais ~24%.;1.0.0;;;OK
 leite_po_integral;Leite em pó integral;dairy_powder;26;0;96;0,45;FALSO;milk;VERDADEIRO;Sólidos ~96%.;1.0.0;;;OK
