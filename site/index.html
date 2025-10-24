@@ -1251,38 +1251,42 @@ function exportarReceita() {
     // ==========================
     // Init
     // ==========================
-    function init() {
-      // tema
-      const savedTheme = localStorage.getItem('sorvete_theme') || '';
-      themeSel.value = savedTheme; setTheme(savedTheme);
-      themeSel.addEventListener('change', () => { setTheme(themeSel.value); localStorage.setItem('sorvete_theme', themeSel.value || ''); });
+document.addEventListener('DOMContentLoaded', init);
 
-      // presets
-      presetSel.innerHTML = Object.keys(PRESETS).map(p => `<option ${p === current ? 'selected' : ''}>${p}</option>`).join('');
-      applyPreset(current);
-      presetSel.addEventListener('change', () => applyPreset(presetSel.value));
+async function init() {
+  // 1) Carrega o catálogo primeiro (popula COMPOS a partir do JSON)
+  await loadCatalog();
 
-      // botões principais
-      document.getElementById('btnExport').addEventListener('click', exportarReceita);
-      document.getElementById('btnReset').addEventListener('click', () => applyPreset(current));
-      document.getElementById('btnT1').addEventListener('click', () => setTarget(1000));
-      document.getElementById('btnT15').addEventListener('click', () => setTarget(1500));
-      document.getElementById('btnT2').addEventListener('click', () => setTarget(2000));
-      document.getElementById('btnBlur').addEventListener('click', () => { if (document.activeElement && document.activeElement.blur) { document.activeElement.blur(); } });
+  // 2) Só depois inicializa o resto
+  const savedTheme = localStorage.getItem('sorvete_theme') || '';
+  themeSel.value = savedTheme; 
+  setTheme(savedTheme);
+  themeSel.addEventListener('change', () => { 
+    setTheme(themeSel.value); 
+    localStorage.setItem('sorvete_theme', themeSel.value || ''); 
+  });
 
-      // catálogo + receitas
-      setupRecipesModal();
+  presetSel.innerHTML = Object.keys(PRESETS).map(p => `<option ${p === current ? 'selected' : ''}>${p}</option>`).join('');
+  applyPreset(current);
+  presetSel.addEventListener('change', () => applyPreset(presetSel.value));
 
-      // carregar lista de receitas (dinâmica)
-      fetch(JSON_RECEITAS)
-        .then(r => { if (!r.ok) throw new Error("Erro ao carregar receitas_testadas.json"); return r.json(); })
-        .then(data => {
-          receitas = data.receitas || [];
-          console.log(`📘 ${receitas.length} receitas carregadas do JSON.`);
-        })
-        .catch(err => console.error("⚠️ Falha ao carregar lista de receitas:", err));
-    }
-    document.addEventListener('DOMContentLoaded', init);
+  document.getElementById('btnExport').addEventListener('click', exportarReceita);
+  document.getElementById('btnReset').addEventListener('click', () => applyPreset(current));
+  document.getElementById('btnT1').addEventListener('click', () => setTarget(1000));
+  document.getElementById('btnT15').addEventListener('click', () => setTarget(1500));
+  document.getElementById('btnT2').addEventListener('click', () => setTarget(2000));
+  document.getElementById('btnBlur').addEventListener('click', () => { if (document.activeElement?.blur) document.activeElement.blur(); });
+
+  setupRecipesModal();
+
+  fetch(JSON_RECEITAS)
+    .then(r => { if (!r.ok) throw new Error("Erro ao carregar receitas_testadas.json"); return r.json(); })
+    .then(data => { receitas = data.receitas || []; console.log(`📘 ${receitas.length} receitas carregadas do JSON.`); })
+    .catch(err => console.error("⚠️ Falha ao carregar lista de receitas:", err));
+}
+
+    
+
   </script>
 </body>
 
