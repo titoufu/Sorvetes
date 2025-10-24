@@ -33,4 +33,4 @@ glicose_mel_equiv;Glicose/mel (equiv.);sweetener;0;80;80;1,45;VERDADEIRO;none;VE
 gemas;Gemas;egg;30;0;50;1,03;FALSO;egg;VERDADEIRO;Base para receitas custard.;1.0.0;;;OK
 estabilizante_base;Estabilizante;additive;0;0;100;0,8;VERDADEIRO;none;VERDADEIRO;Mistura de gomas e mono/di-glicerídeos.;1.0.0;;;OK
 emulsificante_base;Emulsificante;additive;0;0;100;0,8;VERDADEIRO;none;VERDADEIRO;Base sintética para sorvetes.;1.0.0;;;OK
-agua_polpa;Água/Polpa;base;0;0;0;1;VERDADEIRO;none;VERDADEIRO;Água ou polpa de fruta natural.;1.0.0;;;OK
+agua_polpa;Água/Polpa;base;0;0;0;1;VERDADEIRO;none;VERDADEIRO;Água ou polpa de fruta natural.;1.0.0 ;;;OK
