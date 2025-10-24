@@ -1,15 +1,19 @@
 @echo off
-REM ===== Script minimalista: sem variáveis, sem IF/FOR, sem parênteses =====
-REM Rode este arquivo a partir da pasta raiz do repositório (ex.: C:\Sorvetes)
+REM ========================================
+REM Atualiza o catálogo de ingredientes no site
+REM ========================================
 
-python admin_scaffold\admin\validate.py admin_scaffold\admin\ingredients_master.csv
-IF ERRORLEVEL 1 GOTO END
+echo Gerando arquivo ingredients_master.json...
+python atualizar_receitas.py
 
-python admin_scaffold\admin\build_json.py admin_scaffold\admin\ingredients_master.csv site\ingredients_master.json
+REM Copia o arquivo gerado para a pasta /docs
+if exist ingredients_master.json (
+    echo Movendo ingredients_master.json para /docs...
+    move /Y ingredients_master.json docs\ingredients_master.json
+) else (
+    echo ⚠️  Arquivo ingredients_master.json não encontrado!
+)
 
-git add .
-git commit -m "Atualiza catalogo via planilha Excel"
-git push origin main
-
-:END
+echo.
+echo ✅ Catálogo atualizado com sucesso em docs\ingredients_master.json
 pause
